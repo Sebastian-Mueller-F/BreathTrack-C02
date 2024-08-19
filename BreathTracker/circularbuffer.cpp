@@ -4,16 +4,15 @@
 //TODO: Create Buffer Subscriber Class
 
 template <typename T>
-CircularBuffer<T>::CircularBuffer( size_t capacity) :
+CircularBuffer<T>::CircularBuffer( size_t capacity, int newDataIntervalMS, QObject *parent) :
     _buffer(capacity),
+    _newDataIntervalMS(newDataIntervalMS),
     _start(0),
     _end(0),
     _capacity(capacity),
     _size(0)
 {
-    //connect source here
 
-    //connect subscribers here
 }
 
 
@@ -35,6 +34,8 @@ void CircularBuffer<T>::writeNewItem(const T &newItem)
         //when size matches capacity move _start (to match end)
         _start = (_start +1) % _capacity;
     }
+
+    emit dataAdded(_newDataIntervalMS);
 }
 
 template<typename T>
