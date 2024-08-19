@@ -20,9 +20,6 @@ int main(int argc, char *argv[])
     }
 
 
-
-
-
     QQmlApplicationEngine engine;
     const QUrl url(QStringLiteral("qrc:/BreathTracker/main.qml"));
     QObject::connect(
