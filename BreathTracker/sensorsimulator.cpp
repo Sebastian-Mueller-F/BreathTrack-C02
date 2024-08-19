@@ -28,7 +28,7 @@ void SensorSimulator::generateSensorValuesInInterval(int interval)
 void SensorSimulator::generateNewCo2Value()
 {
     //generate random value between -1.0 and + 1.0
-    double random = QRandomGenerator::global()->generateDouble(); // val inbetween 0 and 0.999
+    double random = QRandomGenerator::global()->generateDouble(); // val inbetween 0 and 1
     double transformedValue = 2.0 * random - 1.0; //val inbetween -1 and 1
 
     //simulated value

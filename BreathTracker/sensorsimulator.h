@@ -18,7 +18,6 @@ private slots:
     void generateNewCo2Value();
 
 private :
-    //
     QScopedPointer<QTimer> timer;
     double baseline;
     double amplitude;
