@@ -5,6 +5,8 @@
 #include <QLocale>
 #include <QTranslator>
 
+#include <circularbuffer.h>
+
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
@@ -18,6 +20,12 @@ int main(int argc, char *argv[])
             break;
         }
     }
+
+    SensorSimulator CO2sensor();
+
+    //create buffer for averagers
+    CircularBuffer<double> averagerBuffer(60); //TODO: variable instead of hardcoded 60
+
 
 
     QQmlApplicationEngine engine;
