@@ -8,7 +8,7 @@ class SensorSimulator : public QObject
 {
     Q_OBJECT
 public:
-    explicit SensorSimulator(QObject *parent = nullptr, double baseline = 50.0, double amplitude = 10.0 );
+    explicit SensorSimulator(double baseline = 50.0, double amplitude = 10.0, int interval = 1000, QObject *parent = nullptr );
 
 signals:
     void newCo2Value(double value);
@@ -18,9 +18,10 @@ private slots:
     void generateNewCo2Value();
 
 private :
-    QScopedPointer<QTimer> timer;
-    double baseline;
-    double amplitude;
+    QScopedPointer<QTimer> _timer;
+    double _baseline;
+    double _amplitude;
+    int _interval;
 
 
 signals:

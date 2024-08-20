@@ -2,13 +2,14 @@
 #include <QRandomGenerator>
 #include <QDebug>
 
-SensorSimulator::SensorSimulator(QObject *parent, double baseline, double amplitude )
+SensorSimulator::SensorSimulator( double baseline, double amplitude, int interval, QObject *parent)
     : QObject{parent},
-    baseline(baseline),
-    amplitude(amplitude)
+    _baseline(baseline),
+    _amplitude(amplitude),
+    _interval(interval)
 
 {
-    generateSensorValuesInInterval(1000);//generate sensor values every second
+    generateSensorValuesInInterval(_interval);//generate sensor values every second
 
     //test readout created values
     connect(this, &SensorSimulator::newCo2Value, [&](double sensorValue) {
@@ -20,9 +21,9 @@ SensorSimulator::SensorSimulator(QObject *parent, double baseline, double amplit
 
 void SensorSimulator::generateSensorValuesInInterval(int interval)
 {
-    timer.reset(new QTimer(this));
-    connect(timer.data(), &QTimer::timeout, this, &SensorSimulator::generateNewCo2Value);
-    timer.data()->start(interval);
+    _timer.reset(new QTimer(this));
+    connect(_timer.data(), &QTimer::timeout, this, &SensorSimulator::generateNewCo2Value);
+    _timer.data()->start(interval);
 }
 
 void SensorSimulator::generateNewCo2Value()
@@ -32,7 +33,7 @@ void SensorSimulator::generateNewCo2Value()
     double transformedValue = 2.0 * random - 1.0; //val inbetween -1 and 1
 
     //simulated value
-    double sensorValue = baseline + (transformedValue * amplitude);
+    double sensorValue = _baseline + (transformedValue * _amplitude);
 
     emit newCo2Value(sensorValue);
 
