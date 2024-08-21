@@ -1,13 +1,13 @@
 #include "databuffermanager.h"
 
 DataBufferManager::DataBufferManager() {
-    buffers[RAW] = new CircularBuffer(rawCapacity);
-    buffers[SMA] = new CircularBuffer(averageCapacity);
-    buffers[EMA] = new CircularBuffer(averageCapacity);
+    _buffers[RAW] = new CircularBuffer(_rawCapacity);
+    _buffers[SMA] = new CircularBuffer(_averageCapacity);
+    _buffers[EMA] = new CircularBuffer(_averageCapacity);
 }
 
-CircularBuffer *DataBufferManager::getBuffer(BufferType type)
+CircularBuffer *DataBufferManager::getBuffer(SensorDataType type)
 {
-    return buffers[type];
+    return _buffers[type];
 }
 

@@ -4,8 +4,8 @@
 #include <QObject>
 
 #include <circularbuffer.h>
+#include <types.h>
 
-  enum BufferType { RAW, SMA, EMA };
 
 class DataBufferManager
 {
@@ -28,10 +28,10 @@ public:
 
 
 
-    CircularBuffer* getBuffer(BufferType type);
+    CircularBuffer* getBuffer(SensorDataType type);
 
 private:
-    std::map<BufferType, CircularBuffer*> buffers;
+    std::map<SensorDataType, CircularBuffer*> _buffers;
     size_t _rawCapacity = 600;   // Example: 10 minutes at 1-second intervals
     size_t _averageCapacity = 60; // Example: 5 minutes at 5-second intervals
 
