@@ -3,8 +3,8 @@
 
 //TODO: Create Buffer Subscriber Class
 
-template <typename T>
-CircularBuffer<T>::CircularBuffer( size_t capacity, int newDataIntervalMS, QObject *parent) :
+
+CircularBuffer::CircularBuffer( size_t capacity, int newDataIntervalMS, QObject *parent) :
     _buffer(capacity),
     _newDataIntervalMS(newDataIntervalMS),
     _start(0),
@@ -16,8 +16,8 @@ CircularBuffer<T>::CircularBuffer( size_t capacity, int newDataIntervalMS, QObje
 }
 
 
-template<typename T>
-void CircularBuffer<T>::writeNewItem(const T &newItem)
+
+void CircularBuffer::writeNewItem(const double &newItem)
 {
     //edge case ?
 
@@ -38,10 +38,10 @@ void CircularBuffer<T>::writeNewItem(const T &newItem)
     emit dataAdded(_newDataIntervalMS);
 }
 
-template<typename T>
-std::vector<T> CircularBuffer<T>::readLastNValues(size_t n)
+
+std::vector<double> CircularBuffer::readLastNValues(size_t n)
 {
-    std::vector<T> values;
+    std::vector<double> values;
     size_t reader = (_end + _capacity - n) % _capacity;
 
 
@@ -55,8 +55,6 @@ std::vector<T> CircularBuffer<T>::readLastNValues(size_t n)
         n = _size;
     }
 
-    reader = _end;
-
     for (int i = 0; i < n; i++){
 
         //add to values
@@ -69,29 +67,29 @@ std::vector<T> CircularBuffer<T>::readLastNValues(size_t n)
     return values;
 }
 
-template<typename T>
-bool CircularBuffer<T>::isEmpty()
+
+bool CircularBuffer::isEmpty()
 {
     std::lock_guard<std::mutex> lock(_mtx);
     return _size == 0;
 }
 
-template<typename T>
-bool CircularBuffer<T>::isFull()
+
+bool CircularBuffer::isFull()
 {
     std::lock_guard<std::mutex> lock(_mtx);
     return _size == _capacity;
 }
 
-template<typename T>
-size_t CircularBuffer<T>::getBufferSize()
+
+size_t CircularBuffer::getBufferSize()
 {
      std::lock_guard<std::mutex> lock(_mtx);
     return _size;
 }
 
-template<typename T>
-size_t CircularBuffer<T>::getBufferCapacity()
+
+size_t CircularBuffer::getBufferCapacity()
 {
     std::lock_guard<std::mutex> lock(_mtx);
     return _capacity;

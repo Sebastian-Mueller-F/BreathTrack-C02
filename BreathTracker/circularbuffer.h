@@ -15,7 +15,7 @@
  */
 
 
-template <typename T>
+
 class CircularBuffer : public QObject
 {
     Q_OBJECT
@@ -24,14 +24,14 @@ public:
      ~CircularBuffer();
 
     //writing new data to the buffer
-    void writeNewItem(const T& newItem);
+    void writeNewItem(const double& newItem);
 
     /** Reading out a range of the latest data
      *
      *  subscriber: Averager, Trends
      *  */
 
-    std::vector<T> readLastNValues(size_t n);
+    std::vector<double> readLastNValues(size_t n);
 
     bool isEmpty();
     bool isFull();
@@ -45,7 +45,7 @@ signals:
 private:
 
     //Buffer holding any item
-    std::vector<T> _buffer;
+    std::vector<double>_buffer;
     int _newDataIntervalMS;
     //index pointer
     size_t _start;

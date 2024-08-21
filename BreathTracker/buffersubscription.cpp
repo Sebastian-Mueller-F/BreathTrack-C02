@@ -1,7 +1,7 @@
 #include "buffersubscription.h"
 #include <csignal>
 
-// maybe easier to add this directly to the buffer class!!
+// maybe easier to add this directly to the buffer class!! ?!
 
 class SubscriberNotFoundException : public std::exception {
 public:
@@ -11,25 +11,19 @@ public:
 };
 
 
-
-template<typename T>
-BufferSubscription<T>::BufferSubscription(CircularBuffer<T>& buffer, QObject *parent)
+BufferSubscription::BufferSubscription(CircularBuffer& buffer, QObject *parent)
 :   QObject(parent),
     _buffer(buffer)
 {
      //connect to buffer
-    connect(&_buffer, &CircularBuffer<T>::dataAdded, this, &BufferSubscription<T>::onDataAddedToBuffer);
+    connect(&_buffer, &CircularBuffer::dataAdded, this, &BufferSubscription::onDataAddedToBuffer);
 }
-
-template<typename T>
-void BufferSubscription<T>::registerSubscriber(QSharedPointer<QObject> subscriber, int lookBackPeriodMS)
+void BufferSubscription::registerSubscriber(QSharedPointer<QObject> subscriber, int lookBackPeriodMS)
 {
     _subscribers.push_back(subscriber);
     _lookBackPeriods.push_back(lookBackPeriodMS);
 }
-
-template<typename T>
-void BufferSubscription<T>::unregisterSubscriber(QSharedPointer<QObject> subscriber)
+void BufferSubscription::unregisterSubscriber(QSharedPointer<QObject> subscriber)
 {
     bool success = false;
 
@@ -47,14 +41,12 @@ void BufferSubscription<T>::unregisterSubscriber(QSharedPointer<QObject> subscri
     }
 
 }
-
-template<typename T>
-void BufferSubscription<T>::onDataAddedToBuffer(int dataIntervalsMS)
+void BufferSubscription::onDataAddedToBuffer(int dataIntervalsMS)
 {
     for (size_t i = 0; i < _subscribers.size(); ++i) {
         int lookBackPeriodMs = _lookBackPeriods[i];
         size_t elementsToRead = lookBackPeriodMs / dataIntervalsMS;
-        QVector<T> values = _buffer.readLastNValues(elementsToRead);
+        std::vector<double> values = _buffer.readLastNValues(elementsToRead);
         emit notifySubscribers(_subscribers[i], values);
     }
 }
