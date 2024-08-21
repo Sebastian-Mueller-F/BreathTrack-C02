@@ -17,6 +17,14 @@ SensorSimulator::SensorSimulator( double baseline, double amplitude, int interva
     });
 }
 
+SensorSimulator *SensorSimulator::instance()
+{
+    if (_instance == nullptr){
+        _instance = new SensorSimulator;
+    }
+    return _instance;
+}
+
 //Create function for starting the simulation
 
 void SensorSimulator::generateSensorValuesInInterval(int interval)
@@ -35,7 +43,7 @@ void SensorSimulator::generateNewCo2Value()
     //simulated value
     double sensorValue = _baseline + (transformedValue * _amplitude);
 
-    emit newCo2Value(sensorValue);
+    emit newCo2Value(sensorValue, this->_sensorDataType);
 
 }
 

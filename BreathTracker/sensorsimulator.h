@@ -3,28 +3,36 @@
 
 #include <QObject>
 #include <QTimer>
+#include <types.h>
 
 class SensorSimulator : public QObject
 {
     Q_OBJECT
 public:
+
     explicit SensorSimulator(double baseline = 50.0, double amplitude = 10.0, int interval = 1000, QObject *parent = nullptr );
+    //singleton
+    static SensorSimulator* instance();
 
 signals:
-    void newCo2Value(double value);
+    void newCo2Value(double value, SensorDataType type);
 
 private slots:
     void generateSensorValuesInInterval(int interval);
     void generateNewCo2Value();
 
 private :
+    static SensorSimulator *_instance;
+
+    SensorDataType _sensorDataType = SensorDataType::RAW;
+
     QScopedPointer<QTimer> _timer;
     double _baseline;
     double _amplitude;
     int _interval;
 
 
-signals:
+
 };
 
 #endif // SENSORSIMULATOR_H
