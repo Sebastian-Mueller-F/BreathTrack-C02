@@ -19,11 +19,15 @@ qt_add_qml_module(appBreathTracker
     SOURCES circularbuffer.h circularbuffer.cpp
     SOURCES buffersubscription.h buffersubscription.cpp
     SOURCES databuffermanager.h databuffermanager.cpp
+    SOURCES averager.h
+    SOURCES smaaverager.h smaaverager.cpp
+    SOURCES subscriber.h
 )
 
 source_group("Source Files// Sensor" FILES sensorsimulator.h sensorsimulator.cpp)
-source_group("Source Files// Data Structures" FILES circularbuffer.h circularbuffer.cpp buffersubscription.h buffersubscription.cpp)
+source_group("Source Files// Data Structures" FILES circularbuffer.h circularbuffer.cpp buffersubscription.h buffersubscription.cpp subscriber.h)
 source_group("Source Files// Data" FILES databuffermanager.h databuffermanager.cpp)
+source_group("Source Files// Averager" FILES averager.h smaaverager.h smaaverager.cpp  )
 
 
 
