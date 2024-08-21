@@ -5,13 +5,16 @@
 
 #include <circularbuffer.h>
 #include <types.h>
+#include <emaaverager.h>
+#include <smaaverager.h>
+#include <sensorsimulator.h>
 
 
-class DataBufferManager
+class DataBufferManager : public QObject
 {
-
+    Q_OBJECT
 public:
-    DataBufferManager();
+    DataBufferManager(QObject *parent = nullptr);
 
     //TODO: Include Buffer Subscription Class
     /* TODO: add data into buffers from..
@@ -29,6 +32,9 @@ public:
 
 
     CircularBuffer* getBuffer(SensorDataType type);
+
+private slots:
+    void onAverageUpdated(double newAverage, SensorDataType averageType);
 
 private:
     std::map<SensorDataType, CircularBuffer*> _buffers;
