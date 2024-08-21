@@ -1,5 +1,8 @@
 #include "buffersubscription.h"
+
+
 #include <csignal>
+
 
 // maybe easier to add this directly to the buffer class!! ?!
 
@@ -18,12 +21,12 @@ BufferSubscription::BufferSubscription(CircularBuffer& buffer, QObject *parent)
      //connect to buffer
     connect(&_buffer, &CircularBuffer::dataAdded, this, &BufferSubscription::onDataAddedToBuffer);
 }
-void BufferSubscription::registerSubscriber(QSharedPointer<QObject> subscriber, int lookBackPeriodMS)
+void BufferSubscription::registerSubscriber(QSharedPointer<Subscriber> subscriber, int lookBackPeriodMS)
 {
     _subscribers.push_back(subscriber);
     _lookBackPeriods.push_back(lookBackPeriodMS);
 }
-void BufferSubscription::unregisterSubscriber(QSharedPointer<QObject> subscriber)
+void BufferSubscription::unregisterSubscriber(QSharedPointer<Subscriber> subscriber)
 {
     bool success = false;
 
