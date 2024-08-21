@@ -4,6 +4,7 @@
 #include <QObject>
 #include <circularbuffer.h>
 #include "subscriber.h"
+
 #include <QSharedPointer>
 
 
@@ -17,8 +18,8 @@ public:
     void registerSubscriber(QSharedPointer<Subscriber> subscriber, int lookBackPeriodMS);
     void unregisterSubscriber(QSharedPointer<Subscriber> subscriber);
 
-signals :
-    void notifySubscribers(QSharedPointer<Subscriber> subscriber,const std::vector<double> values);
+// signals :
+    // void notifySubscribers(QSharedPointer<Subscriber> subscriber,const std::vector<double> values);
 
 private slots:
     void onDataAddedToBuffer(int dataIntervalsMS);

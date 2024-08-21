@@ -50,7 +50,7 @@ void BufferSubscription::onDataAddedToBuffer(int dataIntervalsMS)
         int lookBackPeriodMs = _lookBackPeriods[i];
         size_t elementsToRead = lookBackPeriodMs / dataIntervalsMS;
         std::vector<double> values = _buffer.readLastNValues(elementsToRead);
-        emit notifySubscribers(_subscribers[i], values);
+          _subscribers[i]->onNewData(values);
     }
 }
 
