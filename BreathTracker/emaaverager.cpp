@@ -6,7 +6,7 @@ EMAAverager::EMAAverager(size_t period, QObject *parent)
     : Averager(parent),  _period(period), _previousEMA(0.0), _isFirstCalculation(true)
 {
     //Initialize averageType
-    _averageType = AverageTypes::EMA;
+    _averageType = SensorDataType::EMA;
     // Calculate alpha
     _alpha = 2.0 / (static_cast<double>(_period) + 1.0);
 }

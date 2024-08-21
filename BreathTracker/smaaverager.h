@@ -5,11 +5,16 @@
 #include "averager.h"
 #include <QObject>
 
+//TODO: 1. do we need period ?
+//TODO 2. do we need to limit the number of values that are being taking into account for the averager ?
+
 class SMAAverager : public Averager, public Subscriber {
     Q_OBJECT
 
 public:
     SMAAverager(size_t period, QObject *parent = nullptr);
+
+    static SMAAverager *instance();
 
     double calculate() override;
     size_t getPeriod() const override;

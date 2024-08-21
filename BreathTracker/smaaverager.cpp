@@ -6,7 +6,7 @@ SMAAverager::SMAAverager(size_t period, QObject *parent)
     : Averager(parent), _period(period)
 {
     //Initialize averageType
-    _averageType = AverageTypes::SMA;
+    _averageType = SensorDataType::SMA;
 }
 
 SMAAverager *SMAAverager::instance()

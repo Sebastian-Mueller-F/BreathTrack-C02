@@ -21,11 +21,11 @@ public:
     virtual size_t getPeriod() const = 0;
     virtual void setPeriod(size_t period) = 0;
 
-    AverageTypes _averageType;
+    SensorDataType _averageType;
 
 signals:
 
-    void averageUpdated(double newAverage, AverageTypes averageType);
+    void averageUpdated(double newAverage, SensorDataType averageType);
 
 };
 
