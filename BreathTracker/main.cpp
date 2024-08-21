@@ -21,10 +21,10 @@ int main(int argc, char *argv[])
         }
     }
 
-    SensorSimulator CO2sensor();
+    SensorSimulator* CO2sensor = SensorSimulator::instance();
 
     //create buffer for averagers
-    CircularBuffer<double> averagerBuffer(60); //TODO: variable instead of hardcoded 60
+    CircularBuffer averagerBuffer(60); //TODO: variable instead of hardcoded 60
 
 
 
