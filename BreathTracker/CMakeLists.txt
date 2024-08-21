@@ -18,7 +18,14 @@ qt_add_qml_module(appBreathTracker
     SOURCES sensorsimulator.h sensorsimulator.cpp
     SOURCES circularbuffer.h circularbuffer.cpp
     SOURCES buffersubscription.h buffersubscription.cpp
+    SOURCES databuffermanager.h databuffermanager.cpp
 )
+
+source_group("Source Files// Sensor" FILES sensorsimulator.h sensorsimulator.cpp)
+source_group("Source Files// Data Structures" FILES circularbuffer.h circularbuffer.cpp buffersubscription.h buffersubscription.cpp)
+source_group("Source Files// Data" FILES databuffermanager.h databuffermanager.cpp)
+
+
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
 # If you are developing for iOS or macOS you should consider setting an
