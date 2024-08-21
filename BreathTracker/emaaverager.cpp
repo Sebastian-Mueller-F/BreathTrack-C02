@@ -3,8 +3,10 @@
 #include <numeric>
 
 EMAAverager::EMAAverager(size_t period, QObject *parent)
-    : Averager(parent), _period(period), _previousEMA(0.0), _isFirstCalculation(true)
+    : Averager(parent),  _period(period), _previousEMA(0.0), _isFirstCalculation(true)
 {
+    //Initialize averageType
+    _averageType = AverageTypes::EMA;
     // Calculate alpha
     _alpha = 2.0 / (static_cast<double>(_period) + 1.0);
 }
@@ -26,7 +28,7 @@ void EMAAverager::onNewData(const std::vector<double>& data)
         // Apply the EMA formula
         _previousEMA = _alpha * currentData + (1.0 - _alpha) * _previousEMA;
     }
-    emit averageUpdated(_previousEMA);
+    emit averageUpdated(_previousEMA, this->_averageType);
 }
 
 double EMAAverager::calculate()

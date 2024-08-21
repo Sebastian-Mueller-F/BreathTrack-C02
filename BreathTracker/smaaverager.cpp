@@ -5,13 +5,15 @@
 SMAAverager::SMAAverager(size_t period, QObject *parent)
     : Averager(parent), _period(period)
 {
+    //Initialize averageType
+    _averageType = AverageTypes::SMA;
 }
 
 void SMAAverager::onNewData(const std::vector<double>& data)
 {
     _recentData = data;
     double sma = calculate();
-    emit averageUpdated(sma);
+    emit averageUpdated(sma, this->_averageType);
 }
 
 double SMAAverager::calculate()

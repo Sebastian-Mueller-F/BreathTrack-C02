@@ -3,9 +3,12 @@
 
 #include <QObject>
 
+#include <types.h>
+
 // Averager Interface
 class Averager : public QObject {
     Q_OBJECT
+
 
 public:
     explicit Averager(QObject *parent = nullptr) : QObject(parent) {}
@@ -18,9 +21,14 @@ public:
     virtual size_t getPeriod() const = 0;
     virtual void setPeriod(size_t period) = 0;
 
+    AverageTypes _averageType;
+
 signals:
 
-    void averageUpdated(double newAverage);
+    void averageUpdated(double newAverage, AverageTypes averageType);
+
 };
+
+
 
 #endif // AVERAGER_H
