@@ -11,6 +11,9 @@ class EMAAverager : public Averager, public Subscriber {
 public:
     EMAAverager(size_t period, QObject *parent = nullptr);
 
+    //singleton
+    static EMAAverager *instance();
+
     double calculate() override;
     size_t getPeriod() const override;
     void setPeriod(size_t period) override;
@@ -19,6 +22,9 @@ public:
     void onNewData(const std::vector<double>& data) override;
 
 private:
+    //singleton
+    static EMAAverager* _instance;
+
     size_t _period;
     double _previousEMA;
     bool _isFirstCalculation;

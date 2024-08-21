@@ -11,6 +11,15 @@ EMAAverager::EMAAverager(size_t period, QObject *parent)
     _alpha = 2.0 / (static_cast<double>(_period) + 1.0);
 }
 
+EMAAverager *EMAAverager::instance()
+{
+    if(_instance == nullptr){
+        _instance = new EMAAverager(2);
+    }
+
+    return _instance;
+}
+
 void EMAAverager::onNewData(const std::vector<double>& data)
 {
     if (data.empty()) {

@@ -9,6 +9,15 @@ SMAAverager::SMAAverager(size_t period, QObject *parent)
     _averageType = AverageTypes::SMA;
 }
 
+SMAAverager *SMAAverager::instance()
+{
+    if (_instance == nullptr){
+        _instance = new SMAAverager(2);
+    }
+
+    return _instance;
+}
+
 void SMAAverager::onNewData(const std::vector<double>& data)
 {
     _recentData = data;

@@ -19,6 +19,8 @@ public:
     void onNewData(const std::vector<double>& data) override;
 
 private:
+    static SMAAverager* _instance;
+
     size_t _period;
     std::vector<double> _recentData;
 };
