@@ -6,6 +6,10 @@
 #include <QTranslator>
 
 #include <circularbuffer.h>
+#include <buffersubscription.h>
+#include <smaaverager.h>
+#include <emaaverager.h>
+#include <subscriber.h>
 
 int main(int argc, char *argv[])
 {
@@ -22,9 +26,19 @@ int main(int argc, char *argv[])
     }
 
     SensorSimulator* CO2sensor = SensorSimulator::instance();
+    QSharedPointer<Subscriber> sma = SMAAverager::instance();
+    QSharedPointer<Subscriber> ema = EMAAverager::instance();
 
     //create buffer for averagers
-    CircularBuffer averagerBuffer(60); //TODO: variable instead of hardcoded 60
+    CircularBuffer averagerBuffer(60); //TODO: variable instead of hardcoded 6
+    //add data from Sensor into averagerBuffer
+    QObject::connect(SensorSimulator::instance(), &SensorSimulator::newCo2Value, [&] (double newCo2Value){
+        averagerBuffer.writeNewItem(newCo2Value);
+    });
+    BufferSubscription averagerBufferSubscription(averagerBuffer);
+    averagerBufferSubscription.registerSubscriber(sma, 5000); //5 seconds
+    averagerBufferSubscription.registerSubscriber(ema, 10000); // 10 seconds
+
 
 
 
