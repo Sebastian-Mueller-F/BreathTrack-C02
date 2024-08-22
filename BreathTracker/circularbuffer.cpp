@@ -15,7 +15,10 @@ CircularBuffer::CircularBuffer( size_t capacity, int newDataIntervalMS, QObject 
 
 }
 
+CircularBuffer::~CircularBuffer()
+{
 
+}
 
 void CircularBuffer::writeNewItem(const double &newItem)
 {
