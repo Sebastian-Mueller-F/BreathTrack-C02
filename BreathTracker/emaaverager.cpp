@@ -1,6 +1,6 @@
 #include "emaaverager.h"
 #include <stdexcept>
-#include <numeric>
+
 
 EMAAverager::EMAAverager(size_t period, QObject *parent)
     : Averager(parent),  _period(period), _previousEMA(0.0), _isFirstCalculation(true)

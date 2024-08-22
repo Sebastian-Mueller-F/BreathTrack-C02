@@ -6,12 +6,12 @@
 #include <types.h>
 
 // Averager Interface
-class Averager : public QObject {
+class Averager : public  QObject {
     Q_OBJECT
 
 
 public:
-    explicit Averager(QObject *parent = nullptr) : QObject(parent) {}
+    explicit Averager(QObject *parent = nullptr) :   QObject(parent) {}
     virtual ~Averager() {}
 
     // calculate the average

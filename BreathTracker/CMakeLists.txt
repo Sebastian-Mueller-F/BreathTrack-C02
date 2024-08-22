@@ -1,9 +1,12 @@
 cmake_minimum_required(VERSION 3.16)
 
+set(QT_ENABLE_VERBOSE_DEPLOYMENT TRUE)
+
 project(BreathTracker VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
 
 find_package(Qt6 6.2 COMPONENTS Quick REQUIRED)
 
@@ -14,23 +17,23 @@ qt_add_executable(appBreathTracker
 qt_add_qml_module(appBreathTracker
     URI BreathTracker
     VERSION 1.0
-    QML_FILES main.qml
-    SOURCES sensorsimulator.h sensorsimulator.cpp
-             circularbuffer.h circularbuffer.cpp
-             buffersubscription.h buffersubscription.cpp
-             databuffermanager.h databuffermanager.cpp
-             averager.h
-             smaaverager.h smaaverager.cpp
-             subscriber.h
-             emaaverager.h emaaverager.cpp
-             types.h
+    QML_FILES qt/qml/main.qml
+    # SOURCES sensorsimulator.h sensorsimulator.cpp
+    # SOURCES circularbuffer.h circularbuffer.cpp
+    # SOURCES buffersubscription.h buffersubscription.cpp
+    # SOURCES databuffermanager.h databuffermanager.cpp
+    # SOURCES averager.h
+    # SOURCES smaaverager.h smaaverager.cpp
+    # SOURCES subscriber.h
+    # SOURCES emaaverager.h emaaverager.cpp
+    # SOURCES types.h
 )
 
-source_group("Source Files// Sensor" FILES sensorsimulator.h sensorsimulator.cpp)
-source_group("Source Files// Data Structures" FILES circularbuffer.h circularbuffer.cpp buffersubscription.h buffersubscription.cpp subscriber.h)
-source_group("Source Files// Data" FILES databuffermanager.h databuffermanager.cpp)
-source_group("Source Files// Averager" FILES averager.h smaaverager.h smaaverager.cpp emaaverager.h emaaverager.cpp)
-source_group("Source FIles// Utils" Files types.h)
+# source_group("Source Files// Sensor" FILES sensorsimulator.h sensorsimulator.cpp)
+# source_group("Source Files// Data Structures" FILES circularbuffer.h circularbuffer.cpp buffersubscription.h buffersubscription.cpp subscriber.h)
+# source_group("Source Files// Data" FILES databuffermanager.h databuffermanager.cpp)
+# source_group("Source Files// Averager" FILES averager.h smaaverager.h smaaverager.cpp emaaverager.h emaaverager.cpp)
+# source_group("Source FIles// Utils" Files types.h)
 
 
 
@@ -46,7 +49,8 @@ set_target_properties(appBreathTracker PROPERTIES
 )
 
 target_link_libraries(appBreathTracker
-    PRIVATE Qt6::Quick)
+    PRIVATE Qt6::Quick Qt6::Core Qt6::Gui)
+
 
 include(GNUInstallDirs)
 install(TARGETS appBreathTracker
