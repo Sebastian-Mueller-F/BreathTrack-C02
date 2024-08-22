@@ -17,7 +17,7 @@ CircularBuffer *DataBufferManager::getBuffer(SensorDataType type)
     return _buffers[type];
 }
 
-void DataBufferManager::onAverageUpdated(double newAverage, SensorDataType averageType)
+void DataBufferManager::onNewData(double newData, SensorDataType sensorDataType)
 {
     qDebug()<<" On Average Updated" ;
 }
