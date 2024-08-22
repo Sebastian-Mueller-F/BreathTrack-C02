@@ -4,11 +4,11 @@
 #include <QObject>
 #include <vector>
 
-class Subscriber : public QObject {
-    Q_OBJECT
+class Subscriber  {
+
 
 public:
-    explicit Subscriber(QObject *parent = nullptr) : QObject(parent) {}
+    explicit Subscriber();
     virtual ~Subscriber() {}
 
     // Pure virtual function to be implemented by all subscribers
