@@ -12,7 +12,7 @@ class BufferSubscription : public QObject {
     Q_OBJECT
 
 public:
-    BufferSubscription(CircularBuffer& buffer, QObject* parent);
+    BufferSubscription(CircularBuffer& buffer, QObject* parent = nullptr);
 
 
     void registerSubscriber(QSharedPointer<Subscriber> subscriber, int lookBackPeriodMS);
