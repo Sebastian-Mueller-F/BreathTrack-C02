@@ -1,4 +1,5 @@
 #include "databuffermanager.h"
+#include <QDebug>
 
 DataBufferManager::DataBufferManager(QObject *parent) : QObject(parent) {
     _buffers[SensorDataType::RAW] = new CircularBuffer(_rawCapacity);
@@ -18,6 +19,6 @@ CircularBuffer *DataBufferManager::getBuffer(SensorDataType type)
 
 void DataBufferManager::onAverageUpdated(double newAverage, SensorDataType averageType)
 {
-
+    qDebug()<<" On Average Updated" ;
 }
 
