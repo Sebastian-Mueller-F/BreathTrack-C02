@@ -8,8 +8,10 @@ DataBufferManager::DataBufferManager(QObject *parent) : QObject(parent) {
 
 
     //data input for buffers
-    connect(SensorSimulator::instance(), &SensorSimulator::newCo2Value, this, &DataBufferManager::onAverageUpdated);
-    connect (EMAAverager::instance(), &EMAAverager::averageUpdated, this, &DataBufferManager::onAverageUpdated);
+    connect(SensorSimulator::instance(), &SensorSimulator::newCo2Value, this, &DataBufferManager::onNewData);
+    connect (EMAAverager::instance().data(), &EMAAverager::averageUpdated, this, &DataBufferManager::onNewData);
+
+    //data output for subscribers
 }
 
 CircularBuffer *DataBufferManager::getBuffer(SensorDataType type)
@@ -17,8 +19,10 @@ CircularBuffer *DataBufferManager::getBuffer(SensorDataType type)
     return _buffers[type];
 }
 
-void DataBufferManager::onAverageUpdated(double newAverage, SensorDataType averageType)
+void DataBufferManager::onNewData(double newData, SensorDataType sensorDataType)
 {
-    qDebug()<<" On Average Updated" ;
+    qDebug()<<" New Data for Data Buffer from " << sensorDataType << ", data: " << newData;
+    _buffers[sensorDataType]->writeNewItem(newData);
+
 }
 

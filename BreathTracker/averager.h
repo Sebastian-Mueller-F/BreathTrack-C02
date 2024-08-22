@@ -6,6 +6,8 @@
 #include <types.h>
 
 // Averager Interface
+
+// TODO: I_ as Interface prefix
 class Averager : public  QObject {
     Q_OBJECT
 

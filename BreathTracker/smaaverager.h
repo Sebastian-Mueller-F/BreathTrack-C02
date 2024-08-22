@@ -1,9 +1,12 @@
 #ifndef SMAAVERAGER_H
 #define SMAAVERAGER_H
 
+#include <QSharedPointer>
+#include <QObject>
+
 #include "subscriber.h"
 #include "averager.h"
-#include <QObject>
+
 
 //TODO: 1. do we need period ?
 //TODO 2. do we need to limit the number of values that are being taking into account for the averager ?
@@ -18,7 +21,7 @@ public:
         // Destructor code, if any specific cleanup is needed
     }
 
-    static SMAAverager *instance();
+    static QSharedPointer<SMAAverager> instance();
 
     double calculate() override;
     size_t getPeriod() const override;
@@ -28,7 +31,7 @@ public:
     void onNewData(const std::vector<double>& data) override;
 
 private:
-    static QScopedPointer<SMAAverager> _instance;
+    static QSharedPointer<SMAAverager> _instance;
 
     size_t _period;
     std::vector<double> _recentData;

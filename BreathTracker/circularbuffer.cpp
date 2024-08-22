@@ -26,19 +26,21 @@ void CircularBuffer::writeNewItem(const double &newItem)
 
     //add new item to end pointer
     _buffer[_end] = newItem;
+
     //move end pointer
     _end = (_end + 1) % _capacity;
 
-    if (_size < _capacity){
+    if (_size < _capacity) {
         //increase size until it matches capacity
         _size++;
     }
     else {
         //when size matches capacity move _start (to match end)
-        _start = (_start +1) % _capacity;
+        _start = (_start + 1) % _capacity;
     }
 
     emit dataAdded(_newDataIntervalMS);
+    qDebug() << "dataAdded signal emitted with interval:" << _newDataIntervalMS;
 }
 
 

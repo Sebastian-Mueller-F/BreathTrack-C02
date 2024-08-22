@@ -34,7 +34,7 @@ public:
     CircularBuffer* getBuffer(SensorDataType type);
 
 private slots:
-    void onAverageUpdated(double newAverage, SensorDataType averageType);
+    void onNewData(double newData, SensorDataType sensorDataType);
 
 private:
     std::map<SensorDataType, CircularBuffer*> _buffers;
