@@ -27,6 +27,9 @@ qt_add_qml_module(appBreathTracker
     SOURCES subscriber.h
     SOURCES emaaverager.h emaaverager.cpp
     SOURCES types.h
+    QML_FILES RawSensorData.qml
+    QML_FILES AveragedSensorData.qml
+    QML_FILES DataTrends.qml
 )
 
 source_group("Source Files// Sensor" FILES sensorsimulator.h sensorsimulator.cpp)
