@@ -17,7 +17,7 @@ EMAAverager::EMAAverager(size_t period, QObject *parent)
 QSharedPointer<EMAAverager> EMAAverager::instance()
 {
     if (_instance.isNull()) {
-        _instance = QSharedPointer<EMAAverager>::create(2);  // Use QSharedPointer::create to instantiate
+        _instance = QSharedPointer<EMAAverager>::create(2);
     }
     return _instance;
 }
