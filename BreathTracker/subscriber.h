@@ -8,8 +8,9 @@ class Subscriber  {
 
 
 public:
-    explicit Subscriber();
-    virtual ~Subscriber() {}
+    //No constructor due to double inheritance, and no initialization needed here
+
+    // virtual ~Subscriber() {}
 
     // Pure virtual function to be implemented by all subscribers
     virtual void onNewData(const std::vector<double>& data) = 0;
