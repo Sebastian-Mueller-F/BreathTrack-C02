@@ -2,6 +2,8 @@
 #include <QRandomGenerator>
 #include <QDebug>
 
+SensorSimulator* SensorSimulator::_instance = nullptr;
+
 SensorSimulator::SensorSimulator( double baseline, double amplitude, int interval, QObject *parent)
     : QObject{parent},
     _baseline(baseline),

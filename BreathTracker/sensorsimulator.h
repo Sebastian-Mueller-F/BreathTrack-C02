@@ -22,7 +22,7 @@ private slots:
     void generateNewCo2Value();
 
 private :
-    static SensorSimulator *_instance;
+    static SensorSimulator* _instance;
 
     SensorDataType _sensorDataType = SensorDataType::RAW;
 
