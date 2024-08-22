@@ -21,6 +21,8 @@ CircularBuffer *DataBufferManager::getBuffer(SensorDataType type)
 
 void DataBufferManager::onNewData(double newData, SensorDataType sensorDataType)
 {
-    qDebug()<<" On Average Updated" ;
+    qDebug()<<" New Data for Data Buffer from " << sensorDataType << ", data: " << newData;
+    _buffers[sensorDataType]->writeNewItem(newData);
+
 }
 
