@@ -1,6 +1,7 @@
 #include "emaaverager.h"
 #include <stdexcept>
 
+QScopedPointer<EMAAverager> EMAAverager::_instance;
 
 EMAAverager::EMAAverager(size_t period, QObject *parent)
     : Averager(parent),  _period(period), _previousEMA(0.0), _isFirstCalculation(true)
@@ -13,11 +14,10 @@ EMAAverager::EMAAverager(size_t period, QObject *parent)
 
 EMAAverager *EMAAverager::instance()
 {
-    if(_instance == nullptr){
-        _instance = new EMAAverager(2);
+    if (_instance.isNull()) {
+        _instance.reset(new EMAAverager(2));
     }
-
-    return _instance;
+    return _instance.data();
 }
 
 void EMAAverager::onNewData(const std::vector<double>& data)

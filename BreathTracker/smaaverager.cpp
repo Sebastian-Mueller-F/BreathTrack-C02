@@ -2,6 +2,8 @@
 #include <numeric>  // for std::accumulate
 #include <stdexcept>
 
+QScopedPointer<SMAAverager> SMAAverager::_instance;
+
 SMAAverager::SMAAverager(size_t period, QObject *parent)
     : Averager(parent), _period(period)
 {
@@ -9,13 +11,13 @@ SMAAverager::SMAAverager(size_t period, QObject *parent)
     _averageType = SensorDataType::SMA;
 }
 
+
 SMAAverager *SMAAverager::instance()
 {
-    if (_instance == nullptr){
-        _instance = new SMAAverager(2);
+    if (_instance.isNull()) {
+        _instance.reset(new SMAAverager(2));
     }
-
-    return _instance;
+    return _instance.data();
 }
 
 void SMAAverager::onNewData(const std::vector<double>& data)

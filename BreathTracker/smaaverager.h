@@ -14,6 +14,10 @@ class SMAAverager : public Averager, public Subscriber {
 public:
     SMAAverager(size_t period, QObject *parent = nullptr);
 
+    ~SMAAverager() override {
+        // Destructor code, if any specific cleanup is needed
+    }
+
     static SMAAverager *instance();
 
     double calculate() override;
@@ -24,7 +28,7 @@ public:
     void onNewData(const std::vector<double>& data) override;
 
 private:
-    static SMAAverager* _instance;
+    static QScopedPointer<SMAAverager> _instance;
 
     size_t _period;
     std::vector<double> _recentData;

@@ -11,6 +11,10 @@ class EMAAverager : public Averager, public Subscriber {
 public:
     EMAAverager(size_t period, QObject *parent = nullptr);
 
+    ~EMAAverager() override {
+        // Destructor code, if any specific cleanup is needed
+    }
+
     //singleton
     static EMAAverager *instance();
 
@@ -19,11 +23,11 @@ public:
     void setPeriod(size_t period) override;
 
     // Implement the Subscriber interface
-    void onNewData(const std::vector<double>& data) override;
+    void onNewData(const std::vector<double>& data) override ;
 
 private:
     //singleton
-    static EMAAverager* _instance;
+    static QScopedPointer<EMAAverager> _instance;
 
     size_t _period;
     double _previousEMA;
