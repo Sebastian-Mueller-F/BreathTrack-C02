@@ -1,8 +1,9 @@
 #include "smaaverager.h"
 #include <numeric>  // for std::accumulate
 #include <stdexcept>
+#include <QDebug>
 
-QScopedPointer<SMAAverager> SMAAverager::_instance;
+QSharedPointer<SMAAverager> SMAAverager::_instance = nullptr;
 
 SMAAverager::SMAAverager(size_t period, QObject *parent)
     : Averager(parent), _period(period)
@@ -12,19 +13,35 @@ SMAAverager::SMAAverager(size_t period, QObject *parent)
 }
 
 
-SMAAverager *SMAAverager::instance()
+QSharedPointer<SMAAverager> SMAAverager::instance()
 {
     if (_instance.isNull()) {
-        _instance.reset(new SMAAverager(2));
+        _instance = QSharedPointer<SMAAverager>::create(2);
     }
-    return _instance.data();
+    return _instance;
 }
 
+//Todo: Handle case for first value
+/*Bug:
+ *  Sensor Co2 value :  49.1481
+Emitted averageUpdated signal with SMA: 0
+
+ Sensor Co2 value :  53.1448
+Emitted averageUpdated signal with SMA: 0
+
+
+ Sensor Co2 value :  57.5672
+Emitted averageUpdated signal with SMA: 16.3827
+
+ */
 void SMAAverager::onNewData(const std::vector<double>& data)
 {
     _recentData = data;
+
     double sma = calculate();
+
     emit averageUpdated(sma, this->_averageType);
+    qDebug() << "Emitted averageUpdated signal with SMA:" << sma;
 }
 
 double SMAAverager::calculate()

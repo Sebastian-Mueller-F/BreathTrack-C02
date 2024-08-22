@@ -1,7 +1,9 @@
 #include "emaaverager.h"
 #include <stdexcept>
+#include <QDebug>
 
-QScopedPointer<EMAAverager> EMAAverager::_instance;
+QSharedPointer<EMAAverager> EMAAverager::_instance = nullptr;
+
 
 EMAAverager::EMAAverager(size_t period, QObject *parent)
     : Averager(parent),  _period(period), _previousEMA(0.0), _isFirstCalculation(true)
@@ -12,12 +14,12 @@ EMAAverager::EMAAverager(size_t period, QObject *parent)
     _alpha = 2.0 / (static_cast<double>(_period) + 1.0);
 }
 
-EMAAverager *EMAAverager::instance()
+QSharedPointer<EMAAverager> EMAAverager::instance()
 {
     if (_instance.isNull()) {
-        _instance.reset(new EMAAverager(2));
+        _instance = QSharedPointer<EMAAverager>::create(2);  // Use QSharedPointer::create to instantiate
     }
-    return _instance.data();
+    return _instance;
 }
 
 void EMAAverager::onNewData(const std::vector<double>& data)
@@ -38,6 +40,7 @@ void EMAAverager::onNewData(const std::vector<double>& data)
         _previousEMA = _alpha * currentData + (1.0 - _alpha) * _previousEMA;
     }
     emit averageUpdated(_previousEMA, this->_averageType);
+    qDebug() << "Emitted averageUpdated signal with EMA:" << _previousEMA;
 }
 
 double EMAAverager::calculate()

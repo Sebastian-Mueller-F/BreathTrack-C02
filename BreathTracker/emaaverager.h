@@ -1,9 +1,12 @@
 #ifndef EMAAVERAGER_H
 #define EMAAVERAGER_H
 
+#include <QObject>
+#include <QSharedPointer>
+
 #include "averager.h"
 #include "subscriber.h"
-#include <QObject>
+
 
 class EMAAverager : public Averager, public Subscriber {
     Q_OBJECT
@@ -16,7 +19,7 @@ public:
     }
 
     //singleton
-    static EMAAverager *instance();
+    static QSharedPointer<EMAAverager> instance();
 
     double calculate() override;
     size_t getPeriod() const override;
@@ -27,7 +30,7 @@ public:
 
 private:
     //singleton
-    static QScopedPointer<EMAAverager> _instance;
+    static QSharedPointer<EMAAverager> _instance;
 
     size_t _period;
     double _previousEMA;
