@@ -1,5 +1,5 @@
-#ifndef AVERAGER_H
-#define AVERAGER_H
+#ifndef I_AVERAGER_H
+#define I_AVERAGER_H
 
 #include <QObject>
 
@@ -8,13 +8,13 @@
 // Averager Interface
 
 // TODO: I_ as Interface prefix
-class Averager : public  QObject {
+class I_Averager : public  QObject {
     Q_OBJECT
 
 
 public:
-    explicit Averager(QObject *parent = nullptr) :   QObject(parent) {}
-    virtual ~Averager() {}
+    explicit I_Averager(QObject *parent = nullptr) :   QObject(parent) {}
+    virtual ~I_Averager() {}
 
     // calculate the average
     virtual double calculate() = 0;
@@ -33,4 +33,4 @@ signals:
 
 
 
-#endif // AVERAGER_H
+#endif // I_AVERAGER_H

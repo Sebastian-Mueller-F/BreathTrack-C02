@@ -4,7 +4,7 @@
 #include <QObject>
 #include <vector>
 
-class Subscriber  {
+class I_Subscriber  {
 
 
 public:

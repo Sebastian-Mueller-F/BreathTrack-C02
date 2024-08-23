@@ -4,14 +4,14 @@
 #include <QSharedPointer>
 #include <QObject>
 
-#include "subscriber.h"
-#include "averager.h"
+#include "I_Subscriber.h"
+#include "I_Averager.h"
 
 
 //TODO: 1. do we need period ?
 //TODO 2. do we need to limit the number of values that are being taking into account for the averager ?
 
-class SMAAverager : public Averager, public Subscriber {
+class SMAAverager : public I_Averager, public I_Subscriber {
     Q_OBJECT
 
 public:

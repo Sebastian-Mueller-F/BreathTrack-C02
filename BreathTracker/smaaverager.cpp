@@ -6,7 +6,7 @@
 QSharedPointer<SMAAverager> SMAAverager::_instance = nullptr;
 
 SMAAverager::SMAAverager(size_t period, QObject *parent)
-    : Averager(parent), _period(period)
+    : I_Averager(parent), _period(period)
 {
     //Initialize averageType
     _averageType = SensorDataType::SMA;
