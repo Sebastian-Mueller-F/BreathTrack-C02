@@ -26,9 +26,7 @@ Window {
 
        DataTrends {
            id: trendDisplay
-           anchors.top: averageData.bottom
-           anchors.left: parent.left
-           anchors.right: parent.right
-           height: parent.height * 0.4
+
+           height: 400
        }
 }

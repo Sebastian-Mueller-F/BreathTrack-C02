@@ -1,213 +1,186 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
+import QtQuick.Layouts 1.15
 
-Rectangle {
-    id: trendDisplaySection
-    width: parent.width
-    height: 300
-    color: "#333333"  // Dark background color similar to the image
-    radius: 10
-    border.color: "#555555"  // Lighter border color
-    border.width: 2
+ApplicationWindow {
+    visible: true
+    width: 800
+    height: 400
+    title: "CO2 Sensor Visualization"
 
-    // Define min and max values for the graph
-    property real minValue: 400  // Set according to your data's minimum expected value
-    property real maxValue: 700  // Set according to your data's maximum expected value
+    property var sensorData: []
+    property var maxDataPoints: 100
+    property var canvasHeight: 300
+    property int gridSpacing: 50  // Adjust as needed
 
-    // Mocked data as properties
-    property var sensorData: [
-        { "time": 0, "value": 400 },
-        { "time": 10, "value": 450 },
-        { "time": 20, "value": 460 },
-        { "time": 30, "value": 480 },
-        { "time": 40, "value": 490 },
-        { "time": 50, "value": 510 },
-        { "time": 60, "value": 530 },
-        { "time": 70, "value": 540 },
-        { "time": 80, "value": 560 },
-        { "time": 90, "value": 570 },
-        { "time": 100, "value": 590 },
-        { "time": 110, "value": 600 },
-        { "time": 120, "value": 620 },
-        { "time": 130, "value": 630 },
-        { "time": 140, "value": 640 },
-        { "time": 150, "value": 650 },
-        { "time": 160, "value": 660 },
-        { "time": 170, "value": 670 },
-        { "time": 180, "value": 680 },
-        { "time": 190, "value": 690 },
-        { "time": 200, "value": 700 }
-    ]
+    Timer {
+        interval: 1000
+        running: true
+        repeat: true
+        onTriggered: {
+            let newValue = Math.random() * 100;
+            sensorData.push(newValue);
+            if (sensorData.length > maxDataPoints) {
+                sensorData.shift();
+            }
+            sensorCanvas.requestPaint();
+        }
+    }
 
-    property var averagedData: [
-        { "time": 0, "value": 405 },
-        { "time": 10, "value": 455 },
-        { "time": 20, "value": 465 },
-        { "time": 30, "value": 475 },
-        { "time": 40, "value": 485 },
-        { "time": 50, "value": 505 },
-        { "time": 60, "value": 525 },
-        { "time": 70, "value": 535 },
-        { "time": 80, "value": 555 },
-        { "time": 90, "value": 565 },
-        { "time": 100, "value": 585 },
-        { "time": 110, "value": 595 },
-        { "time": 120, "value": 615 },
-        { "time": 130, "value": 625 },
-        { "time": 140, "value": 635 },
-        { "time": 150, "value": 645 },
-        { "time": 160, "value": 655 },
-        { "time": 170, "value": 665 },
-        { "time": 180, "value": 675 },
-        { "time": 190, "value": 685 },
-        { "time": 200, "value": 695 }
-    ]
+    Rectangle {
+        width: parent.width
+        height: parent.height
+        color: "#333333"  // Dark background color
+        radius: 20 // Rounded corners
 
-    Canvas {
-        id: customGraph
-        anchors.fill: parent
-        anchors.margins: 20
-        antialiasing: true
+        Item {
+            id: sensorGraph
+            x: 100
+            y: 50
+            width: parent.width - 150
+            height: parent.height - 150
+            clip: true
 
-        onPaint: {
-            var ctx = getContext("2d");
+            Canvas {
+                id: sensorCanvas
+                width: parent.width
+                height: canvasHeight
 
-            // Clear the canvas
-            ctx.clearRect(0, 0, width, height);
+                onPaint: {
+                    var ctx = getContext("2d");
+                    ctx.clearRect(0, 0, width, height);
 
-            // Draw the grid lines
-            ctx.strokeStyle = "#666666";  // Darker grid line color
-            ctx.lineWidth = 1;
+                    // Grid lines
+                    ctx.strokeStyle = "#AAAAAA";  // Light gray grid lines
+                    ctx.lineWidth = 2;  // Thicker grid lines
 
-            // Draw vertical and horizontal grid lines
-            for (var i = 0; i <= 10; i++) {
-                var x = width / 10 * i;
-                var y = height / 10 * i;
+                    // Vertical grid lines and X-axis tick marks
+                    for (var x = gridSpacing; x < width; x += gridSpacing) {
+                        ctx.beginPath();
+                        ctx.moveTo(x, 0);
+                        ctx.lineTo(x, height);
+                        ctx.stroke();
 
-                // Vertical grid lines
-                ctx.beginPath();
-                ctx.moveTo(x, 0);
-                ctx.lineTo(x, height);
-                ctx.stroke();
+                        // Draw tick marks on X-axis
+                        ctx.beginPath();
+                        ctx.moveTo(x, height);
+                        ctx.lineTo(x, height + 5);  // Small vertical line for tick mark
+                        ctx.stroke();
+                    }
 
-                // Horizontal grid lines
-                ctx.beginPath();
-                ctx.moveTo(0, y);
-                ctx.lineTo(width, y);
-                ctx.stroke();
+                    // Horizontal grid lines and Y-axis tick marks
+                    for (var y = gridSpacing; y < height; y += gridSpacing) {
+                        ctx.beginPath();
+                        ctx.moveTo(0, y);
+                        ctx.lineTo(width, y);
+                        ctx.stroke();
+                    }
+
+                    // Draw the graph line and fill area
+                    if (sensorData.length > 0) {
+                        var scaleX = width / Math.min(sensorData.length, maxDataPoints);
+                        var scaleY = height / 100;
+
+                        // Step 1: Adjust the line style
+                        ctx.beginPath();
+                        ctx.moveTo(0, height - (sensorData[0] * scaleY));
+
+                        for (var i = 1; i < sensorData.length - 1; i++) {
+                            var xc = (i * scaleX + (i + 1) * scaleX) / 2;
+                            var yc = (height - (sensorData[i] * scaleY) + height - (sensorData[i + 1] * scaleY)) / 2;
+                            ctx.quadraticCurveTo(i * scaleX, height - (sensorData[i] * scaleY), xc, yc);
+                        }
+
+                        ctx.lineTo((sensorData.length - 1) * scaleX, height - (sensorData[sensorData.length - 1] * scaleY));
+
+                        // Fill the area under the curve
+                        ctx.lineTo(width, height);
+                        ctx.lineTo(0, height);
+                        ctx.closePath();
+
+                        var gradient = ctx.createLinearGradient(0, 0, 0, height);
+                        gradient.addColorStop(0, "rgba(255, 255, 255, 0.3)");  // Lighter fill gradient
+                        gradient.addColorStop(1, "rgba(255, 255, 255, 0.1)");  // Fade to transparent
+                        ctx.fillStyle = gradient;
+                        ctx.fill();
+
+                        // Step 2: Set line color and thickness
+                        ctx.strokeStyle = "#FFFFFF";  // Solid white line
+                        ctx.lineWidth = 3;  // Thicker line for better visibility
+
+                        // Optional: Add shadow for a 3D effect
+                        ctx.shadowColor = "rgba(0, 0, 0, 0.7)";
+                        ctx.shadowBlur = 10;
+
+                        ctx.stroke();  // Draw the line with the new style
+                    }
+                }
             }
 
-            // Helper function to normalize data points between minValue and maxValue
-            function normalize(value) {
-                return (value - minValue) / (maxValue - minValue);
+            // Sensor title
+            Text {
+                text: "SENSOR"
+                font.pixelSize: 24
+                color: "white"
+                anchors.top: parent.top
+                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.topMargin: 10
             }
+        }
 
-            // Draw the filled area for the sensor data
-            ctx.fillStyle = "#E0E0E0";  // Light gray fill color
-            ctx.beginPath();
-            ctx.moveTo(0, height);  // Start at the bottom left
-            ctx.lineTo(0, height * (1 - normalize(sensorData[0].value)));  // Move to the first data point
+        // X-Axis Labels with RowLayout and Rectangles
+        RowLayout {
+            id: xAxisLabels
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.top: sensorGraph.bottom
+            anchors.topMargin: 5
+            width: sensorGraph.width
 
-            for (var j = 1; j < sensorData.length; j++) {
-                var x = width * (sensorData[j].time / 200);
-                var y = height * (1 - normalize(sensorData[j].value));
-                ctx.lineTo(x, y);
+            Repeater {
+                model: Math.floor((sensorGraph.width) / gridSpacing)
+                delegate: Rectangle {
+                    color: "transparent"
+                    radius: 5
+                    width: 40  // Fixed width for the label container
+                    height: 25
+                    Layout.alignment: Qt.AlignHCenter
+                    Layout.margins: 0
+
+                    Text {
+                        text: model.index * gridSpacing
+                        font.pixelSize: 12
+                        color: "white"
+                        anchors.centerIn: parent
+                    }
+                }
             }
+        }
 
-            ctx.lineTo(width, height);  // Finish at the bottom right
-            ctx.closePath();
-            ctx.fill();
+        // Y-Axis Labels with ColumnLayout and Rectangles
+        ColumnLayout {
+            id: yAxisLabels
+            anchors.verticalCenter: sensorGraph.verticalCenter
+            anchors.left: parent.left
+            anchors.leftMargin: 5
+            height: sensorGraph.height
 
-            // Draw the sensor data line
-            ctx.strokeStyle = "#E0E0E0";  // Light gray line color
-            ctx.lineWidth = 3;
-            ctx.beginPath();
+            Repeater {
+                model: Math.floor((sensorGraph.height) / gridSpacing)
+                delegate: Rectangle {
+                    color: "transparent"
+                    radius: 5
+                    width: 40  // Fixed width for the label container
+                    height: 25
+                    Layout.alignment: Qt.AlignVCenter
+                    Layout.margins: 0
 
-            ctx.moveTo(0, height * (1 - normalize(sensorData[0].value)));  // Start point
-
-            for (var j = 1; j < sensorData.length; j++) {
-                var x = width * (sensorData[j].time / 200);
-                var y = height * (1 - normalize(sensorData[j].value));
-                ctx.lineTo(x, y);
-            }
-
-            ctx.stroke();
-
-            // Draw the filled area for the averaged data
-            ctx.fillStyle = "#A0A0A0";  // Darker gray fill color
-            ctx.beginPath();
-            ctx.moveTo(0, height);  // Start at the bottom left
-            ctx.lineTo(0, height * (1 - normalize(averagedData[0].value)));  // Move to the first data point
-
-            for (var k = 1; k < averagedData.length; k++) {
-                var x = width * (averagedData[k].time / 200);
-                var y = height * (1 - normalize(averagedData[k].value));
-                ctx.lineTo(x, y);
-            }
-
-            ctx.lineTo(width, height);  // Finish at the bottom right
-            ctx.closePath();
-            ctx.fill();
-
-            // Draw the averaged data line
-            ctx.strokeStyle = "#A0A0A0";  // Darker gray line color
-            ctx.lineWidth = 3;
-            ctx.beginPath();
-
-            ctx.moveTo(0, height * (1 - normalize(averagedData[0].value)));  // Start point
-
-            for (var k = 1; k < averagedData.length; k++) {
-                var x = width * (averagedData[k].time / 200);
-                var y = height * (1 - normalize(averagedData[k].value));
-                ctx.lineTo(x, y);
-            }
-
-            ctx.stroke();
-
-            // Draw the circular markers for the averaged data
-            ctx.fillStyle = "#A0A0A0";
-
-            for (var m = 0; m < averagedData.length; m += 5) {
-                var x = width * (averagedData[m].time / 200);
-                var y = height * (1 - normalize(averagedData[m].value));
-                ctx.beginPath();
-                ctx.arc(x, y, 8, 0, 2 * Math.PI);
-                ctx.fill();
-            }
-
-            // Draw the legend
-            ctx.fillStyle = "#CCCCCC";
-            ctx.font = "bold 14px sans-serif";
-            ctx.fillText("Sensor", 10, 20);
-            ctx.fillText("Averaged", 10, 40);
-
-            // Draw the legend indicators
-            ctx.fillStyle = "#E0E0E0";  // Color for the sensor data
-            ctx.beginPath();
-            ctx.arc(60, 15, 5, 0, 2 * Math.PI);
-            ctx.fill();
-
-            ctx.fillStyle = "#A0A0A0";  // Color for the averaged data
-            ctx.beginPath();
-            ctx.arc(60, 35, 5, 0, 2 * Math.PI);
-            ctx.fill();
-
-            // Draw the x-axis labels (time)
-            for (var i = 0; i <= 10; i++) {
-                var x = width / 10 * i;
-                var timeLabel = (i * 20).toString();  // Adjust according to your time scale
-                ctx.fillStyle = "#CCCCCC";
-                ctx.font = "bold 12px sans-serif";
-                ctx.fillText(timeLabel, x - 10, height + 15);
-            }
-
-            // Draw the y-axis labels (values)
-            for (var i = 0; i <= 10; i++) {
-                var y = height - (height / 10 * i);
-                var valueLabel = (minValue + i * (maxValue - minValue) / 10).toFixed(0);
-                ctx.fillStyle = "#CCCCCC";
-                ctx.font = "bold 12px sans-serif";
-                ctx.fillText(valueLabel, -30, y + 5);
+                    Text {
+                        text: 100 - model.index * (100 / Math.floor((sensorGraph.height) / gridSpacing))
+                        font.pixelSize: 12
+                        color: "white"
+                        anchors.centerIn: parent
+                    }
+                }
             }
         }
     }
