@@ -9,7 +9,8 @@
 #include <buffersubscription.h>
 #include <smaaverager.h>
 #include <emaaverager.h>
-#include <subscriber.h>
+#include <I_Subscriber.h>
+#include <databuffermanager.h>
 
 int main(int argc, char *argv[])
 {
@@ -39,6 +40,7 @@ int main(int argc, char *argv[])
     averagerBufferSubscription.registerSubscriber(sma, 5000); //5 seconds
     averagerBufferSubscription.registerSubscriber(ema, 10000); // 10 seconds
 
+    std::shared_ptr<DataBufferManager> dataBuffer = DataBufferManager::instance();
 
 
 
