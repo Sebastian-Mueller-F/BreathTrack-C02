@@ -27,11 +27,27 @@ ApplicationWindow {
         }
     }
 
+    // Simulate Drop Shadow using a Semi-Transparent Rectangle
+    Rectangle {
+        width: parent.width + 10
+        height: parent.height + 10
+        color: "black"
+        opacity: 0.2  // Semi-transparent shadow
+        radius: 20 // Rounded corners for shadow
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.leftMargin: 5
+        anchors.topMargin: 5
+    }
+
     Rectangle {
         width: parent.width
         height: parent.height
         color: "#333333"  // Dark background color
-        radius: 20 // Rounded corners
+        radius: 15  // Adjusted corner radius for a slightly sharper look
+        border.color: "#555555"  // Adding a subtle border around the graph area
+        border.width: 2
+
 
         Item {
             id: sensorGraph
@@ -81,7 +97,6 @@ ApplicationWindow {
                         var scaleX = width / Math.min(sensorData.length, maxDataPoints);
                         var scaleY = height / 100;
 
-                        // Step 1: Adjust the line style
                         ctx.beginPath();
                         ctx.moveTo(0, height - (sensorData[0] * scaleY));
 
@@ -104,23 +119,20 @@ ApplicationWindow {
                         ctx.fillStyle = gradient;
                         ctx.fill();
 
-                        // Step 2: Set line color and thickness
+                        // Set line color and thickness
                         ctx.strokeStyle = "#FFFFFF";  // Solid white line
                         ctx.lineWidth = 3;  // Thicker line for better visibility
-
-                        // Optional: Add shadow for a 3D effect
-                        ctx.shadowColor = "rgba(0, 0, 0, 0.7)";
-                        ctx.shadowBlur = 10;
 
                         ctx.stroke();  // Draw the line with the new style
                     }
                 }
             }
 
-            // Sensor title
+            // Sensor title font and style
             Text {
                 text: "SENSOR"
-                font.pixelSize: 24
+                font.pixelSize: 28
+                font.family: "Arial Black"  // Updated font for a more stylized look
                 color: "white"
                 anchors.top: parent.top
                 anchors.horizontalCenter: parent.horizontalCenter
@@ -148,7 +160,8 @@ ApplicationWindow {
 
                     Text {
                         text: model.index * gridSpacing
-                        font.pixelSize: 12
+                        font.pixelSize: 14  // Increased font size for better readability
+                        font.family: "Arial"  // Consistent font style
                         color: "white"
                         anchors.centerIn: parent
                     }
@@ -161,7 +174,7 @@ ApplicationWindow {
             id: yAxisLabels
             anchors.verticalCenter: sensorGraph.verticalCenter
             anchors.left: parent.left
-            anchors.leftMargin: 5
+            anchors.leftMargin: 10  // Increased margin for better spacing
             height: sensorGraph.height
 
             Repeater {
@@ -176,7 +189,8 @@ ApplicationWindow {
 
                     Text {
                         text: 100 - model.index * (100 / Math.floor((sensorGraph.height) / gridSpacing))
-                        font.pixelSize: 12
+                        font.pixelSize: 14  // Increased font size for consistency with X-axis labels
+                        font.family: "Arial"  // Consistent font style
                         color: "white"
                         anchors.centerIn: parent
                     }
