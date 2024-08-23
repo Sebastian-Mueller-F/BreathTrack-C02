@@ -3,7 +3,7 @@
 
 #include <QObject>
 #include <circularbuffer.h>
-#include "subscriber.h"
+#include "I_Subscriber.h"
 
 #include <QSharedPointer>
 
