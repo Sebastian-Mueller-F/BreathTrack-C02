@@ -11,15 +11,12 @@ class I_FrontendAPI : public QObject {
 
 public :
 
- virtual QVariant getBackendData();
- virtual void handleFrontendRequest();
+ virtual QVariant getBackendData() = 0;
+ virtual void handleFrontendRequest() = 0;
 
- virtual void saveSettings(QString key, QVariant val);
- virtual void loadSettings();
+ virtual void saveSettings(QString key, QVariant val) = 0;
+ virtual void loadSettings() = 0;
 
- private:
-
- QSettings _settings;
 };
 
 
