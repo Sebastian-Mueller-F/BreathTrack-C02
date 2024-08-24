@@ -3,7 +3,7 @@ import QtQuick.Controls 2.15
 
 Window {
     width: 640
-    height: 480
+    height: 800
     visible: true
     title: qsTr("Hello World")
 
@@ -11,18 +11,18 @@ Window {
        // RawSensorData {
        //     id: rawData
        //     anchors.top: parent.top
-       //     anchors.left: pare nt.left
-       //     anchors.right: parent.right
-       //     height: parent.height * 0.3
-       // }
-
-       // AveragedSensorData {
-       //     id: averageData
-       //     anchors.top: rawData.bottom
        //     anchors.left: parent.left
        //     anchors.right: parent.right
        //     height: parent.height * 0.3
        // }
+
+       AveragedSensorData {
+           id: averageData
+           anchors.top: parent.top
+           anchors.left: parent.left
+           anchors.right: parent.right
+
+       }
 
        DataTrends {
            id: trendDisplay
