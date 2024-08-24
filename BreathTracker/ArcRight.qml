@@ -49,8 +49,6 @@
 ****************************************************************************/
 
 import QtQuick 2.10
-import ebikeDesign 1.0
-import QtQuick.Studio.Components 1.0
 import QtQuick.Timeline 1.0
 
 ArcItem {

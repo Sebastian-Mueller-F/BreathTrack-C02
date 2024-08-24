@@ -18,13 +18,17 @@ Window {
        //     height: parent.height * 0.3
        // }
 
-        LiveData{
-            id: liveData
+
+
+    LiveData{
+        id: liveData
 
     }
-       DataTrends {
-           id: trendDisplay
 
-           height: 400
-       }
+
+    DataTrends {
+        id: trendDisplay
+
+        height: 400
+    }
 }

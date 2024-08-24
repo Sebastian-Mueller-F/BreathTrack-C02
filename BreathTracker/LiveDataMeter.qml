@@ -49,14 +49,16 @@
 ****************************************************************************/
 
 import QtQuick 2.10
-import ebikeDesign 1.0
+
+
+//Changing values
 
 
 
-SpeedBackground {
-    id: speedoMeter
-    property alias speed: arcLeft.value
-    property alias battery: arcRight.value
+LiveData {
+    id: live
+    property alias sensorValue: arcLeft.value
+    property alias averageValue: arcRight.value
     ArcRight {
         id: arcRight
         x: 36

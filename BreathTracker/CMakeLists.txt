@@ -33,7 +33,8 @@ qt_add_qml_module(appBreathTracker
     SOURCES I_FrontendAPI.h
     # SOURCES livedataapi.h livedataapi.cpp
     SOURCES trenddataapi.h trenddataapi.cpp
-    QML_FILES ArcItem.qml ArcLeft.qml ArcRight.qml CircleIndicator.qml CustomLabel.qml LiveData.qml LiveDataMeter.qml ModeToggle.qml
+    QML_FILES ArcItem.qml ArcLeft.qml ArcRight.qml CircleIndicator.qml CustomLabel.qml LiveDataBackground.qml LiveDataMeter.qml ModeToggle.qml
+    QML_FILES LiveData.qml
 )
 
 
@@ -43,7 +44,9 @@ source_group("Source Files// Data" FILES databuffermanager.h databuffermanager.c
 source_group("Source Files// Averager" FILES I_Averager.h smaaverager.h smaaverager.cpp emaaverager.h emaaverager.cpp)
 source_group("Source Files// Backend Frontend Interface" FILES I_FrontendAPI.h livedataapi.h livedataapi.cpp trenddataapi.h trenddataapi.cpp )
 source_group("Source Files// Utils" FILES types.h)
-source_group("QML " FILES main.qml ArcItem.qml ArcLeft.qml ArcRight.qml CircleIndicator.qml CustomLabel.qml LiveData.qml LiveDataMeter.qml ModeToggle.qml)
+source_group("QML " FILES main.qml LiveData.qml LiveDataBackground.qml LiveDataMeter.qml )
+source_group("QML// Components // Arcs" FILES ArcItem.qml ArcLeft.qml ArcRight.qml CircleIndicator.qml)
+source_group("QML// Components " FILES CustomLabel.qml ModeToggle.qml)
 
 
 
