@@ -6,16 +6,18 @@
 
 
 
-class I_FrontendAPI : public QObject {
- Q_OBJECT
+class I_FrontendAPI  {
+
 
 public :
 
- virtual QVariant getBackendData() = 0;
+ virtual void getBackendData() = 0;
  virtual void handleFrontendRequest() = 0;
 
  virtual void saveSettings(QString key, QVariant val) = 0;
  virtual void loadSettings() = 0;
+
+ virtual ~I_FrontendAPI() = default;
 
 };
 

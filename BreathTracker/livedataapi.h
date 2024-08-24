@@ -2,28 +2,52 @@
 #define LIVEDATAAPI_H
 
 #include <QObject>
-#include <I_Subscriber.h>
+#include <QQmlEngine>
 
-class LiveDataAPI : public QObject, public I_Subscriber
+#include <I_Subscriber.h>
+#include <I_FrontendAPI.h>
+#include <sensorsimulator.h>
+#include <smaaverager.h>
+#include <emaaverager.h>
+
+//Singleton
+class LiveDataAPI : public QObject, public I_FrontendAPI
 {
 Q_OBJECT
 public:
-    LiveDataAPI();
+    LiveDataAPI(QObject *parent = nullptr);
+
+    ~LiveDataAPI() override {
+        // Destructor
+    }
+
+     static QObject *qmlInstance(QQmlEngine *engine, QJSEngine *scriptEngine);
+    //TODO: Change to std::unique / std::shared ?
+     static LiveDataAPI *instance();
 
 private:
+    static LiveDataAPI *_instance;
 
-    double _sensorValue;
-    double _averagedValue;
+    int _sensorValue;
+    int _averagedValue;
+    int _averageType;  //TODO: Make enum
 
-    Q_PROPERTY(double sensorValue READ sensorValue WRITE setSensorValue NOTIFY sensorValueChanged)
-    Q_PROPERTY(double averagedValue READ averagedValue WRITE setAveragedValue NOTIFY averagedValueChanged FINAL)
+    Q_PROPERTY(int sensorValue READ sensorValue WRITE setSensorValue NOTIFY sensorValueChanged)
+    Q_PROPERTY(int averagedValue READ averagedValue WRITE setAveragedValue NOTIFY averagedValueChanged FINAL)
+
+    void getBackendData() override;
+    void handleFrontendRequest() override;
+
+    void saveSettings(QString key, QVariant val) override;
+    void loadSettings() override;
+
 
 public:
-    double sensorValue() const;
-    void setSensorValue(double newSensorValue);
+    int sensorValue() const;
+    void setSensorValue(int newSensorValue);
 
-    double averagedValue() const;
-    void setAveragedValue(double newAveragedValue);
+    int averagedValue() const;
+    void setAveragedValue(int newAveragedValue);
 
 signals:
 
