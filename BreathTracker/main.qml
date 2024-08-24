@@ -23,6 +23,7 @@ Window {
     LiveData{
         id: liveData
 
+        anchors.fill: parent
     }
 
 
