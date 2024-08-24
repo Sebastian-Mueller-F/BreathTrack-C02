@@ -49,20 +49,31 @@
 ****************************************************************************/
 
 import QtQuick 2.10
-
-
 import QtQuick.Timeline 1.0
 
 
 Item {
-    id: element
+    id: root
     width: 454
     height: 440
 
-    property int sensorData
-    property int smaData
-    property int emaData
-    property int warningLevel
+    property int sensorData: 50
+    property int averagedData : 10
+    property int smaData: 45
+    property int emaData: 46
+    property int warningLevel: 1
+    property int averageType : 0
+
+    // Handler to check when sensorData changes
+        onSensorDataChanged: {
+            console.log("sensorData has been updated to: " + sensorData)
+            // You can add further logic here to handle the change
+        }
+
+        onAveragedDataChanged: {
+            console.log("averagedData has been updated to: " + averagedData)
+            // You can add further logic here to handle the change
+        }
 
 
     ArcItem {
@@ -225,7 +236,7 @@ Item {
 
             CustomLabel {
                 id: averagedData
-                text: "30" //TODO: connect to BE
+                text:root.averagedData
                 anchors.horizontalCenter: parent.horizontalCenter
                 font.pixelSize: 48
             }
@@ -261,7 +272,7 @@ Item {
 
             CustomLabel {
                 id: avgData
-                text: " 17 " // TODO: connect to backend
+                text: root.sensorData // TODO: connect to backend
                 anchors.horizontalCenter: parent.horizontalCenter
                 font.pixelSize: 48
             }
@@ -271,7 +282,7 @@ Item {
                 width: 40
                 height: 70
                 color: "#6d6d6d"
-                text: qsTr("Sensor Value")
+                text: qsTr("Raw")
                 anchors.horizontalCenter: parent.horizontalCenter
                 wrapMode: Text.WordWrap
                 lineHeight: 0.8
