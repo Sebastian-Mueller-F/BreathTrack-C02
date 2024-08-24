@@ -31,13 +31,15 @@ qt_add_qml_module(appBreathTracker
     QML_FILES AveragedSensorData.qml
     QML_FILES DataTrends.qml
     SOURCES I_FrontendAPI.h
+    # SOURCES livedataapi.h livedataapi.cpp
+    SOURCES trenddataapi.h trenddataapi.cpp
 )
 
 source_group("Source Files// Sensor" FILES sensorsimulator.h sensorsimulator.cpp)
 source_group("Source Files// Data Structures" FILES circularbuffer.h circularbuffer.cpp buffersubscription.h buffersubscription.cpp I_Subscriber.h)
 source_group("Source Files// Data" FILES databuffermanager.h databuffermanager.cpp)
 source_group("Source Files// Averager" FILES I_Averager.h smaaverager.h smaaverager.cpp emaaverager.h emaaverager.cpp)
-source_group("Source Files// Backend Frontend Interface" FILES I_FrontendAPI.h)
+source_group("Source Files// Backend Frontend Interface" FILES I_FrontendAPI.h livedataapi.h livedataapi.cpp trenddataapi.h trenddataapi.cpp )
 source_group("Source Files// Utils" FILES types.h)
 
 
