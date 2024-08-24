@@ -31,10 +31,9 @@ qt_add_qml_module(appBreathTracker
     QML_FILES AveragedSensorData.qml
     QML_FILES DataTrends.qml
     SOURCES I_FrontendAPI.h
-    # SOURCES livedataapi.h livedataapi.cpp
+    SOURCES livedataapi.h livedataapi.cpp
     SOURCES trenddataapi.h trenddataapi.cpp
-    QML_FILES ArcItem.qml ArcLeft.qml ArcRight.qml CircleIndicator.qml CustomLabel.qml LiveDataBackground.qml LiveDataMeter.qml ModeToggle.qml
-    QML_FILES LiveData.qml
+    QML_FILES ArcItem.qml ArcLeft.qml ArcRight.qml CircleIndicator.qml CustomLabel.qml LiveDataBackground.qml LiveData.qml ModeToggle.qml
 )
 
 
