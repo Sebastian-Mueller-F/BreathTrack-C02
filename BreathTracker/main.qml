@@ -1,5 +1,7 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
+import UI 1.0
+
 
 Window {
     width: 640
@@ -16,13 +18,9 @@ Window {
        //     height: parent.height * 0.3
        // }
 
-       AveragedSensorData {
-           id: averageData
-           anchors.top: parent.top
-           anchors.left: parent.left
-           anchors.right: parent.right
-
-       }
+        App{
+            id: app
+        }
 
        DataTrends {
            id: trendDisplay

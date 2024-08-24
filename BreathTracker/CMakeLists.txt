@@ -35,6 +35,11 @@ qt_add_qml_module(appBreathTracker
     SOURCES trenddataapi.h trenddataapi.cpp
 )
 
+add_subdirectory(UI)
+add_subdirectory(imports)
+
+
+
 source_group("Source Files// Sensor" FILES sensorsimulator.h sensorsimulator.cpp)
 source_group("Source Files// Data Structures" FILES circularbuffer.h circularbuffer.cpp buffersubscription.h buffersubscription.cpp I_Subscriber.h)
 source_group("Source Files// Data" FILES databuffermanager.h databuffermanager.cpp)
