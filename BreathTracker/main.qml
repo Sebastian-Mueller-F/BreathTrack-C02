@@ -1,6 +1,6 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
-import UI 1.0
+
 
 
 Window {
@@ -18,10 +18,10 @@ Window {
        //     height: parent.height * 0.3
        // }
 
-        App{
-            id: app
-        }
+        LiveData{
+            id: liveData
 
+    }
        DataTrends {
            id: trendDisplay
 
