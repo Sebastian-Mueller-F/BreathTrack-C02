@@ -1,0 +1,8 @@
+module EbikeData
+linktarget EbikeDataplugin
+optional plugin EbikeDataplugin
+classname EbikeDataPlugin
+typeinfo EbikeData.qmltypes
+prefer :/qt/qml/EbikeData/
+singleton Backend 1.0 Backend.qml
+

@@ -1,0 +1,12 @@
+<RCC>
+  <qresource prefix="/qt-project.org/imports/QtQuick/Studio/LogicHelper/">
+    <file alias="BidirectionalBinding.qml">/Users/sebastian_mueller/Desktop/Bewerbungen/13_Loewenstein Medical/Code-Challenge/BreathTrack-C02/BreathTrackerDesign/build/Qt_6_7_2_for_macOS-Debug/_deps/ds-src/src/imports/logichelper/BidirectionalBinding.qml</file>
+    <file alias="RangeMapper.qml">/Users/sebastian_mueller/Desktop/Bewerbungen/13_Loewenstein Medical/Code-Challenge/BreathTrack-C02/BreathTrackerDesign/build/Qt_6_7_2_for_macOS-Debug/_deps/ds-src/src/imports/logichelper/RangeMapper.qml</file>
+    <file alias="MinMaxMapper.qml">/Users/sebastian_mueller/Desktop/Bewerbungen/13_Loewenstein Medical/Code-Challenge/BreathTrack-C02/BreathTrackerDesign/build/Qt_6_7_2_for_macOS-Debug/_deps/ds-src/src/imports/logichelper/MinMaxMapper.qml</file>
+    <file alias="StringMapper.qml">/Users/sebastian_mueller/Desktop/Bewerbungen/13_Loewenstein Medical/Code-Challenge/BreathTrack-C02/BreathTrackerDesign/build/Qt_6_7_2_for_macOS-Debug/_deps/ds-src/src/imports/logichelper/StringMapper.qml</file>
+    <file alias="OrOperator.qml">/Users/sebastian_mueller/Desktop/Bewerbungen/13_Loewenstein Medical/Code-Challenge/BreathTrack-C02/BreathTrackerDesign/build/Qt_6_7_2_for_macOS-Debug/_deps/ds-src/src/imports/logichelper/OrOperator.qml</file>
+    <file alias="AndOperator.qml">/Users/sebastian_mueller/Desktop/Bewerbungen/13_Loewenstein Medical/Code-Challenge/BreathTrack-C02/BreathTrackerDesign/build/Qt_6_7_2_for_macOS-Debug/_deps/ds-src/src/imports/logichelper/AndOperator.qml</file>
+    <file alias="NotOperator.qml">/Users/sebastian_mueller/Desktop/Bewerbungen/13_Loewenstein Medical/Code-Challenge/BreathTrack-C02/BreathTrackerDesign/build/Qt_6_7_2_for_macOS-Debug/_deps/ds-src/src/imports/logichelper/NotOperator.qml</file>
+  </qresource>
+</RCC>
+

@@ -1,0 +1,29 @@
+module content
+linktarget contentplugin
+optional plugin contentplugin
+classname contentPlugin
+typeinfo content.qmltypes
+prefer :/qt/qml/content/
+NavigationItem 1.0 NavigationItem.ui.qml
+FpsCounter 1.0 FpsCounter.qml
+EBikeDesign 1.0 EBikeDesign.qml
+Screen01 1.0 Screen01.ui.qml
+SpeedBackground 1.0 SpeedBackground.ui.qml
+Foreground 1.0 Foreground.ui.qml
+CustomLabel 1.0 CustomLabel.ui.qml
+ArcRight 1.0 ArcRight.ui.qml
+SpeedoMeter 1.0 SpeedoMeter.ui.qml
+TripScreen 1.0 TripScreen.ui.qml
+MyButton 1.0 MyButton.ui.qml
+ModeToggle 1.0 ModeToggle.ui.qml
+App 1.0 App.qml
+ArcLeft 1.0 ArcLeft.ui.qml
+BikeInfo 1.0 BikeInfo.ui.qml
+Light 1.0 Light.ui.qml
+NavigationScreen 1.0 NavigationScreen.ui.qml
+ViewSettings 1.0 ViewSettings.ui.qml
+Tabbar 1.0 Tabbar.qml
+SettingsBar 1.0 SettingsBar.ui.qml
+CircleIndicator 1.0 CircleIndicator.ui.qml
+GeneralSettings 1.0 GeneralSettings.ui.qml
+

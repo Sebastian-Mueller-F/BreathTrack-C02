@@ -1,0 +1,12 @@
+module Main
+linktarget Mainplugin
+optional plugin Mainplugin
+classname MainPlugin
+typeinfo Main.qmltypes
+prefer :/qt/qml/Main/
+ArcLeft 1.0 COPY/ArcLeft.ui.qml
+SpeedoMeter 1.0 COPY/SpeedoMeter.ui.qml
+CircleIndicator 1.0 COPY/CircleIndicator.ui.qml
+ArcRight 1.0 COPY/ArcRight.ui.qml
+SpeedBackground 1.0 COPY/SpeedBackground.ui.qml
+

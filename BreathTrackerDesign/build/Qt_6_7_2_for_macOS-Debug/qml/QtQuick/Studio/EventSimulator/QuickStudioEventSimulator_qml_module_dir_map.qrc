@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="/">
+    <file alias="/qt-project.org/imports/QtQuick/Studio/EventSimulator">/Users/sebastian_mueller/Desktop/Bewerbungen/13_Loewenstein Medical/Code-Challenge/BreathTrack-C02/BreathTrackerDesign/build/Qt_6_7_2_for_macOS-Debug/qml/QtQuick/Studio/EventSimulator</file>
+
+  </qresource>
+</RCC>

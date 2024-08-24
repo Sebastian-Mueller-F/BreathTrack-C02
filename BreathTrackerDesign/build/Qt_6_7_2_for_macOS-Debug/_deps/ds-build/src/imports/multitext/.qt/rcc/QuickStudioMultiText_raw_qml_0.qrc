@@ -1,0 +1,8 @@
+<RCC>
+  <qresource prefix="/qt-project.org/imports/QtQuick/Studio/MultiText/">
+    <file alias="MultiTextElement.qml">/Users/sebastian_mueller/Desktop/Bewerbungen/13_Loewenstein Medical/Code-Challenge/BreathTrack-C02/BreathTrackerDesign/build/Qt_6_7_2_for_macOS-Debug/_deps/ds-src/src/imports/multitext/MultiTextElement.qml</file>
+    <file alias="MultiTextItem.qml">/Users/sebastian_mueller/Desktop/Bewerbungen/13_Loewenstein Medical/Code-Challenge/BreathTrack-C02/BreathTrackerDesign/build/Qt_6_7_2_for_macOS-Debug/_deps/ds-src/src/imports/multitext/MultiTextItem.qml</file>
+    <file alias="MultiTextException.qml">/Users/sebastian_mueller/Desktop/Bewerbungen/13_Loewenstein Medical/Code-Challenge/BreathTrack-C02/BreathTrackerDesign/build/Qt_6_7_2_for_macOS-Debug/_deps/ds-src/src/imports/multitext/MultiTextException.qml</file>
+  </qresource>
+</RCC>
+

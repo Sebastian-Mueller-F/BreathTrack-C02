@@ -1,0 +1,37 @@
+# ninja log v6
+1	64	1724497791525183700	/Users/sebastian_mueller/Desktop/Bewerbungen/13_Loewenstein Medical/Code-Challenge/BreathTrack-C02/BreathTrackerDesign/build/Qt_6_7_2_for_macOS-Debug/_deps/ds-subbuild/ds-populate-prefix/src/ds-populate-stamp/ds-populate-mkdir	f3d132e483624e4d
+589	656	1724497953386661000	/Users/sebastian_mueller/Desktop/Bewerbungen/13_Loewenstein Medical/Code-Challenge/BreathTrack-C02/BreathTrackerDesign/build/Qt_6_7_2_for_macOS-Debug/_deps/ds-subbuild/ds-populate-prefix/src/ds-populate-stamp/ds-populate-patch	14a36b5e63e474c4
+915	1010	1724497953740263000	/Users/sebastian_mueller/Desktop/Bewerbungen/13_Loewenstein Medical/Code-Challenge/BreathTrack-C02/BreathTrackerDesign/build/Qt_6_7_2_for_macOS-Debug/_deps/ds-subbuild/ds-populate-prefix/src/ds-populate-stamp/ds-populate-done	44a1ae5c9fa896df
+657	721	1724497953451292000	/Users/sebastian_mueller/Desktop/Bewerbungen/13_Loewenstein Medical/Code-Challenge/BreathTrack-C02/BreathTrackerDesign/build/Qt_6_7_2_for_macOS-Debug/_deps/ds-subbuild/ds-populate-prefix/src/ds-populate-stamp/ds-populate-configure	b200d3a36524fd94
+784	852	1724497953582523000	ds-populate-prefix/src/ds-populate-stamp/ds-populate-install	7695233cb72cd7ed
+64	1479	1724497792940662638	/Users/sebastian_mueller/Desktop/Bewerbungen/13_Loewenstein Medical/Code-Challenge/BreathTrack-C02/BreathTrackerDesign/build/Qt_6_7_2_for_macOS-Debug/_deps/ds-subbuild/ds-populate-prefix/src/ds-populate-stamp/ds-populate-download	d879166b273a4990
+721	784	1724497953514286000	ds-populate-prefix/src/ds-populate-stamp/ds-populate-build	a430fe1ec5ccaba2
+1	589	1724497952732706911	ds-populate-prefix/src/ds-populate-stamp/ds-populate-update	408863d7dc74f878
+1	589	1724497952732706911	/Users/sebastian_mueller/Desktop/Bewerbungen/13_Loewenstein Medical/Code-Challenge/BreathTrack-C02/BreathTrackerDesign/build/Qt_6_7_2_for_macOS-Debug/_deps/ds-subbuild/ds-populate-prefix/src/ds-populate-stamp/ds-populate-update	408863d7dc74f878
+1	64	1724497791525183700	ds-populate-prefix/src/ds-populate-stamp/ds-populate-mkdir	f3d132e483624e4d
+64	1479	1724497792940662638	ds-populate-prefix/src/ds-populate-stamp/ds-populate-download	d879166b273a4990
+721	784	1724497953514286000	/Users/sebastian_mueller/Desktop/Bewerbungen/13_Loewenstein Medical/Code-Challenge/BreathTrack-C02/BreathTrackerDesign/build/Qt_6_7_2_for_macOS-Debug/_deps/ds-subbuild/ds-populate-prefix/src/ds-populate-stamp/ds-populate-build	a430fe1ec5ccaba2
+589	656	1724497953386661000	ds-populate-prefix/src/ds-populate-stamp/ds-populate-patch	14a36b5e63e474c4
+657	721	1724497953451292000	ds-populate-prefix/src/ds-populate-stamp/ds-populate-configure	b200d3a36524fd94
+784	852	1724497953582523000	/Users/sebastian_mueller/Desktop/Bewerbungen/13_Loewenstein Medical/Code-Challenge/BreathTrack-C02/BreathTrackerDesign/build/Qt_6_7_2_for_macOS-Debug/_deps/ds-subbuild/ds-populate-prefix/src/ds-populate-stamp/ds-populate-install	7695233cb72cd7ed
+852	915	1724497953645465000	ds-populate-prefix/src/ds-populate-stamp/ds-populate-test	a0a04937812f8cb
+915	1010	1724497953740263000	/Users/sebastian_mueller/Desktop/Bewerbungen/13_Loewenstein Medical/Code-Challenge/BreathTrack-C02/BreathTrackerDesign/build/Qt_6_7_2_for_macOS-Debug/_deps/ds-subbuild/CMakeFiles/ds-populate-complete	44a1ae5c9fa896df
+852	915	1724497953645465000	/Users/sebastian_mueller/Desktop/Bewerbungen/13_Loewenstein Medical/Code-Challenge/BreathTrack-C02/BreathTrackerDesign/build/Qt_6_7_2_for_macOS-Debug/_deps/ds-subbuild/ds-populate-prefix/src/ds-populate-stamp/ds-populate-test	a0a04937812f8cb
+915	1010	1724497953740263000	ds-populate-prefix/src/ds-populate-stamp/ds-populate-done	44a1ae5c9fa896df
+915	1010	1724497953740263000	CMakeFiles/ds-populate-complete	44a1ae5c9fa896df
+1	669	1724498168282244810	ds-populate-prefix/src/ds-populate-stamp/ds-populate-update	408863d7dc74f878
+1	669	1724498168282244810	/Users/sebastian_mueller/Desktop/Bewerbungen/13_Loewenstein Medical/Code-Challenge/BreathTrack-C02/BreathTrackerDesign/build/Qt_6_7_2_for_macOS-Debug/_deps/ds-subbuild/ds-populate-prefix/src/ds-populate-stamp/ds-populate-update	408863d7dc74f878
+669	727	1724498169007198000	ds-populate-prefix/src/ds-populate-stamp/ds-populate-patch	14a36b5e63e474c4
+669	727	1724498169007198000	/Users/sebastian_mueller/Desktop/Bewerbungen/13_Loewenstein Medical/Code-Challenge/BreathTrack-C02/BreathTrackerDesign/build/Qt_6_7_2_for_macOS-Debug/_deps/ds-subbuild/ds-populate-prefix/src/ds-populate-stamp/ds-populate-patch	14a36b5e63e474c4
+728	785	1724498169065055000	ds-populate-prefix/src/ds-populate-stamp/ds-populate-configure	b200d3a36524fd94
+728	785	1724498169065055000	/Users/sebastian_mueller/Desktop/Bewerbungen/13_Loewenstein Medical/Code-Challenge/BreathTrack-C02/BreathTrackerDesign/build/Qt_6_7_2_for_macOS-Debug/_deps/ds-subbuild/ds-populate-prefix/src/ds-populate-stamp/ds-populate-configure	b200d3a36524fd94
+785	843	1724498169123001000	ds-populate-prefix/src/ds-populate-stamp/ds-populate-build	a430fe1ec5ccaba2
+785	843	1724498169123001000	/Users/sebastian_mueller/Desktop/Bewerbungen/13_Loewenstein Medical/Code-Challenge/BreathTrack-C02/BreathTrackerDesign/build/Qt_6_7_2_for_macOS-Debug/_deps/ds-subbuild/ds-populate-prefix/src/ds-populate-stamp/ds-populate-build	a430fe1ec5ccaba2
+843	901	1724498169180702000	ds-populate-prefix/src/ds-populate-stamp/ds-populate-install	7695233cb72cd7ed
+843	901	1724498169180702000	/Users/sebastian_mueller/Desktop/Bewerbungen/13_Loewenstein Medical/Code-Challenge/BreathTrack-C02/BreathTrackerDesign/build/Qt_6_7_2_for_macOS-Debug/_deps/ds-subbuild/ds-populate-prefix/src/ds-populate-stamp/ds-populate-install	7695233cb72cd7ed
+901	958	1724498169238107000	ds-populate-prefix/src/ds-populate-stamp/ds-populate-test	a0a04937812f8cb
+901	958	1724498169238107000	/Users/sebastian_mueller/Desktop/Bewerbungen/13_Loewenstein Medical/Code-Challenge/BreathTrack-C02/BreathTrackerDesign/build/Qt_6_7_2_for_macOS-Debug/_deps/ds-subbuild/ds-populate-prefix/src/ds-populate-stamp/ds-populate-test	a0a04937812f8cb
+958	1043	1724498169322951000	CMakeFiles/ds-populate-complete	44a1ae5c9fa896df
+958	1043	1724498169322951000	ds-populate-prefix/src/ds-populate-stamp/ds-populate-done	44a1ae5c9fa896df
+958	1043	1724498169322951000	/Users/sebastian_mueller/Desktop/Bewerbungen/13_Loewenstein Medical/Code-Challenge/BreathTrack-C02/BreathTrackerDesign/build/Qt_6_7_2_for_macOS-Debug/_deps/ds-subbuild/CMakeFiles/ds-populate-complete	44a1ae5c9fa896df
+958	1043	1724498169322951000	/Users/sebastian_mueller/Desktop/Bewerbungen/13_Loewenstein Medical/Code-Challenge/BreathTrack-C02/BreathTrackerDesign/build/Qt_6_7_2_for_macOS-Debug/_deps/ds-subbuild/ds-populate-prefix/src/ds-populate-stamp/ds-populate-done	44a1ae5c9fa896df
