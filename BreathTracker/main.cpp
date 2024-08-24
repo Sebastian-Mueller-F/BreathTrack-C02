@@ -27,8 +27,8 @@ int main(int argc, char *argv[])
     }
 
     SensorSimulator* CO2sensor = SensorSimulator::instance();
-    QSharedPointer<Subscriber> sma = SMAAverager::instance();
-    QSharedPointer<Subscriber> ema = EMAAverager::instance();
+    QSharedPointer<I_Subscriber> sma = SMAAverager::instance();
+    QSharedPointer<I_Subscriber> ema = EMAAverager::instance();
 
     //create buffer for averagers
     CircularBuffer averagerBuffer(60); //TODO: variable instead of hardcoded 6

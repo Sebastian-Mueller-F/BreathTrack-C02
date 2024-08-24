@@ -22,7 +22,7 @@ BufferSubscription::BufferSubscription(CircularBuffer& buffer, QObject *parent)
      //connect to buffer
     connect(&_buffer, &CircularBuffer::dataAdded, this, &BufferSubscription::onDataAddedToBuffer);
 }
-void BufferSubscription::registerSubscriber(QSharedPointer<Subscriber> subscriber, int lookBackPeriodMS)
+void BufferSubscription::registerSubscriber(QSharedPointer<I_Subscriber> subscriber, int lookBackPeriodMS)
 {
     qDebug() << "Registering new subscriber with lookBackPeriodMS:" << lookBackPeriodMS;
     _subscribers.push_back(subscriber);
@@ -30,7 +30,7 @@ void BufferSubscription::registerSubscriber(QSharedPointer<Subscriber> subscribe
     qDebug() << "Subscriber registered. Total subscribers:" << _subscribers.size();
 }
 
-void BufferSubscription::unregisterSubscriber(QSharedPointer<Subscriber> subscriber)
+void BufferSubscription::unregisterSubscriber(QSharedPointer<I_Subscriber> subscriber)
 {
     qDebug() << "Attempting to unregister subscriber";
     bool success = false;
