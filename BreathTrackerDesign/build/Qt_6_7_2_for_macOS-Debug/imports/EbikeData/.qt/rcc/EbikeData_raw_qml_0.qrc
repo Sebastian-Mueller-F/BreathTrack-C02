@@ -1,6 +1,0 @@
-<RCC>
-  <qresource prefix="/qt/qml/EbikeData/">
-    <file alias="Backend.qml">/Users/sebastian_mueller/Desktop/Bewerbungen/13_Loewenstein Medical/Code-Challenge/BreathTrack-C02/BreathTrackerDesign/imports/EbikeData/Backend.qml</file>
-  </qresource>
-</RCC>
-

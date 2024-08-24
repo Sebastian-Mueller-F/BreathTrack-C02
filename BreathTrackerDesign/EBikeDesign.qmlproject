@@ -1,25 +1,9 @@
-// prop: json-converted
-// prop: auto-generated
-
 import QmlProject
 
 Project {
     mainFile: "content/App.qml"
-    targetDirectory: "/opt/EBikeDesign"
-    enableCMakeGeneration: true
-    widgetApp: false
-    importPaths: [ ".","imports","asset_imports" ]
 
-    qt6Project: true
-    qtForMCUs: false
-
-    Environment {
-        QT_AUTO_SCREEN_SCALE_FACTOR: "1"
-        QT_ENABLE_HIGHDPI_SCALING: "0"
-        QT_LOGGING_RULES: "qt.qml.connections=false"
-        QT_QUICK_CONTROLS_CONF: "qtquickcontrols2.conf"
-    }
-
+    /* Include .qml, .js, and image files from current directory and subdirectories */
     QmlFiles {
         directory: "."
     }
@@ -34,17 +18,36 @@ Project {
 
     Files {
         filter: "*.conf"
-        files: [
-            "qtquickcontrols2.conf"
-        ]
+        files: ["qtquickcontrols2.conf"]
     }
 
     Files {
-        directory: "."
         filter: "qmldir"
+        directory: "."
     }
 
     Files {
         filter: "*.ttf;*.otf"
     }
+
+    Environment {
+        QT_QUICK_CONTROLS_CONF: "qtquickcontrols2.conf"
+        QT_AUTO_SCREEN_SCALE_FACTOR: "1"
+        QT_LOGGING_RULES: "qt.qml.connections=false"
+        QT_ENABLE_HIGHDPI_SCALING: "0"
+        /* Useful for debugging
+       QSG_VISUALIZE=batches
+       QSG_VISUALIZE=clip
+       QSG_VISUALIZE=changes
+       QSG_VISUALIZE=overdraw
+       */
+    }
+
+    qt6Project: true
+
+    /* List of plugin directories passed to QML runtime */
+    importPaths: [ ".", "imports", "asset_imports" ]
+
+    /* Required for deployment */
+    targetDirectory: "/opt/EBikeDesign"
 }
