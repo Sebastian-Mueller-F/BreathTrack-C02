@@ -4,6 +4,7 @@
 
 #include <QLocale>
 #include <QTranslator>
+#include <QQmlEngine>
 
 #include <circularbuffer.h>
 #include <buffersubscription.h>
@@ -11,6 +12,7 @@
 #include <emaaverager.h>
 #include <I_Subscriber.h>
 #include <databuffermanager.h>
+#include <livedataapi.h>
 
 int main(int argc, char *argv[])
 {
@@ -44,7 +46,15 @@ int main(int argc, char *argv[])
 
 
 
+
+
     QQmlApplicationEngine engine;
+
+    // qmlRegisterType<LiveDataAPI>("BreathTracker.LiveData", 1, 0, "BELiveData", LiveDataAPI::qmlInstance);
+    qmlRegisterSingletonType<LiveDataAPI>("BreathTracker.LiveData", 1, 0, "BELiveData", LiveDataAPI::qmlInstance);
+    LiveDataAPI::instance();
+
+
     const QUrl url(QStringLiteral("qrc:/BreathTracker/main.qml"));
     QObject::connect(
         &engine,
@@ -56,6 +66,9 @@ int main(int argc, char *argv[])
         },
         Qt::QueuedConnection);
     engine.load(url);
+
+    //Frontend API
+
 
     return app.exec();
 }
