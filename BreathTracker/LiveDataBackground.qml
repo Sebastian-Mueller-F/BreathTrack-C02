@@ -50,9 +50,10 @@
 
 import QtQuick 2.10
 import QtQuick.Timeline 1.0
+import BreathTracker.LiveData 1.0
+import BreathTracker.FrontendTypes 1.0
 
-
-Item {
+Rectangle {
     id: root
     width: 454
     height: 440
@@ -155,8 +156,8 @@ Item {
             }
         }
 
-        //
 
+        //Werte
         Text {
             id: text0Percent
             x: 231
@@ -216,80 +217,133 @@ Item {
         Image {
             y: 299
             anchors.horizontalCenter: arc.horizontalCenter
-            source: "images/assist.png"
+            source:  "images/assist.png"
         }
-        //TODOMake Clickable to change between SMA and EMA
-        Column {
-            id: avgeradedDataInfo
+
+
+        Rectangle {
+            id: averageDataRoot
             width: 100
             height: 130
+            color: "transparent"
             anchors.horizontalCenterOffset: -100
             anchors.verticalCenter: arc.verticalCenter
             anchors.horizontalCenter: arc.horizontalCenter
-            spacing: -8
 
-            Image {
-                id: averagedInfo
-                anchors.horizontalCenter: parent.horizontalCenter
-                source: "images/speed.png"
+
+
+            MouseArea {
+                id: clickArea
+                anchors.fill: parent
+                hoverEnabled : true
+                onClicked: {
+                    // Toggle between SMA and EMA on click
+                    root.averageType = root.averageType === FrontendTypes.SMA ? FrontendTypes.EMA : FrontendTypes.SMA
+                    avgDataDescription.text = root.averageType === FrontendTypes.SMA ? qsTr("SMA") : qsTr("EMA")
+                }
+
+                onEntered: {
+                    averageDataRoot.scale = 1.08; // Slightly increase size
+                    }
+
+                onExited: {
+                    averageDataRoot.scale = 1.0; // Reset size
+                }
             }
 
-            CustomLabel {
-                id: averagedData
-                text:root.averagedData
-                anchors.horizontalCenter: parent.horizontalCenter
-                font.pixelSize: 48
-            }
+            //Animation for Scaling
 
-            CustomLabel {
-                id: avgDataDescription
-                width: 40
-                height: 47
-                color: "#6d6d6d"
-                text: qsTr("SMA ")
-                anchors.horizontalCenter: parent.horizontalCenter
-                lineHeight: 0.8
-                horizontalAlignment: Text.AlignHCenter
-                font.pixelSize: 20
-                wrapMode: Text.WordWrap
+
+            Behavior on scale {
+            NumberAnimation {
+                           duration: 200
+                           easing.type: Easing.InOutQuad
+                       }
+                   }
+
+            Column {
+                id: avgeradedDataInfo
+                anchors.fill: parent
+                spacing: 4
+                width: 100
+                height: 130
+
+                Image {
+                    id: averagedInfo
+                    width: 30
+                    height: 30
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    source: averageType === FrontendTypes.SMA ? "images/sma.png" : "images/ema.png"
+                }
+
+                CustomLabel {
+                    id: averagedData
+                    text: root.averagedData
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    font.pixelSize: 48
+                }
+
+                CustomLabel {
+                    id: avgDataDescription
+                    width: 40
+                    height: 47
+                    color: "#6d6d6d"
+                    text: qsTr("SMA")
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    lineHeight: 0.8
+                    horizontalAlignment: Text.AlignHCenter
+                    font.pixelSize: 20
+                    wrapMode: Text.WordWrap
+                }
             }
         }
 
-        Column {
-            id: sensorInfo
+
+        Rectangle {
+            id: sensorInfoRoot
             width: 100
             height: 130
+            color: "transparent"
             anchors.horizontalCenterOffset: 100
             anchors.verticalCenter: arc.verticalCenter
             anchors.horizontalCenter: arc.horizontalCenter
-            spacing: -8
 
-            Image {
-                id: avgDataIcon
-                anchors.horizontalCenter: parent.horizontalCenter
-                source: "images/battery.png"
-            }
 
-            CustomLabel {
-                id: avgData
-                text: root.sensorData // TODO: connect to backend
-                anchors.horizontalCenter: parent.horizontalCenter
-                font.pixelSize: 48
-            }
+            Column {
+                id: sensorInfo
+                anchors.fill: parent
+                spacing: 4
 
-            CustomLabel {
-                id: assistLeft
-                width: 40
-                height: 70
-                color: "#6d6d6d"
-                text: qsTr("Raw")
-                anchors.horizontalCenter: parent.horizontalCenter
-                wrapMode: Text.WordWrap
-                lineHeight: 0.8
-                horizontalAlignment: Text.AlignHCenter
-                font.pixelSize: 20
+                Image {
+                    id: avgDataIcon
+                    width: 30
+                    height: 30
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    source: "images/raw.png"
+                }
+
+                CustomLabel {
+                    id: avgData
+                    text: root.sensorData // TODO: connect to backend
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    font.pixelSize: 48
+                }
+
+                CustomLabel {
+                    id: assistLeft
+                    width: 40
+                    height: 70
+                    color: "#6d6d6d"
+                    text: qsTr("Raw")
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    wrapMode: Text.WordWrap
+                    lineHeight: 0.8
+                    horizontalAlignment: Text.AlignHCenter
+                    font.pixelSize: 20
+                }
             }
         }
+
     }
 
 
