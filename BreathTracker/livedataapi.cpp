@@ -6,7 +6,7 @@ LiveDataAPI::LiveDataAPI (QObject *parent) :
     QObject(parent),
     _sensorValue(0),
     _averagedValue(0),
-    _averageType(0)
+    _averageType(FrontendTypes::AverageType::SMA)
 {
     this->getBackendData();
 }
@@ -26,8 +26,21 @@ QObject *LiveDataAPI::qmlInstance(QQmlEngine *engine, QJSEngine *scriptEngine)
     if (!_instance){
             _instance = new LiveDataAPI;
         }
-
         return _instance;
+}
+
+FrontendTypes::AverageType LiveDataAPI::averageType() const
+{
+    return _averageType;
+}
+
+void LiveDataAPI::setAverageType(const FrontendTypes::AverageType &newAverageType)
+{
+    if (_averageType == newAverageType) {
+         return;
+    }
+    _averageType = newAverageType;
+    emit averageTypeChanged();
 }
 
 void LiveDataAPI::getBackendData()
