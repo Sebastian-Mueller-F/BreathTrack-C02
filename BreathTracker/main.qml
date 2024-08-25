@@ -4,10 +4,14 @@ import QtQuick.Controls 2.15
 
 
 Window {
-    width: 640
-    height: 800
+    width: 768
+    height: 1024
     visible: true
     title: qsTr("Hello World")
+    Rectangle {
+        anchors.fill: parent
+        color: "#191E26"
+    }
 
     // Import the custom components
        // RawSensorData {
@@ -18,18 +22,30 @@ Window {
        //     height: parent.height * 0.3
        // }
 
+    Column {
+        spacing : 10
 
+        LiveData{
+            id: liveData
+            color: "#191E26"
+            anchors.horizontalCenter: parent.horizontalCenter
+        }
 
-    LiveData{
-        id: liveData
+        DataTrends {
+            id: rawTrend
 
-        anchors.fill: parent
+            height: 300
+            width: 750
+
+        }
+
+        DataTrends {
+            id: averagedTrend
+
+            height: 300
+            width: 750
+        }
     }
 
 
-    DataTrends {
-        id: trendDisplay
-
-        height: 400
-    }
 }
