@@ -44,13 +44,9 @@ int main(int argc, char *argv[])
 
     std::shared_ptr<DataBufferManager> dataBuffer = DataBufferManager::instance();
 
-
-
-
-
     QQmlApplicationEngine engine;
 
-    // qmlRegisterType<LiveDataAPI>("BreathTracker.LiveData", 1, 0, "BELiveData", LiveDataAPI::qmlInstance);
+    qmlRegisterType<FrontendTypes>("BreathTracker.FrontendTypes", 1, 0, "FrontendTypes");
     qmlRegisterSingletonType<LiveDataAPI>("BreathTracker.LiveData", 1, 0, "BELiveData", LiveDataAPI::qmlInstance);
     LiveDataAPI::instance();
 
