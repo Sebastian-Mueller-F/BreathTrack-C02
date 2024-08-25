@@ -2,14 +2,23 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
 
-ApplicationWindow {
+Item {
     visible: true
     width: 800
-    height: 400
-    title: "CO2 Sensor Visualization"
+    height: 300
+
+    // New properties for adjustable aspects
+    property color lineStartColor: "#53BFF5"  // Start color of the line gradient (Orange)
+    property color lineEndColor: "#1E90FF"    // End color of the line gradient (Blue)
+    property string fillStartColor: "rgba(83, 91, 245, 0.3)"  // Start color of the fill gradient (Transparent Orange)
+    property string fillEndColor: "rgba(30, 144, 255, 0.1)"   // End color of the fill gradient (Transparent Blue)
+    property int lineThickness: 2
+// Line thickness
+    property int gridThickness: 1  // Grid line thickness
+    property color gridColor: "#AAAAAA"  // Color of the grid lines
 
     property var sensorData: []
-    property var maxDataPoints: 100
+    property var maxDataPoints: 50
     property var canvasHeight: 300
     property int gridSpacing: 50  // Adjust as needed
 
@@ -43,18 +52,17 @@ ApplicationWindow {
     Rectangle {
         width: parent.width
         height: parent.height
-        color: "#333333"  // Dark background color
+        color: "transparent"  // Dark background color
         radius: 15  // Adjusted corner radius for a slightly sharper look
         border.color: "#555555"  // Adding a subtle border around the graph area
-        border.width: 2
-
+        border.width: 0
 
         Item {
             id: sensorGraph
             x: 100
             y: 50
             width: parent.width - 150
-            height: parent.height - 150
+            height: parent.height - 100
             clip: true
 
             Canvas {
@@ -67,8 +75,8 @@ ApplicationWindow {
                     ctx.clearRect(0, 0, width, height);
 
                     // Grid lines
-                    ctx.strokeStyle = "#AAAAAA";  // Light gray grid lines
-                    ctx.lineWidth = 2;  // Thicker grid lines
+                    ctx.strokeStyle = gridColor;  // Use adjustable grid color
+                    ctx.lineWidth = gridThickness;  // Use adjustable grid thickness
 
                     // Vertical grid lines and X-axis tick marks
                     for (var x = gridSpacing; x < width; x += gridSpacing) {
@@ -97,6 +105,11 @@ ApplicationWindow {
                         var scaleX = width / Math.min(sensorData.length, maxDataPoints);
                         var scaleY = height / 100;
 
+                        // Create gradient for the line using properties
+                        var lineGradient = ctx.createLinearGradient(0, 0, width, 0);
+                        lineGradient.addColorStop(0, lineStartColor);  // Start color
+                        lineGradient.addColorStop(1, lineEndColor);  // End color
+
                         ctx.beginPath();
                         ctx.moveTo(0, height - (sensorData[0] * scaleY));
 
@@ -108,35 +121,24 @@ ApplicationWindow {
 
                         ctx.lineTo((sensorData.length - 1) * scaleX, height - (sensorData[sensorData.length - 1] * scaleY));
 
-                        // Fill the area under the curve
+                        // Fill the area under the curve using properties
                         ctx.lineTo(width, height);
                         ctx.lineTo(0, height);
                         ctx.closePath();
 
-                        var gradient = ctx.createLinearGradient(0, 0, 0, height);
-                        gradient.addColorStop(0, "rgba(255, 255, 255, 0.3)");  // Lighter fill gradient
-                        gradient.addColorStop(1, "rgba(255, 255, 255, 0.1)");  // Fade to transparent
-                        ctx.fillStyle = gradient;
+                        var fillGradient = ctx.createLinearGradient(0, 0, 0, height);
+                        fillGradient.addColorStop(0, fillStartColor);  // Start color for fill
+                        fillGradient.addColorStop(1, fillEndColor);  // End color for fill
+                        ctx.fillStyle = fillGradient;
                         ctx.fill();
 
-                        // Set line color and thickness
-                        ctx.strokeStyle = "#FFFFFF";  // Solid white line
-                        ctx.lineWidth = 3;  // Thicker line for better visibility
+                        // Set line color and thickness using properties
+                        ctx.strokeStyle = lineGradient;  // Gradient line
+                        ctx.lineWidth = lineThickness;  // Adjustable line thickness
 
                         ctx.stroke();  // Draw the line with the new style
                     }
                 }
-            }
-
-            // Sensor title font and style
-            Text {
-                text: "SENSOR"
-                font.pixelSize: 28
-                font.family: "Arial Black"  // Updated font for a more stylized look
-                color: "white"
-                anchors.top: parent.top
-                anchors.horizontalCenter: parent.horizontalCenter
-                anchors.topMargin: 10
             }
         }
 
@@ -145,7 +147,7 @@ ApplicationWindow {
             id: xAxisLabels
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: sensorGraph.bottom
-            anchors.topMargin: 5
+            anchors.topMargin: 0
             width: sensorGraph.width
 
             Repeater {

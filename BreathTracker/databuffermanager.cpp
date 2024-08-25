@@ -1,6 +1,8 @@
 #include "databuffermanager.h"
 #include <QDebug>
 
+std::shared_ptr<DataBufferManager> DataBufferManager::_instance = nullptr;
+
 DataBufferManager::DataBufferManager(QObject *parent) : QObject(parent) {
     _buffers[SensorDataType::RAW] = new CircularBuffer(_rawCapacity);
     _buffers[SensorDataType::SMA] = new CircularBuffer(_averageCapacity);
@@ -13,6 +15,16 @@ DataBufferManager::DataBufferManager(QObject *parent) : QObject(parent) {
 
     //data output for subscribers
 }
+
+std::shared_ptr<DataBufferManager> DataBufferManager::instance()
+{
+    if (!_instance){
+        _instance = std::shared_ptr<DataBufferManager>(new DataBufferManager);
+    }
+    return _instance;
+}
+
+
 
 CircularBuffer *DataBufferManager::getBuffer(SensorDataType type)
 {

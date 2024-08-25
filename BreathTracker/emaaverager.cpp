@@ -6,7 +6,7 @@ QSharedPointer<EMAAverager> EMAAverager::_instance = nullptr;
 
 
 EMAAverager::EMAAverager(size_t period, QObject *parent)
-    : Averager(parent),  _period(period), _previousEMA(0.0), _isFirstCalculation(true)
+    : I_Averager(parent),  _period(period), _previousEMA(0.0), _isFirstCalculation(true)
 {
     //Initialize averageType
     _averageType = SensorDataType::EMA;

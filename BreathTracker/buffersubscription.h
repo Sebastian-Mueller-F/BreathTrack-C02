@@ -3,7 +3,7 @@
 
 #include <QObject>
 #include <circularbuffer.h>
-#include "subscriber.h"
+#include "I_Subscriber.h"
 
 #include <QSharedPointer>
 
@@ -15,8 +15,8 @@ public:
     BufferSubscription(CircularBuffer& buffer, QObject* parent = nullptr);
 
 
-    void registerSubscriber(QSharedPointer<Subscriber> subscriber, int lookBackPeriodMS);
-    void unregisterSubscriber(QSharedPointer<Subscriber> subscriber);
+    void registerSubscriber(QSharedPointer<I_Subscriber> subscriber, int lookBackPeriodMS);
+    void unregisterSubscriber(QSharedPointer<I_Subscriber> subscriber);
 
 // signals :
     // void notifySubscribers(QSharedPointer<Subscriber> subscriber,const std::vector<double> values);
@@ -27,7 +27,7 @@ private slots:
 private:
 
     CircularBuffer& _buffer;
-    QVector<QSharedPointer<Subscriber>> _subscribers;
+    QVector<QSharedPointer<I_Subscriber>> _subscribers;
     QVector<int> _lookBackPeriods;
 
 };

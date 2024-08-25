@@ -29,6 +29,8 @@ public:
      *      .. ema: Trend Calculator, FrontendAPI
      */
 
+    //Singleton
+    static std::shared_ptr<DataBufferManager> instance();
 
 
     CircularBuffer* getBuffer(SensorDataType type);
@@ -41,6 +43,7 @@ private:
     size_t _rawCapacity = 600;   // Example: 10 minutes at 1-second intervals
     size_t _averageCapacity = 60; // Example: 5 minutes at 5-second intervals
 
+    static std::shared_ptr<DataBufferManager> _instance;
 
 };
 

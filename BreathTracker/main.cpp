@@ -4,12 +4,15 @@
 
 #include <QLocale>
 #include <QTranslator>
+#include <QQmlEngine>
 
 #include <circularbuffer.h>
 #include <buffersubscription.h>
 #include <smaaverager.h>
 #include <emaaverager.h>
-#include <subscriber.h>
+#include <I_Subscriber.h>
+#include <databuffermanager.h>
+#include <livedataapi.h>
 
 int main(int argc, char *argv[])
 {
@@ -26,8 +29,8 @@ int main(int argc, char *argv[])
     }
 
     SensorSimulator* CO2sensor = SensorSimulator::instance();
-    QSharedPointer<Subscriber> sma = SMAAverager::instance();
-    QSharedPointer<Subscriber> ema = EMAAverager::instance();
+    QSharedPointer<I_Subscriber> sma = SMAAverager::instance();
+    QSharedPointer<I_Subscriber> ema = EMAAverager::instance();
 
     //create buffer for averagers
     CircularBuffer averagerBuffer(60); //TODO: variable instead of hardcoded 6
@@ -39,10 +42,15 @@ int main(int argc, char *argv[])
     averagerBufferSubscription.registerSubscriber(sma, 5000); //5 seconds
     averagerBufferSubscription.registerSubscriber(ema, 10000); // 10 seconds
 
-
-
+    std::shared_ptr<DataBufferManager> dataBuffer = DataBufferManager::instance();
 
     QQmlApplicationEngine engine;
+
+    qmlRegisterType<FrontendTypes>("BreathTracker.FrontendTypes", 1, 0, "FrontendTypes");
+    qmlRegisterSingletonType<LiveDataAPI>("BreathTracker.LiveData", 1, 0, "BELiveData", LiveDataAPI::qmlInstance);
+    LiveDataAPI::instance();
+
+
     const QUrl url(QStringLiteral("qrc:/BreathTracker/main.qml"));
     QObject::connect(
         &engine,
@@ -54,6 +62,9 @@ int main(int argc, char *argv[])
         },
         Qt::QueuedConnection);
     engine.load(url);
+
+    //Frontend API
+
 
     return app.exec();
 }

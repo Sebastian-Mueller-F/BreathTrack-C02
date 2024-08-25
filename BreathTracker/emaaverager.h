@@ -4,11 +4,11 @@
 #include <QObject>
 #include <QSharedPointer>
 
-#include "averager.h"
-#include "subscriber.h"
+#include "I_Averager.h"
+#include "I_Subscriber.h"
 
 
-class EMAAverager : public Averager, public Subscriber {
+class EMAAverager : public I_Averager, public I_Subscriber {
     Q_OBJECT
 
 public:
