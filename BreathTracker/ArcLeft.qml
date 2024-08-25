@@ -70,7 +70,7 @@ ArcItem {
     Timeline {
         id: timeline
         currentFrame: arcLeft.value * 10
-        endFrame: 600
+        endFrame: 1000
         enabled: true
         startFrame: 0
 

@@ -64,6 +64,7 @@ ArcItem {
     begin: 98
     rotation: -90
 
+
     Timeline {
         id: timeline
         currentFrame: arcRight.value * 10
