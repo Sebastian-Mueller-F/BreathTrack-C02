@@ -5,45 +5,55 @@
 
 import QtQuick 2.10
 import BreathTracker.LiveData 1.0
+import BreathTracker.FrontendTypes 1.0
 
 //Changing values
 
 
 
-LiveDataBackground {
-    id: root
+    LiveDataBackground {
+        id: background
 
-    sensorData: BELiveData.sensorValue
-    averagedData: BELiveData.averagedValue
-    warningLevel: 1
-    averageType : 0
+        sensorData: BELiveData.sensorValue
+        averagedData: BELiveData.averagedValue
+        warningLevel: 1
+        averageType : BELiveData.averageType
 
 
-    ArcRight {
-        id: rawSensorData
-        x: 36
-        y: 37
-        antialiasing: true
 
-        value: root.sensorData
-    }
+        ArcRight {
+                id: rawSensorData
+                x: 36
+                y: 37
+                antialiasing: true
 
-    ArcLeft {
-        id: averagedSensorData
-        x: 42
-        y: 37
-        strokeColor: "#11d388"
-        antialiasing: true
-        value: root.averagedData
-    }
+                value: background.sensorData
+            }
 
-    Connections {
-        target: BELiveData
-        onSensorValueChanged: {
-            console.log("Sensor Value Updated: ", BELiveData.sensorValue)
+
+        ArcLeft {
+            id: averagedSensorData
+            x: 42
+            y: 37
+            strokeColor: averageType == FrontendTypes.SMA ? "#00FF00" : "#E69FFF"
+            antialiasing: true
+            value: background.averagedData
         }
-        onAveragedValueChanged: {
-            console.log("Averaged Value Updated: ", BELiveData.averagedValue)
+
+        Connections {
+            target: BELiveData
+            onSensorValueChanged: {
+                console.log("Sensor Value Updated: ", BELiveData.sensorValue)
+            }
+            onAveragedValueChanged: {
+                console.log("Averaged Value Updated: ", BELiveData.averagedValue)
+            }
+
+            onAverageTypeChanged: {
+                console.log("Average Type Updated: ", BELiveData.averageType)
+            }
         }
     }
-}
+
+
+
