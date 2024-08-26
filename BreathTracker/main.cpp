@@ -37,6 +37,7 @@ int main(int argc, char *argv[])
     }
 
     SensorSimulator* CO2sensor = SensorSimulator::instance();
+    CO2sensor->startMeasurement();
     QSharedPointer<I_Subscriber> sma = SMAAverager::instance();
     QSharedPointer<I_Subscriber> ema = EMAAverager::instance();
 

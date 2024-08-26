@@ -36,10 +36,11 @@ qt_add_qml_module(appBreathTracker
     QML_FILES ArcItem.qml ArcLeft.qml ArcRight.qml CircleIndicator.qml CustomLabel.qml LiveDataBackground.qml LiveData.qml ModeToggle.qml
     SOURCES FrontendTypes.h
     RESOURCES fonts/fonts.txt images/arrow_left.png images/arrow_right.png images/assist.png images/battery.png images/bike-rearwheel.png images/blue_circle_gps_area.png images/calories.png images/curtain_shadow_handle.png images/info.png images/info_selected.png images/lights_off.png images/lights_on.png images/list.png images/list_selected.png images/map_locate.png images/map_location_arrow.png images/map_zoomin.png images/map_zoomout.png images/nav_nodir.png images/search_cancel.png images/settings.png images/settings_selected.png images/small_speedometer_shadow.png images/speed.png images/top_curtain_drag.png images/top_curtain_drag_back.png images/trip.png images/sma.png images/ema.png images/raw.png
+    SOURCES I_Sensor.h
 )
 
 
-source_group("Source Files// Sensor" FILES sensorsimulator.h sensorsimulator.cpp)
+source_group("Source Files// Sensor" FILES sensorsimulator.h sensorsimulator.cpp I_Sensor.h)
 source_group("Source Files// Data Structures" FILES circularbuffer.h circularbuffer.cpp buffersubscription.h buffersubscription.cpp I_Subscriber.h)
 source_group("Source Files// Data" FILES databuffermanager.h databuffermanager.cpp)
 source_group("Source Files// Averager" FILES I_Averager.h smaaverager.h smaaverager.cpp emaaverager.h emaaverager.cpp)
