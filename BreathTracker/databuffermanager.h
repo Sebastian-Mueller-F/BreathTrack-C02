@@ -4,10 +4,12 @@
 #include <QObject>
 
 #include <circularbuffer.h>
+#include <buffersubscription.h>
 #include <types.h>
 #include <emaaverager.h>
 #include <smaaverager.h>
 #include <sensorsimulator.h>
+#include <trenddataapi.h>
 
 
 class DataBufferManager : public QObject
@@ -40,10 +42,19 @@ private slots:
 
 private:
     std::map<SensorDataType, CircularBuffer*> _buffers;
-    size_t _rawCapacity = 600;   // Example: 10 minutes at 1-second intervals
-    size_t _averageCapacity = 60; // Example: 5 minutes at 5-second intervals
+    void initializeBuffers();
+
+    size_t _rawCapacity = 1000;   // Example: 10 minutes at 1-second intervals
+    size_t _averageCapacity = 1000; // Example: 5 minutes at 5-second intervals
 
     static std::shared_ptr<DataBufferManager> _instance;
+
+    std::shared_ptr<BufferSubscription> _rawTrendBufferSubscription;
+    std::shared_ptr<BufferSubscription> _smaTrendBufferSubscription;
+    std::shared_ptr<BufferSubscription> _emaTrendBufferSubscription;
+
+    //development functions
+    void printBufferValues();
 
 };
 

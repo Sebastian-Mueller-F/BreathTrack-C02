@@ -46,8 +46,6 @@ private:
     void loadSettings() override;
 
 
-
-
 public:
     int sensorValue() const;
     void setSensorValue(int newSensorValue);
@@ -62,7 +60,6 @@ signals:
 
     void sensorValueChanged();
     void averagedValueChanged();
-
 
     void averageTypeChanged();
 };

@@ -22,7 +22,7 @@ QSharedPointer<EMAAverager> EMAAverager::instance()
     return _instance;
 }
 
-void EMAAverager::onNewData(const std::vector<double>& data)
+void EMAAverager::onNewData(const std::vector<double>& data, SensorDataType type)
 {
     if (data.empty()) {
         throw std::runtime_error("No data available. Cannot calculate EMA.");
@@ -40,7 +40,7 @@ void EMAAverager::onNewData(const std::vector<double>& data)
         _previousEMA = _alpha * currentData + (1.0 - _alpha) * _previousEMA;
     }
     emit averageUpdated(_previousEMA, this->_averageType);
-    qDebug() << "Emitted averageUpdated signal with EMA:" << _previousEMA;
+    // qDebug() << "Emitted averageUpdated signal with EMA:" << _previousEMA;
 }
 
 double EMAAverager::calculate()

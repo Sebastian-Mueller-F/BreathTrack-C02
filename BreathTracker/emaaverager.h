@@ -6,6 +6,7 @@
 
 #include "I_Averager.h"
 #include "I_Subscriber.h"
+#include <types.h>
 
 
 class EMAAverager : public I_Averager, public I_Subscriber {
@@ -26,7 +27,7 @@ public:
     void setPeriod(size_t period) override;
 
     // Implement the Subscriber interface
-    void onNewData(const std::vector<double>& data) override ;
+    void onNewData(const std::vector<double>& data, SensorDataType type = SensorDataType::RAW) override ;
 
 private:
     //singleton

@@ -32,6 +32,7 @@ public:
      *  */
 
     std::vector<double> readLastNValues(size_t n);
+    std::vector<double> readAllValues();
 
     bool isEmpty();
     bool isFull();

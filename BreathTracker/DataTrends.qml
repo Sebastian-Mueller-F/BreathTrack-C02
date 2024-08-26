@@ -3,36 +3,43 @@ import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
 
 Item {
+    id: root
+
     visible: true
     width: 800
     height: 300
 
-    // New properties for adjustable aspects
-    property color lineStartColor: "#53BFF5"  // Start color of the line gradient (Orange)
-    property color lineEndColor: "#1E90FF"    // End color of the line gradient (Blue)
-    property string fillStartColor: "rgba(83, 91, 245, 0.3)"  // Start color of the fill gradient (Transparent Orange)
-    property string fillEndColor: "rgba(30, 144, 255, 0.1)"   // End color of the fill gradient (Transparent Blue)
+    // Graph Dataset 1
+    property var sensorData1: []
+    property color lineStartColor: "#53BFF5"
+    property color lineEndColor: "#1E90FF"
+    property string fillStartColor: "rgba(83, 91, 245, 0.3)"
+    property string fillEndColor: "rgba(30, 144, 255, 0.1)"
     property int lineThickness: 2
-// Line thickness
-    property int gridThickness: 1  // Grid line thickness
-    property color gridColor: "#AAAAAA"  // Color of the grid lines
 
-    property var sensorData: []
-    property var maxDataPoints: 50
-    property var canvasHeight: 300
-    property int gridSpacing: 50  // Adjust as needed
+    // Graph Dataset 2
+    property var sensorData2: []
+    property color line2StartColor: "#FFA500"
+    property color line2EndColor: "#FF4500"
+    property string fill2StartColor: "rgba(255, 165, 0, 0.3)"
+    property string fill2EndColor: "rgba(255, 69, 0, 0.1)"
+    property int line2Thickness: 2
 
-    Timer {
-        interval: 1000
-        running: true
-        repeat: true
-        onTriggered: {
-            let newValue = Math.random() * 100;
-            sensorData.push(newValue);
-            if (sensorData.length > maxDataPoints) {
-                sensorData.shift();
-            }
-            sensorCanvas.requestPaint();
+    property bool hasTwoDataSets: false
+    property int gridThickness: 1
+    property color gridColor: "#AAAAAA"
+
+    property int maxDataPoints: 50
+    property int canvasHeight: root.height
+    property int gridSpacing: 50
+    property real gridOpacity: 0.5
+
+    onSensorData1Changed: {
+        sensorCanvas1.requestPaint();
+    }
+    onSensorData2Changed: {
+        if (hasTwoDataSets) {
+            sensorCanvas2.requestPaint();
         }
     }
 
@@ -52,9 +59,9 @@ Item {
     Rectangle {
         width: parent.width
         height: parent.height
-        color: "transparent"  // Dark background color
-        radius: 15  // Adjusted corner radius for a slightly sharper look
-        border.color: "#555555"  // Adding a subtle border around the graph area
+        color: "transparent"
+        radius: 15
+        border.color: "#555555"
         border.width: 0
 
         Item {
@@ -62,11 +69,12 @@ Item {
             x: 100
             y: 50
             width: parent.width - 150
-            height: parent.height - 100
+            height: parent.height - 50
             clip: true
 
+            // Grid Canvas
             Canvas {
-                id: sensorCanvas
+                id: gridCanvas
                 width: parent.width
                 height: canvasHeight
 
@@ -74,9 +82,10 @@ Item {
                     var ctx = getContext("2d");
                     ctx.clearRect(0, 0, width, height);
 
-                    // Grid lines
-                    ctx.strokeStyle = gridColor;  // Use adjustable grid color
-                    ctx.lineWidth = gridThickness;  // Use adjustable grid thickness
+                    // Grid lines with opacity
+                    ctx.strokeStyle = gridColor;
+                    ctx.lineWidth = gridThickness;
+                    ctx.globalAlpha = gridOpacity; // Set opacity to 50%
 
                     // Vertical grid lines and X-axis tick marks
                     for (var x = gridSpacing; x < width; x += gridSpacing) {
@@ -84,88 +93,111 @@ Item {
                         ctx.moveTo(x, 0);
                         ctx.lineTo(x, height);
                         ctx.stroke();
-
-                        // Draw tick marks on X-axis
-                        ctx.beginPath();
-                        ctx.moveTo(x, height);
-                        ctx.lineTo(x, height + 5);  // Small vertical line for tick mark
-                        ctx.stroke();
                     }
 
                     // Horizontal grid lines and Y-axis tick marks
-                    for (var y = gridSpacing; y < height; y += gridSpacing) {
+                    for (var y = 0; y <= height; y += gridSpacing) {
                         ctx.beginPath();
                         ctx.moveTo(0, y);
                         ctx.lineTo(width, y);
                         ctx.stroke();
                     }
+                }
+            }
 
-                    // Draw the graph line and fill area
-                    if (sensorData.length > 0) {
-                        var scaleX = width / Math.min(sensorData.length, maxDataPoints);
-                        var scaleY = height / 100;
+            // Dataset 1 Canvas
+            Canvas {
+                id: sensorCanvas1
+                width: parent.width
+                height: canvasHeight
 
-                        // Create gradient for the line using properties
-                        var lineGradient = ctx.createLinearGradient(0, 0, width, 0);
-                        lineGradient.addColorStop(0, lineStartColor);  // Start color
-                        lineGradient.addColorStop(1, lineEndColor);  // End color
+                onPaint: {
+                    var ctx = getContext("2d");
+                    ctx.clearRect(0, 0, width, height);
+
+                    // Draw the first dataset's graph line and fill area
+                    if (sensorData1.length > 0) {
+                        var scaleX = width / Math.min(sensorData1.length, maxDataPoints);
+                        var scaleY = height / 100; // Adjust scaling to fit 100 units to height
+
+                        var lineGradient1 = ctx.createLinearGradient(0, 0, width, 0);
+                        lineGradient1.addColorStop(0, lineStartColor);
+                        lineGradient1.addColorStop(1, lineEndColor);
 
                         ctx.beginPath();
-                        ctx.moveTo(0, height - (sensorData[0] * scaleY));
+                        ctx.moveTo(0, height - (sensorData1[0] * scaleY));
 
-                        for (var i = 1; i < sensorData.length - 1; i++) {
+                        for (var i = 1; i < sensorData1.length - 1; i++) {
                             var xc = (i * scaleX + (i + 1) * scaleX) / 2;
-                            var yc = (height - (sensorData[i] * scaleY) + height - (sensorData[i + 1] * scaleY)) / 2;
-                            ctx.quadraticCurveTo(i * scaleX, height - (sensorData[i] * scaleY), xc, yc);
+                            var yc = (height - (sensorData1[i] * scaleY) + height - (sensorData1[i + 1] * scaleY)) / 2;
+                            ctx.quadraticCurveTo(i * scaleX, height - (sensorData1[i] * scaleY), xc, yc);
                         }
 
-                        ctx.lineTo((sensorData.length - 1) * scaleX, height - (sensorData[sensorData.length - 1] * scaleY));
+                        ctx.lineTo((sensorData1.length - 1) * scaleX, height - (sensorData1[sensorData1.length - 1] * scaleY));
 
-                        // Fill the area under the curve using properties
                         ctx.lineTo(width, height);
                         ctx.lineTo(0, height);
                         ctx.closePath();
 
-                        var fillGradient = ctx.createLinearGradient(0, 0, 0, height);
-                        fillGradient.addColorStop(0, fillStartColor);  // Start color for fill
-                        fillGradient.addColorStop(1, fillEndColor);  // End color for fill
-                        ctx.fillStyle = fillGradient;
+                        var fillGradient1 = ctx.createLinearGradient(0, 0, 0, height);
+                        fillGradient1.addColorStop(0, fillStartColor);
+                        fillGradient1.addColorStop(1, fillEndColor);
+                        ctx.fillStyle = fillGradient1;
                         ctx.fill();
 
-                        // Set line color and thickness using properties
-                        ctx.strokeStyle = lineGradient;  // Gradient line
-                        ctx.lineWidth = lineThickness;  // Adjustable line thickness
+                        ctx.strokeStyle = lineGradient1;
+                        ctx.lineWidth = lineThickness;
 
-                        ctx.stroke();  // Draw the line with the new style
+                        ctx.stroke();
                     }
                 }
             }
-        }
 
-        // X-Axis Labels with RowLayout and Rectangles
-        RowLayout {
-            id: xAxisLabels
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.top: sensorGraph.bottom
-            anchors.topMargin: 0
-            width: sensorGraph.width
+            // Dataset 2 Canvas
+            Canvas {
+                id: sensorCanvas2
+                width: parent.width
+                height: canvasHeight
+                visible: hasTwoDataSets  // Only show if two datasets are enabled
 
-            Repeater {
-                model: Math.floor((sensorGraph.width) / gridSpacing)
-                delegate: Rectangle {
-                    color: "transparent"
-                    radius: 5
-                    width: 40  // Fixed width for the label container
-                    height: 25
-                    Layout.alignment: Qt.AlignHCenter
-                    Layout.margins: 0
+                onPaint: {
+                    var ctx = getContext("2d");
+                    ctx.clearRect(0, 0, width, height);
 
-                    Text {
-                        text: model.index * gridSpacing
-                        font.pixelSize: 14  // Increased font size for better readability
-                        font.family: "Arial"  // Consistent font style
-                        color: "white"
-                        anchors.centerIn: parent
+                    // Draw the second dataset's graph line and fill area if enabled
+                    if (sensorData2.length > 0) {
+                        var scaleX2 = width / Math.min(sensorData2.length, maxDataPoints);
+                        var scaleY2 = height / 100; // Adjust scaling to fit 100 units to height
+
+                        var lineGradient2 = ctx.createLinearGradient(0, 0, width, 0);
+                        lineGradient2.addColorStop(0, line2StartColor);
+                        lineGradient2.addColorStop(1, line2EndColor);
+
+                        ctx.beginPath();
+                        ctx.moveTo(0, height - (sensorData2[0] * scaleY2));
+
+                        for (var j = 1; j < sensorData2.length - 1; j++) {
+                            var xc2 = (j * scaleX2 + (j + 1) * scaleX2) / 2;
+                            var yc2 = (height - (sensorData2[j] * scaleY2) + height - (sensorData2[j + 1] * scaleY2)) / 2;
+                            ctx.quadraticCurveTo(j * scaleX2, height - (sensorData2[j] * scaleY2), xc2, yc2);
+                        }
+
+                        ctx.lineTo((sensorData2.length - 1) * scaleX2, height - (sensorData2[sensorData2.length - 1] * scaleY2));
+
+                        ctx.lineTo(width, height);
+                        ctx.lineTo(0, height);
+                        ctx.closePath();
+
+                        var fillGradient2 = ctx.createLinearGradient(0, 0, 0, height);
+                        fillGradient2.addColorStop(0, fill2StartColor);
+                        fillGradient2.addColorStop(1, fill2EndColor);
+                        ctx.fillStyle = fillGradient2;
+                        ctx.fill();
+
+                        ctx.strokeStyle = lineGradient2;
+                        ctx.lineWidth = line2Thickness;
+
+                        ctx.stroke();
                     }
                 }
             }
@@ -176,7 +208,7 @@ Item {
             id: yAxisLabels
             anchors.verticalCenter: sensorGraph.verticalCenter
             anchors.left: parent.left
-            anchors.leftMargin: 10  // Increased margin for better spacing
+            anchors.leftMargin: 10
             height: sensorGraph.height
 
             Repeater {
@@ -191,8 +223,8 @@ Item {
 
                     Text {
                         text: 100 - model.index * (100 / Math.floor((sensorGraph.height) / gridSpacing))
-                        font.pixelSize: 14  // Increased font size for consistency with X-axis labels
-                        font.family: "Arial"  // Consistent font style
+                        font.pixelSize: 14
+                        font.family: "Arial"
                         color: "white"
                         anchors.centerIn: parent
                     }

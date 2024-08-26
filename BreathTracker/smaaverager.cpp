@@ -34,14 +34,14 @@ Emitted averageUpdated signal with SMA: 0
 Emitted averageUpdated signal with SMA: 16.3827
 
  */
-void SMAAverager::onNewData(const std::vector<double>& data)
+void SMAAverager::onNewData(const std::vector<double>& data, SensorDataType type)
 {
     _recentData = data;
 
     double sma = calculate();
 
     emit averageUpdated(sma, this->_averageType);
-    qDebug() << "Emitted averageUpdated signal with SMA:" << sma;
+    // qDebug() << "Emitted averageUpdated signal with SMA:" << sma;
 }
 
 double SMAAverager::calculate()

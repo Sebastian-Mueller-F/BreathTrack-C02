@@ -6,6 +6,7 @@
 
 #include "I_Subscriber.h"
 #include "I_Averager.h"
+#include <types.h>
 
 
 //TODO: 1. do we need period ?
@@ -28,8 +29,7 @@ public:
     void setPeriod(size_t period) override;
 
     // Implement the Subscriber interface
-    void onNewData(const std::vector<double>& data) override;
-
+    void onNewData(const std::vector<double>& data, SensorDataType type = SensorDataType::RAW) override;
 private:
     static QSharedPointer<SMAAverager> _instance;
 
