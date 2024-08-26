@@ -4,48 +4,58 @@
 
 SensorSimulator* SensorSimulator::_instance = nullptr;
 
-SensorSimulator::SensorSimulator( double baseline, double amplitude, int interval, QObject *parent)
-    : QObject{parent},
+SensorSimulator::SensorSimulator(double baseline, double amplitude, int interval, QObject *parent)
+    : QObject(parent),  // Initialize QObject
     _baseline(baseline),
     _amplitude(amplitude),
     _interval(interval)
-
 {
-    generateSensorValuesInInterval(_interval);//generate sensor values every second
+    _timer.reset(new QTimer(this));
 
-    //test readout created values
-    connect(this, &SensorSimulator::newCo2Value, [&](double sensorValue) {
-        // qDebug() << " Sensor Co2 value : " << sensorValue;
+    // Connect timer to the generateNewCo2Value slot
+    connect(_timer.data(), &QTimer::timeout, this, &SensorSimulator::generateNewCo2Value);
+
+    // Example debug output connection
+    connect(this, &SensorSimulator::newCo2Value, [&](double sensorValue, SensorDataType type) {
+        // qDebug() << "Sensor Co2 value: " << sensorValue;
     });
 }
 
-SensorSimulator *SensorSimulator::instance()
+SensorSimulator* SensorSimulator::instance()
 {
-    if (_instance == nullptr){
+    if (_instance == nullptr) {
         _instance = new SensorSimulator;
     }
     return _instance;
 }
 
-//Create function for starting the simulation
-
-void SensorSimulator::generateSensorValuesInInterval(int interval)
+void SensorSimulator::startMeasurement()
 {
-    _timer.reset(new QTimer(this));
-    connect(_timer.data(), &QTimer::timeout, this, &SensorSimulator::generateNewCo2Value);
-    _timer.data()->start(interval);
+    if (!_timer->isActive()) {
+        _timer->start(_interval);
+        qDebug() << "Sensor Sim measurement started.";
+    }
+}
+
+void SensorSimulator::stopMeasurement()
+{
+    if (_timer->isActive()) {
+        _timer->stop();
+        qDebug() << "Sensor Sim measurement stopped.";
+    }
+}
+
+SensorDataType SensorSimulator::sensorDataType() const
+{
+    return _sensorDataType;
 }
 
 void SensorSimulator::generateNewCo2Value()
 {
-    //generate random value between -1.0 and + 1.0
-    double random = QRandomGenerator::global()->generateDouble(); // val inbetween 0 and 1
-    double transformedValue = 2.0 * random - 1.0; //val inbetween -1 and 1
+    double random = QRandomGenerator::global()->generateDouble(); // Value between 0 and 1
+    double transformedValue = 2.0 * random - 1.0; // Value between -1 and 1
 
-    //simulated value
     double sensorValue = _baseline + (transformedValue * _amplitude);
 
-    emit newCo2Value(sensorValue, this->_sensorDataType);
-
+    emit newCo2Value(sensorValue, _sensorDataType);
 }
-
