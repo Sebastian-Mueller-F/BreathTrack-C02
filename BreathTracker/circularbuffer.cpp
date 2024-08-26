@@ -22,26 +22,47 @@ CircularBuffer::~CircularBuffer()
 
 void CircularBuffer::writeNewItem(const double &newItem)
 {
-    //edge case ?
+    try {
+        // Check for uninitialized or zero capacity buffer
+        if (_capacity == 0) {
+            throw std::runtime_error("CircularBuffer capacity is zero. Cannot write new items.");
+        }
 
-    //add new item to end pointer
-    _buffer[_end] = newItem;
+        // Check if _buffer is properly initialized
+        if (_buffer.empty()) {
+            throw std::runtime_error("CircularBuffer buffer is not initialized.");
+        }
 
-    //move end pointer
-    _end = (_end + 1) % _capacity;
+        // Add new item to the end pointer
+        _buffer[_end] = newItem;
 
-    if (_size < _capacity) {
-        //increase size until it matches capacity
-        _size++;
+        // Move end pointer
+        _end = (_end + 1) % _capacity;
+
+        if (_size < _capacity) {
+            // Increase size until it matches capacity
+            _size++;
+        } else {
+            // When size matches capacity, move _start to match end
+            _start = (_start + 1) % _capacity;
+        }
+
+        // Emit the dataAdded signal
+        emit dataAdded(_newDataIntervalMS);
+        // qDebug() << "dataAdded signal emitted from buffer" << this;
+
+    } catch (const std::runtime_error &e) {
+        // Handle runtime errors, such as uninitialized buffer or zero capacity
+        std::cerr << "Runtime error in writeNewItem: " << e.what() << std::endl;
+    } catch (const std::exception &e) {
+        // Handle any other standard exceptions
+        std::cerr << "Exception in writeNewItem: " << e.what() << std::endl;
+    } catch (...) {
+        // Catch any other unexpected exceptions
+        std::cerr << "Unknown error occurred in writeNewItem." << std::endl;
     }
-    else {
-        //when size matches capacity move _start (to match end)
-        _start = (_start + 1) % _capacity;
-    }
-
-    emit dataAdded(_newDataIntervalMS);
-    qDebug() << "dataAdded signal emitted with interval:" << _newDataIntervalMS;
 }
+
 
 
 std::vector<double> CircularBuffer::readLastNValues(size_t n)
