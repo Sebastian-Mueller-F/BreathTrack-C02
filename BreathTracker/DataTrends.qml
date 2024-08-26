@@ -13,7 +13,7 @@ Item {
     property string fillStartColor: "rgba(83, 91, 245, 0.3)"  // Start color of the fill gradient (Transparent Orange)
     property string fillEndColor: "rgba(30, 144, 255, 0.1)"   // End color of the fill gradient (Transparent Blue)
     property int lineThickness: 2
-// Line thickness
+    // Line thickness
     property int gridThickness: 1  // Grid line thickness
     property color gridColor: "#AAAAAA"  // Color of the grid lines
 
