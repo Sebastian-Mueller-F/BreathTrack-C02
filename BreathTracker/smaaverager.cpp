@@ -8,10 +8,9 @@ QSharedPointer<SMAAverager> SMAAverager::_instance = nullptr;
 SMAAverager::SMAAverager(size_t period, QObject *parent)
     : I_Averager(parent), _period(period)
 {
-    //Initialize averageType
+    // Initialize averageType
     _averageType = SensorDataType::SMA;
 }
-
 
 QSharedPointer<SMAAverager> SMAAverager::instance()
 {
@@ -21,19 +20,6 @@ QSharedPointer<SMAAverager> SMAAverager::instance()
     return _instance;
 }
 
-//Todo: Handle case for first value
-/*Bug:
- *  Sensor Co2 value :  49.1481
-Emitted averageUpdated signal with SMA: 0
-
- Sensor Co2 value :  53.1448
-Emitted averageUpdated signal with SMA: 0
-
-
- Sensor Co2 value :  57.5672
-Emitted averageUpdated signal with SMA: 16.3827
-
- */
 void SMAAverager::onNewData(const std::vector<double>& data, SensorDataType type)
 {
     _recentData = data;
@@ -50,11 +36,14 @@ double SMAAverager::calculate()
         throw std::runtime_error("No data available. Cannot calculate SMA.");
     }
 
+    // Adjust calculation if the period is greater than the amount of available data
+    size_t numDataPoints = std::min(_period, _recentData.size());
+
     // Calculate the sum of the recent data
-    double sum = std::accumulate(_recentData.begin(), _recentData.end(), 0.0);
+    double sum = std::accumulate(_recentData.end() - numDataPoints, _recentData.end(), 0.0);
 
     // Calculate the average
-    double sma = sum / static_cast<double>(_recentData.size());
+    double sma = sum / static_cast<double>(numDataPoints);
 
     return sma;
 }
@@ -65,4 +54,17 @@ size_t SMAAverager::getPeriod() const {
 
 void SMAAverager::setPeriod(size_t period) {
     _period = period;
+    onPeriodChanged();  // Recalculate or adjust internal state
+}
+
+void SMAAverager::onPeriodChanged()
+{
+    // Adjust the size of _recentData based on the new period
+    if (_recentData.size() > _period) {
+        // If the period is reduced, discard the oldest data
+        _recentData.erase(_recentData.begin(), _recentData.end() - _period);
+    }
+
+    qDebug() << "SMAAverager: Period changed to" << _period;
+    // If the period is increased, the existing data remains valid, and future data will fill in
 }

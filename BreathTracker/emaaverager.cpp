@@ -54,11 +54,17 @@ size_t EMAAverager::getPeriod() const {
 
 void EMAAverager::setPeriod(size_t period) {
     _period = period;
+    onPeriodChanged();
+}
 
+void EMAAverager::onPeriodChanged()
+{
     // Recalculate alpha based on the new period
     _alpha = 2.0 / (static_cast<double>(_period) + 1.0);
 
     // Reset the EMA calculation
     _isFirstCalculation = true;
     _previousEMA = 0.0;
+
+     qDebug() << "EMAAverager: Period changed to" << _period << ", alpha recalculated to" << _alpha;
 }

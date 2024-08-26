@@ -30,6 +30,7 @@ public:
 
     // Implement the Subscriber interface
     void onNewData(const std::vector<double>& data, SensorDataType type = SensorDataType::RAW) override;
+    void onPeriodChanged() override;
 private:
     static QSharedPointer<SMAAverager> _instance;
 
