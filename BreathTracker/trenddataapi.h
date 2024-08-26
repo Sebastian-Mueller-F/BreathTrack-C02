@@ -2,11 +2,64 @@
 #define TRENDDATAAPI_H
 
 #include <QObject>
+#include <QVariantList>
+#include <QSharedPointer>
 
-class TrendDataAPI
+#include <I_FrontendAPI.h>
+#include <I_Subscriber.h>
+#include <types.h>
+
+/**
+ * @brief The TrendDataAPI class
+ */
+
+class TrendDataAPI : public QObject
 {
+    Q_OBJECT
+
 public:
-    TrendDataAPI();
+    TrendDataAPI(QObject *parent = nullptr);
+
+    ~TrendDataAPI() override {
+        // Destructor
+
+    }
+
+    static QSharedPointer<TrendDataAPI> instance();
+
+    Q_PROPERTY(QVariantList raw READ raw WRITE setRaw NOTIFY rawChanged)
+    Q_PROPERTY(QVariantList sma READ sma WRITE setSma NOTIFY smaChanged)
+    Q_PROPERTY(QVariantList ema READ ema WRITE setEma NOTIFY emaChanged)
+
+    QVariantList raw() const;
+    void setRaw(const QVariantList &newRaw);
+
+    QVariantList sma() const;
+    void setSma(const QVariantList &newSma);
+
+    QVariantList ema() const;
+    void setEma(const QVariantList &newEma);
+
+signals:
+    void rawChanged(QVariantList &newData);
+    void smaChanged(QVariantList &newData);
+    void emaChanged(QVariantList &newData);
+
+private:
+    static QSharedPointer<TrendDataAPI> _instance;
+
+    QVariantList _raw;
+    QVariantList _sma;
+    QVariantList _ema;
+
+    // FrontendAPI
+    void getBackendData();
+    void handleFrontendRequest();
+    void saveSettings(QString key, QVariant val);
+    void loadSettings();
+
+    // Subscriber
+    void onNewData(const std::vector<double>& data, SensorDataType type);
 };
 
 #endif // TRENDDATAAPI_H
