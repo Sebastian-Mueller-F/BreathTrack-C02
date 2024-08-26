@@ -1,23 +1,23 @@
-#ifndef I_SENSOR_H
-#define I_SENSOR_H
+#ifndef ISENSOR_H
+#define ISENSOR_H
 
-// #include <functional>
+#include <QObject>
 #include <types.h>
 
-class I_Sensor
+class I_Sensor : public QObject
 {
+    Q_OBJECT
 public:
+    explicit I_Sensor(QObject *parent = nullptr) : QObject(parent) {}
+
     virtual ~I_Sensor() = default;
 
-    // Start and stop measurement functions
     virtual void startMeasurement() = 0;
     virtual void stopMeasurement() = 0;
-
-    // Return the type of sensor data
     virtual SensorDataType sensorDataType() const = 0;
 
-    // Allow setting a callback for when new CO2 values are available
-    // virtual void setNewCo2ValueCallback(std::function<void(double, SensorDataType)> callback) = 0;
+signals:
+    void newCo2Value(double value, SensorDataType type);
 };
 
-#endif // I_SENSOR_H
+#endif // ISENSOR_H
