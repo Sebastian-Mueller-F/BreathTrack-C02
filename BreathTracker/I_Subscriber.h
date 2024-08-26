@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <vector>
+#include <types.h>
 
 class I_Subscriber  {
 
@@ -13,7 +14,7 @@ public:
     // virtual ~Subscriber() {}
 
     // Pure virtual function to be implemented by all subscribers
-    virtual void onNewData(const std::vector<double>& data) = 0;
+    virtual void onNewData(const std::vector<double>& data, SensorDataType type = SensorDataType::RAW) = 0;
 };
 
 #endif // SUBSCRIBER_H

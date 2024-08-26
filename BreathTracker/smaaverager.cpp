@@ -34,7 +34,7 @@ Emitted averageUpdated signal with SMA: 0
 Emitted averageUpdated signal with SMA: 16.3827
 
  */
-void SMAAverager::onNewData(const std::vector<double>& data)
+void SMAAverager::onNewData(const std::vector<double>& data, SensorDataType type)
 {
     _recentData = data;
 
