@@ -5,7 +5,7 @@
 SensorSimulator* SensorSimulator::_instance = nullptr;
 
 SensorSimulator::SensorSimulator(double baseline, double amplitude, int interval, QObject *parent)
-    : QObject(parent),  // Initialize QObject
+    : I_Sensor(parent),  // Initialize QObject
     _baseline(baseline),
     _amplitude(amplitude),
     _interval(interval)

@@ -5,7 +5,7 @@
 #include <QTimer>
 #include "I_Sensor.h"
 
-class SensorSimulator : public QObject, public I_Sensor
+class SensorSimulator :  public I_Sensor
 {
     Q_OBJECT
 public:
@@ -16,9 +16,6 @@ public:
     void startMeasurement() override;
     void stopMeasurement() override;
     SensorDataType sensorDataType() const override;
-
-signals:
-    void newCo2Value(double value, SensorDataType type);
 
 private slots:
     void generateNewCo2Value();
