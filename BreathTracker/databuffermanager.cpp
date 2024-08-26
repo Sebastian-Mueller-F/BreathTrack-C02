@@ -14,6 +14,17 @@ DataBufferManager::DataBufferManager(QObject *parent) : QObject(parent) {
     connect (EMAAverager::instance().data(), &EMAAverager::averageUpdated, this, &DataBufferManager::onNewData);
 
     //data output for subscribers
+    QSharedPointer<TrendDataAPI> trendFrontend = TrendDataAPI::instance();
+    BufferSubscription rawTrendBufferSubscription(*_buffers[SensorDataType::RAW]);
+    BufferSubscription smaTrendBufferSubscription(*_buffers[SensorDataType::SMA]);
+    BufferSubscription emaTrendBufferSubscription(*_buffers[SensorDataType::EMA]);
+
+    //make trendAPI class a subscriber of the buffers
+    //TODO: retrieve lookbackPeriod from Frontend
+    rawTrendBufferSubscription.registerSubscriber(trendFrontend, 60000);
+    smaTrendBufferSubscription.registerSubscriber(trendFrontend, 60000);
+    emaTrendBufferSubscription.registerSubscriber(trendFrontend, 60000);
+
 }
 
 std::shared_ptr<DataBufferManager> DataBufferManager::instance()

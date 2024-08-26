@@ -4,10 +4,12 @@
 #include <QObject>
 
 #include <circularbuffer.h>
+#include <buffersubscription.h>
 #include <types.h>
 #include <emaaverager.h>
 #include <smaaverager.h>
 #include <sensorsimulator.h>
+#include <trenddataapi.h>
 
 
 class DataBufferManager : public QObject
