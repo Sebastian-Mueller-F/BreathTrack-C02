@@ -44,7 +44,6 @@ void BufferSubscription::unregisterSubscriber(QSharedPointer<I_Subscriber> subsc
             break;  // Exit the loop after removing the subscriber
         }
     }
-
     if (success) {
         qDebug() << "Subscriber successfully unregistered. Total subscribers:" << _subscribers.size();
     } else {
