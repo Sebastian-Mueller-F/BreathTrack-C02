@@ -29,6 +29,41 @@ QObject *LiveDataAPI::qmlInstance(QQmlEngine *engine, QJSEngine *scriptEngine)
         return _instance;
 }
 
+int LiveDataAPI::emaPeriod() const
+{
+    return _emaPeriod;
+}
+
+void LiveDataAPI::setEmaPeriod(int newEmaPeriod)
+{
+    if (_emaPeriod == newEmaPeriod)
+        return;
+
+    _emaPeriod = newEmaPeriod;
+
+    EMAAverager::instance()->setPeriod(_emaPeriod);
+    qDebug() << "LiveDataAPI: EMA Period changed to" << _emaPeriod;
+    emit emaPeriodChanged();
+}
+
+int LiveDataAPI::smaPeriod() const
+{
+    return _smaPeriod;
+}
+
+void LiveDataAPI::setSmaPeriod(int newSmaPeriod)
+{
+    if (_smaPeriod == newSmaPeriod)
+        return;
+
+
+    _smaPeriod = newSmaPeriod;
+    SMAAverager::instance()->setPeriod(_smaPeriod);
+    qDebug() << "LiveDataAPI: SMA Period changed to" << _emaPeriod;
+    emit smaPeriodChanged();
+}
+
+
 FrontendTypes::AverageType LiveDataAPI::averageType() const
 {
     return _averageType;
@@ -82,6 +117,16 @@ void LiveDataAPI::saveSettings(QString key, QVariant val)
 void LiveDataAPI::loadSettings()
 {
 
+}
+
+//TODO: either delete or update
+void LiveDataAPI::updatePeriodInAveragers()
+{
+    if (_averageType == FrontendTypes::AverageType::SMA) {
+        SMAAverager::instance()->setPeriod(_smaPeriod);
+    } else {
+        EMAAverager::instance()->setPeriod(_emaPeriod);
+    }
 }
 
 int LiveDataAPI::sensorValue() const
