@@ -1,5 +1,6 @@
 #include "circularbuffer.h"
 #include <QDebug>
+#include <iostream>
 
 //TODO: Create Buffer Subscriber Class
 
@@ -68,6 +69,13 @@ void CircularBuffer::writeNewItem(const double &newItem)
 std::vector<double> CircularBuffer::readLastNValues(size_t n)
 {
     std::vector<double> values;
+
+    // If N number of items is not available just return all items available ( = size)
+    if (_size < n){
+        // qWarning() << " Only " << _size << " number of items in the buffer available. Will read and return " << _size << " values.";
+        n = _size;
+    }
+
     size_t reader = (_end + _capacity - n) % _capacity;
 
 
@@ -75,17 +83,10 @@ std::vector<double> CircularBuffer::readLastNValues(size_t n)
         return values;
     }
 
-    // If N number of items is not available just return all items available ( = size)
-    if (_size < n){
-        qWarning() << " Only " << _size << " number of items in the buffer available. Will read and return " << _size << " values.";
-        n = _size;
-    }
-
     for (int i = 0; i < n; i++){
 
         //add to values
         values.push_back(_buffer[reader]);
-
         //move reader pointer
         reader = (reader + 1) % _capacity;
     }
