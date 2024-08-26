@@ -85,7 +85,7 @@ void TrendDataAPI::loadSettings()
 
 void TrendDataAPI::onNewData(const std::vector<double> &data, SensorDataType type)
 {
-    qDebug() << "TrendDataAPI Data size received: " << data.size();
+    // qDebug() << "TrendDataAPI Data size received: " << data.size();
     QVariantList newData;
     for (double value : data) {
         newData.append(value);
@@ -93,13 +93,13 @@ void TrendDataAPI::onNewData(const std::vector<double> &data, SensorDataType typ
 
     switch (type) {
     case SensorDataType::RAW:
-        qDebug() << "TrendAPI Setting RAW with data of size " << newData.size();
+        // qDebug() << "TrendAPI Setting RAW with data of size " << newData.size();
 
         // Iterate and print all RAW data values
-        qDebug() << "Printing RAW data values:";
-        for (double value : data) {
-            qDebug() << value;
-        }
+        // qDebug() << "Printing RAW data values:";
+        // for (double value : data) {
+        //     qDebug() << value;
+        // }
         setRaw(newData);
         break;
     case SensorDataType::SMA:

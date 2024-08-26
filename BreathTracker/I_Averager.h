@@ -23,14 +23,13 @@ public:
     virtual size_t getPeriod() const = 0;
     virtual void setPeriod(size_t period) = 0;
 
+    // Method to adjust internal data structures or state when the period changes
+    virtual void onPeriodChanged() = 0;
+
     SensorDataType _averageType;
 
 signals:
-
     void averageUpdated(double newAverage, SensorDataType averageType);
-
 };
-
-
 
 #endif // I_AVERAGER_H
