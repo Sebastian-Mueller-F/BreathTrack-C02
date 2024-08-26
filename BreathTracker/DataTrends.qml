@@ -7,19 +7,28 @@ Item {
     width: 800
     height: 300
 
-    // New properties for adjustable aspects
-    property color lineStartColor: "#53BFF5"  // Start color of the line gradient (Orange)
-    property color lineEndColor: "#1E90FF"    // End color of the line gradient (Blue)
-    property string fillStartColor: "rgba(83, 91, 245, 0.3)"  // Start color of the fill gradient (Transparent Orange)
-    property string fillEndColor: "rgba(30, 144, 255, 0.1)"   // End color of the fill gradient (Transparent Blue)
+    // Graph Dataset 1
+     property var sensorData1: []
+    property color lineStartColor: "#53BFF5"
+    property color lineEndColor: "#1E90FF"
+    property string fillStartColor: "rgba(83, 91, 245, 0.3)"
+    property string fillEndColor: "rgba(30, 144, 255, 0.1)"
     property int lineThickness: 2
-    // Line thickness
-    property int gridThickness: 1  // Grid line thickness
-    property color gridColor: "#AAAAAA"  // Color of the grid lines
 
-    property var sensorData: []
-    property var maxDataPoints: 50
-    property var canvasHeight: 300
+    //Graph Dataset 2
+    property var sensorData2: []
+    property color line2StartColor: "#FFA500"
+    property color line2EndColor: "#FF4500"
+    property string fill2StartColor: "rgba(255, 165, 0, 0.3)"
+    property string fill2EndColor: "rgba(255, 69, 0, 0.1)"
+    property int line2Thickness: 2
+
+    property bool hasTwoDataSets: false
+    property int gridThickness: 1
+    property color gridColor: "#AAAAAA"
+
+    property int maxDataPoints: 50
+    property int canvasHeight: 300
     property int gridSpacing: 50  // Adjust as needed
 
     Timer {
@@ -27,11 +36,18 @@ Item {
         running: true
         repeat: true
         onTriggered: {
-            let newValue = Math.random() * 100;
-            sensorData.push(newValue);
-            if (sensorData.length > maxDataPoints) {
-                sensorData.shift();
+            let newValue1 = Math.random() * 100;
+            let newValue2 = Math.random() * 100;
+            sensorData1.push(newValue1);
+            if (sensorData1.length > maxDataPoints) {
+                sensorData1.shift();
             }
+
+            sensorData2.push(newValue2);
+            if (sensorData2.length > maxDataPoints) {
+                sensorData2.shift();
+            }
+
             sensorCanvas.requestPaint();
         }
     }
@@ -100,41 +116,80 @@ Item {
                         ctx.stroke();
                     }
 
-                    // Draw the graph line and fill area
-                    if (sensorData.length > 0) {
-                        var scaleX = width / Math.min(sensorData.length, maxDataPoints);
+                    // Draw the first dataset's graph line and fill area
+                    if (sensorData1.length > 0) {
+                        var scaleX = width / Math.min(sensorData1.length, maxDataPoints);
                         var scaleY = height / 100;
 
                         // Create gradient for the line using properties
-                        var lineGradient = ctx.createLinearGradient(0, 0, width, 0);
-                        lineGradient.addColorStop(0, lineStartColor);  // Start color
-                        lineGradient.addColorStop(1, lineEndColor);  // End color
+                        var lineGradient1 = ctx.createLinearGradient(0, 0, width, 0);
+                        lineGradient1.addColorStop(0, lineStartColor);  // Start color
+                        lineGradient1.addColorStop(1, lineEndColor);  // End color
 
                         ctx.beginPath();
-                        ctx.moveTo(0, height - (sensorData[0] * scaleY));
+                        ctx.moveTo(0, height - (sensorData1[0] * scaleY));
 
-                        for (var i = 1; i < sensorData.length - 1; i++) {
+                        for (var i = 1; i < sensorData1.length - 1; i++) {
                             var xc = (i * scaleX + (i + 1) * scaleX) / 2;
-                            var yc = (height - (sensorData[i] * scaleY) + height - (sensorData[i + 1] * scaleY)) / 2;
-                            ctx.quadraticCurveTo(i * scaleX, height - (sensorData[i] * scaleY), xc, yc);
+                            var yc = (height - (sensorData1[i] * scaleY) + height - (sensorData1[i + 1] * scaleY)) / 2;
+                            ctx.quadraticCurveTo(i * scaleX, height - (sensorData1[i] * scaleY), xc, yc);
                         }
 
-                        ctx.lineTo((sensorData.length - 1) * scaleX, height - (sensorData[sensorData.length - 1] * scaleY));
+                        ctx.lineTo((sensorData1.length - 1) * scaleX, height - (sensorData1[sensorData1.length - 1] * scaleY));
 
                         // Fill the area under the curve using properties
                         ctx.lineTo(width, height);
                         ctx.lineTo(0, height);
                         ctx.closePath();
 
-                        var fillGradient = ctx.createLinearGradient(0, 0, 0, height);
-                        fillGradient.addColorStop(0, fillStartColor);  // Start color for fill
-                        fillGradient.addColorStop(1, fillEndColor);  // End color for fill
-                        ctx.fillStyle = fillGradient;
+                        var fillGradient1 = ctx.createLinearGradient(0, 0, 0, height);
+                        fillGradient1.addColorStop(0, fillStartColor);  // Start color for fill
+                        fillGradient1.addColorStop(1, fillEndColor);  // End color for fill
+                        ctx.fillStyle = fillGradient1;
                         ctx.fill();
 
                         // Set line color and thickness using properties
-                        ctx.strokeStyle = lineGradient;  // Gradient line
+                        ctx.strokeStyle = lineGradient1;  // Gradient line
                         ctx.lineWidth = lineThickness;  // Adjustable line thickness
+
+                        ctx.stroke();  // Draw the line with the new style
+                    }
+
+                    // Draw the second dataset's graph line and fill area if enabled
+                    if (hasTwoDataSets && sensorData2.length > 0) {
+                        var scaleX2 = width / Math.min(sensorData2.length, maxDataPoints);
+                        var scaleY2 = height / 100;
+
+                        // Create gradient for the line using properties
+                        var lineGradient2 = ctx.createLinearGradient(0, 0, width, 0);
+                        lineGradient2.addColorStop(0, line2StartColor);  // Start color
+                        lineGradient2.addColorStop(1, line2EndColor);  // End color
+
+                        ctx.beginPath();
+                        ctx.moveTo(0, height - (sensorData2[0] * scaleY2));
+
+                        for (var j = 1; j < sensorData2.length - 1; j++) {
+                            var xc2 = (j * scaleX2 + (j + 1) * scaleX2) / 2;
+                            var yc2 = (height - (sensorData2[j] * scaleY2) + height - (sensorData2[j + 1] * scaleY2)) / 2;
+                            ctx.quadraticCurveTo(j * scaleX2, height - (sensorData2[j] * scaleY2), xc2, yc2);
+                        }
+
+                        ctx.lineTo((sensorData2.length - 1) * scaleX2, height - (sensorData2[sensorData2.length - 1] * scaleY2));
+
+                        // Fill the area under the curve using properties
+                        ctx.lineTo(width, height);
+                        ctx.lineTo(0, height);
+                        ctx.closePath();
+
+                        var fillGradient2 = ctx.createLinearGradient(0, 0, 0, height);
+                        fillGradient2.addColorStop(0, fill2StartColor);  // Start color for fill
+                        fillGradient2.addColorStop(1, fill2EndColor);  // End color for fill
+                        ctx.fillStyle = fillGradient2;
+                        ctx.fill();
+
+                        // Set line color and thickness using properties
+                        ctx.strokeStyle = lineGradient2;  // Gradient line
+                        ctx.lineWidth = line2Thickness;  // Adjustable line thickness
 
                         ctx.stroke();  // Draw the line with the new style
                     }
