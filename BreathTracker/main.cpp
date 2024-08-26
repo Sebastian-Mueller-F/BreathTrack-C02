@@ -5,6 +5,8 @@
 #include <QLocale>
 #include <QTranslator>
 #include <QQmlEngine>
+#include <QVector>
+#include <QMetaType>
 
 #include <circularbuffer.h>
 #include <buffersubscription.h>
@@ -14,9 +16,15 @@
 #include <databuffermanager.h>
 #include <livedataapi.h>
 
+// Register QVector<double> as a Qt meta-type
+Q_DECLARE_METATYPE(QList<double>)
+
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
+
+    //register Metatypes
+    int registeredQList = qRegisterMetaType<QList<double>>("QList<double>");
 
     QTranslator translator;
     const QStringList uiLanguages = QLocale::system().uiLanguages();
@@ -49,6 +57,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<FrontendTypes>("BreathTracker.FrontendTypes", 1, 0, "FrontendTypes");
     qmlRegisterSingletonType<LiveDataAPI>("BreathTracker.LiveData", 1, 0, "BELiveData", LiveDataAPI::qmlInstance);
     LiveDataAPI::instance();
+    TrendDataAPI::instance();
 
 
     const QUrl url(QStringLiteral("qrc:/BreathTracker/main.qml"));
