@@ -15,7 +15,7 @@ SensorSimulator::SensorSimulator( double baseline, double amplitude, int interva
 
     //test readout created values
     connect(this, &SensorSimulator::newCo2Value, [&](double sensorValue) {
-        qDebug() << " Sensor Co2 value : " << sensorValue;
+        // qDebug() << " Sensor Co2 value : " << sensorValue;
     });
 }
 

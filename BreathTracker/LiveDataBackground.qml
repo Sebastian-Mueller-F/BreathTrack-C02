@@ -67,12 +67,12 @@ Rectangle {
 
     // Handler to check when sensorData changes
         onSensorDataChanged: {
-            console.log("sensorData has been updated to: " + sensorData)
+            // console.log("sensorData has been updated to: " + sensorData)
             // You can add further logic here to handle the change
         }
 
         onAveragedDataChanged: {
-            console.log("averagedData has been updated to: " + averagedData)
+            // console.log("averagedData has been updated to: " + averagedData)
             // You can add further logic here to handle the change
         }
 

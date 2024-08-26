@@ -40,7 +40,7 @@ void EMAAverager::onNewData(const std::vector<double>& data, SensorDataType type
         _previousEMA = _alpha * currentData + (1.0 - _alpha) * _previousEMA;
     }
     emit averageUpdated(_previousEMA, this->_averageType);
-    qDebug() << "Emitted averageUpdated signal with EMA:" << _previousEMA;
+    // qDebug() << "Emitted averageUpdated signal with EMA:" << _previousEMA;
 }
 
 double EMAAverager::calculate()

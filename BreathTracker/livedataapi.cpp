@@ -48,7 +48,7 @@ void LiveDataAPI::getBackendData()
     //get sensor data
     connect(SensorSimulator::instance(), &SensorSimulator::newCo2Value, this, [this](double newValue){
         int val = static_cast<int>(newValue);
-        qDebug() << "Setting Sensor Value for FE = " << val;
+        // qDebug() << "Setting Sensor Value for FE = " << val;
         setSensorValue(val);
     });
 
@@ -56,13 +56,13 @@ void LiveDataAPI::getBackendData()
     if(_averageType == 0){
         connect (SMAAverager::instance().data(), &SMAAverager::averageUpdated,  this, [this] (double newValue) {
             int val = static_cast<int>(newValue);
-            qDebug() << "Setting SMA Value for FE = " << val;
+            // qDebug() << "Setting SMA Value for FE = " << val;
             setAveragedValue(val);
         });
     } else {
         connect (EMAAverager::instance().data(), &EMAAverager::averageUpdated,  this, [this] (double newValue) {
             int val = static_cast<int>(newValue);
-            qDebug() << "Setting EMA Value for FE = " << val;
+            // qDebug() << "Setting EMA Value for FE = " << val;
             setAveragedValue(val);
         });
     }
@@ -106,7 +106,7 @@ void LiveDataAPI::setAveragedValue(int newAveragedValue)
 {
     if (newAveragedValue != _averagedValue){
         _averagedValue = newAveragedValue;
-        qDebug() << "Averaged Value " << newAveragedValue;
+        // qDebug() << "Averaged Value " << newAveragedValue;
         emit averagedValueChanged();
     }
 }
