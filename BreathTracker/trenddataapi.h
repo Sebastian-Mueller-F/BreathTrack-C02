@@ -13,7 +13,7 @@
  * @brief The TrendDataAPI class
  */
 
-class TrendDataAPI : public QObject
+class TrendDataAPI : public QObject, public I_Subscriber, public I_FrontendAPI
 {
     Q_OBJECT
 
@@ -53,13 +53,13 @@ private:
     QVariantList _ema;
 
     // FrontendAPI
-    void getBackendData();
-    void handleFrontendRequest();
-    void saveSettings(QString key, QVariant val);
-    void loadSettings();
+    void getBackendData() override;
+    void handleFrontendRequest() override;
+    void saveSettings(QString key, QVariant val) override;
+    void loadSettings() override;
 
     // Subscriber
-    void onNewData(const std::vector<double>& data, SensorDataType type);
+    void onNewData(const std::vector<double>& data, SensorDataType type) override;
 };
 
 #endif // TRENDDATAAPI_H
