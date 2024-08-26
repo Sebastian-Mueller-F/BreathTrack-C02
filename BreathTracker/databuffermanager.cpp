@@ -23,9 +23,9 @@ DataBufferManager::DataBufferManager(QObject *parent) : QObject(parent)
     QSharedPointer<TrendDataAPI> trendFrontend = TrendDataAPI::instance();
     //make trendAPI class a subscriber of the buffers
     //TODO: retrieve lookbackPeriod from Frontend
-    _rawTrendBufferSubscription->registerSubscriber(trendFrontend, 30000, SensorDataType::RAW);
-    _smaTrendBufferSubscription->registerSubscriber(trendFrontend, 30000, SensorDataType::SMA);
-    _emaTrendBufferSubscription->registerSubscriber(trendFrontend, 30000, SensorDataType::EMA);
+    _rawTrendBufferSubscription->registerSubscriber(trendFrontend, 50000, SensorDataType::RAW);
+    _smaTrendBufferSubscription->registerSubscriber(trendFrontend, 50000, SensorDataType::SMA);
+    _emaTrendBufferSubscription->registerSubscriber(trendFrontend, 50000, SensorDataType::EMA);
 
 
 }
