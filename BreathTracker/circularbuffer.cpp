@@ -72,6 +72,25 @@ std::vector<double> CircularBuffer::readLastNValues(size_t n)
     return values;
 }
 
+std::vector<double> CircularBuffer::readAllValues()
+{
+
+    std::vector<double> values;
+    if (isEmpty()) {
+        return values;  // Return an empty vector if the buffer is empty
+    }
+
+    size_t reader = _start;  // Start reading from the oldest element
+    for (size_t i = 0; i < _size; i++) {
+        values.push_back(_buffer[reader]);  // Add the value to the result vector
+        reader = (reader + 1) % _capacity;  // Move the reader pointer to the next element
+    }
+
+    return values;
+
+
+}
+
 
 bool CircularBuffer::isEmpty()
 {
