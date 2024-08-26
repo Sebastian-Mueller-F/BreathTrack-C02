@@ -29,28 +29,15 @@ Item {
 
     property int maxDataPoints: 50
     property int canvasHeight: 300
-    property int gridSpacing: 50  // Adjust as needed
+    property int gridSpacing: 50
 
-    Timer {
-        interval: 1000
-        running: true
-        repeat: true
-        onTriggered: {
-            let newValue1 = Math.random() * 100;
-            let newValue2 = Math.random() * 100;
-            sensorData1.push(newValue1);
-            if (sensorData1.length > maxDataPoints) {
-                sensorData1.shift();
-            }
-
-            sensorData2.push(newValue2);
-            if (sensorData2.length > maxDataPoints) {
-                sensorData2.shift();
-            }
-
-            sensorCanvas.requestPaint();
-        }
+    onSensorData1Changed: {
+        sensorCanvas.requestPaint();
     }
+    onSensorData2Changed: {
+        sensorCanvas.requestPaint();
+    }
+
 
     // Simulate Drop Shadow using a Semi-Transparent Rectangle
     Rectangle {
@@ -68,9 +55,9 @@ Item {
     Rectangle {
         width: parent.width
         height: parent.height
-        color: "transparent"  // Dark background color
-        radius: 15  // Adjusted corner radius for a slightly sharper look
-        border.color: "#555555"  // Adding a subtle border around the graph area
+        color: "transparent"
+        radius: 15
+        border.color: "#555555"
         border.width: 0
 
         Item {
