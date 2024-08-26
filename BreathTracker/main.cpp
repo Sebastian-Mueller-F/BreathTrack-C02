@@ -47,8 +47,8 @@ int main(int argc, char *argv[])
         averagerBuffer.writeNewItem(newCo2Value);
     });
     BufferSubscription averagerBufferSubscription(averagerBuffer);
-    averagerBufferSubscription.registerSubscriber(sma, 5000); //5 seconds
-    averagerBufferSubscription.registerSubscriber(ema, 10000); // 10 seconds
+    averagerBufferSubscription.registerSubscriber(sma, 5000, SensorDataType::RAW); //5 seconds
+    averagerBufferSubscription.registerSubscriber(ema, 10000, SensorDataType::RAW); // 10 seconds
 
     std::shared_ptr<DataBufferManager> dataBuffer = DataBufferManager::instance();
 
@@ -56,6 +56,7 @@ int main(int argc, char *argv[])
 
     qmlRegisterType<FrontendTypes>("BreathTracker.FrontendTypes", 1, 0, "FrontendTypes");
     qmlRegisterSingletonType<LiveDataAPI>("BreathTracker.LiveData", 1, 0, "BELiveData", LiveDataAPI::qmlInstance);
+    qmlRegisterSingletonType<TrendDataAPI>("BreathTracker.TrendData", 1, 0, "BETrendData", TrendDataAPI::qmlInstance);
     LiveDataAPI::instance();
     TrendDataAPI::instance();
 

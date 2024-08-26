@@ -2,6 +2,7 @@
 #define TRENDDATAAPI_H
 
 #include <QObject>
+#include <QQmlEngine>
 #include <QVariantList>
 #include <QSharedPointer>
 
@@ -25,6 +26,7 @@ public:
 
     }
 
+    static QObject *qmlInstance(QQmlEngine *engine, QJSEngine *scriptEngine);
     static QSharedPointer<TrendDataAPI> instance();
 
     Q_PROPERTY(QVariantList raw READ raw WRITE setRaw NOTIFY rawChanged)

@@ -5,7 +5,15 @@ QSharedPointer<TrendDataAPI> TrendDataAPI::_instance = nullptr;
 TrendDataAPI::TrendDataAPI(QObject *parent)
 {
     // qRegisterMetaType<QList<double>>("QList<double>");
-    qDebug() << "Test";
+
+}
+
+QObject* TrendDataAPI::qmlInstance(QQmlEngine *engine, QJSEngine *scriptEngine)
+{
+    Q_UNUSED(scriptEngine)
+    Q_UNUSED(engine)
+
+    return TrendDataAPI::instance().data();
 }
 
 QSharedPointer<TrendDataAPI> TrendDataAPI::instance()
@@ -57,41 +65,53 @@ void TrendDataAPI::setEma(const QVariantList &newEma)
 
 void TrendDataAPI::getBackendData()
 {
-        qDebug() << "Test";
+
 }
 
 void TrendDataAPI::handleFrontendRequest()
 {
-    qDebug() << "Test";
+
 }
 
 void TrendDataAPI::saveSettings(QString key, QVariant val)
 {
-    qDebug() << "Test";
+
 }
 
 void TrendDataAPI::loadSettings()
 {
-        qDebug() << "Test";
+
 }
 
 void TrendDataAPI::onNewData(const std::vector<double> &data, SensorDataType type)
 {
+    qDebug() << "TrendDataAPI Data size received: " << data.size();
+    qDebug() << "Printing RAW data values:";
+    for (double value : data) {
+        qDebug() << value;
+    }
     //T
     QVariantList newData;
-    for (double value : data) {
-        newData.append(value);
-    }
+
 
     switch (type) {
     case SensorDataType::RAW:
-        setRaw(newData); // Assuming the first value is used for RAW
+        qDebug() << "TrendAPI Setting RAW with data of size " << newData.size();
+
+        // Iterate and print all RAW data values
+        qDebug() << "Printing RAW data values:";
+        for (double value : data) {
+            qDebug() << value;
+        }
+        setRaw(newData);
         break;
     case SensorDataType::SMA:
+         // qDebug() << "TrendAPI Setting SMA with size " << newData.size();
         setSma(newData);
         break;
     case SensorDataType::EMA:
-        // setEma(newData);
+         // qDebug() << "TrendAPI Setting EMA with size " << newData.size();
+        setEma(newData);
         break;
     default:
         qWarning() << "Unknown sensor data type received!";
