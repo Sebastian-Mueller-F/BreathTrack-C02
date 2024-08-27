@@ -1,3 +1,4 @@
+#include <QDebug>
 #include <frontendapi.h>
 
 FrontendModuleManager::FrontendModuleManager(const BackendDependencies &backendDependencies,
@@ -5,10 +6,12 @@ FrontendModuleManager::FrontendModuleManager(const BackendDependencies &backendD
     : QObject(parent)
     , _backendDependencies(backendDependencies)
 {
+    qDebug() << "frontend api created";
+
     // Initialize _liveDataAPI and _trendDataAPI in the constructor body
     _liveDataAPI.reset(new LiveDataAPI(backendDependencies.sensor.get(),
-                                       backendDependencies.smaA.get(),
-                                       backendDependencies.emaA.get(),
+                                       backendDependencies.sma.get(),
+                                       backendDependencies.ema.get(),
                                        this));
 
     _trendDataAPI.reset(new TrendDataAPI(backendDependencies.dataBuffer.get(), this));
