@@ -46,17 +46,34 @@ qt_add_qml_module(appBreathTracker
     qml/images/calories.png
 )
 
+# Sensor
+source_group("Header Files//  Sensor" FILES inc/sensorsimulator.h  inc/I_Sensor.h inc/sensorfactory.h)
+source_group("Source Files// Header Files // Sensor" FILES src/sensorsimulator.cpp)
 
+# Data Structures
+source_group("Header Files// Data Structures" FILES inc/circularbuffer.h inc/buffersubscription.h inc/I_Subscriber.h)
+source_group("Source Files// Data Structures" FILES src/circularbuffer.cpp src/buffersubscription.cpp)
 
-# source_group("Source Files// Sensor" FILES sensorsimulator.h sensorsimulator.cpp I_Sensor.h sensorfactory.h)
-# source_group("Source Files// Data Structures" FILES circularbuffer.h circularbuffer.cpp buffersubscription.h buffersubscription.cpp I_Subscriber.h)
-# source_group("Source Files// Data" FILES databuffermanager.h databuffermanager.cpp)
-# source_group("Source Files// Averager" FILES I_Averager.h smaaverager.h smaaverager.cpp emaaverager.h emaaverager.cpp)
-# source_group("Source Files// Backend Frontend Interface" FILES I_FrontendAPI.h livedataapi.h livedataapi.cpp trenddataapi.h trenddataapi.cpp )
-# source_group("Source Files// Utils" FILES types.h FrontendTypes.h)
-# source_group("QML " FILES main.qml LiveData.qml LiveDataBackground.qml LiveDataMeter.qml )
-# source_group("QML// Components // Arcs" FILES ArcItem.qml ArcLeft.qml ArcRight.qml CircleIndicator.qml)
-# source_group("QML// Components " FILES CustomLabel.qml ModeToggle.qml)
+# Data Management
+source_group("Header Files// Data" FILES inc/databuffermanager.h)
+source_group("Source Files// Data" FILES src/databuffermanager.cpp)
+
+# Averagers
+source_group("Header Files// Averager" FILES inc/I_Averager.h inc/smaaverager.h inc/emaaverager.h)
+source_group("Source Files// Averager" FILES src/smaaverager.cpp src/emaaverager.cpp)
+
+# Backend Frontend Interface
+source_group("Header Files// Backend Frontend Interface" FILES inc/I_FrontendAPI.h inc/livedataapi.h inc/trenddataapi.h)
+source_group("Source Files// Backend Frontend Interface" FILES src/livedataapi.cpp src/trenddataapi.cpp)
+
+# Utils
+source_group("Header Files// Utils" FILES inc/types.h inc/FrontendTypes.h)
+
+# QML Files
+source_group("QML" FILES qml/main.qml qml/LiveData.qml qml/LiveDataBackground.qml qml/LiveDataMeter.qml qml/DataTrends.qml)
+source_group("QML// Components // Arcs" FILES qml/ArcItem.qml qml/ArcLeft.qml qml/ArcRight.qml qml/CircleIndicator.qml)
+source_group("QML// Components" FILES qml/CustomLabel.qml qml/ModeToggle.qml qml/SettingsDrawer.qml qml/SettingsSection.qml)
+
 
 
 
