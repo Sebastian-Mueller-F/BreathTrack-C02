@@ -19,9 +19,7 @@ class SMAAverager : public I_Averager, public I_Subscriber
 public:
   SMAAverager(size_t period, QObject *parent = nullptr);
 
-  ~SMAAverager() override {
-    // Destructor code, if any specific cleanup is needed
-  }
+  ~SMAAverager() override;
 
   static std::shared_ptr<SMAAverager> instance();
 

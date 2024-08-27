@@ -11,6 +11,11 @@ SMAAverager::SMAAverager(size_t period, QObject *parent)
   _averageType = SensorDataType::SMA;
 }
 
+SMAAverager::~SMAAverager()
+{
+    qDebug() << "SMA Averager destroyed";
+}
+
 std::shared_ptr<SMAAverager> SMAAverager::instance()
 {
     if (_instance == nullptr) {

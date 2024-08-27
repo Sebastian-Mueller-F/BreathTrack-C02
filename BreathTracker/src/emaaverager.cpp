@@ -13,6 +13,11 @@ EMAAverager::EMAAverager(size_t period, QObject *parent)
   _alpha = 2.0 / (static_cast<double>(_period) + 1.0);
 }
 
+EMAAverager::~EMAAverager()
+{
+    qDebug() << "EMA Averager destroyed";
+}
+
 std::shared_ptr<EMAAverager> EMAAverager::instance()
 {
     if (_instance == nullptr) {

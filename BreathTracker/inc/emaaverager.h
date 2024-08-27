@@ -14,9 +14,8 @@ class EMAAverager : public I_Averager, public I_Subscriber {
 public:
   EMAAverager(size_t period, QObject *parent = nullptr);
 
-  ~EMAAverager() override {
-    // Destructor code, if any specific cleanup is needed
-  }
+  ~EMAAverager() override;
+  ;
 
   // singleton
   static std::shared_ptr<EMAAverager> instance();
