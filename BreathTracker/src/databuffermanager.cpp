@@ -17,7 +17,9 @@ DataBufferManager::DataBufferManager(QObject *parent) : QObject(parent) {
       std::make_shared<BufferSubscription>(*_buffers[SensorDataType::EMA]);
 
   // data input for buffers
-  connect(SensorSimulator::instance(), &SensorSimulator::newCo2Value, this,
+  connect(SensorSimulator::instance().get(),
+          &SensorSimulator::newCo2Value,
+          this,
           &DataBufferManager::onNewData);
   connect(SMAAverager::instance().data(), &SMAAverager::averageUpdated, this,
           &DataBufferManager::onNewData);
