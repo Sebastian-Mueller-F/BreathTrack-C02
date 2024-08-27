@@ -33,6 +33,12 @@ public:
 
     ~LiveDataAPI() override;
 
+    static LiveDataAPI *instance(I_Sensor *sensor = nullptr,
+                                 I_Averager *smaAverager = nullptr,
+                                 I_Averager *emaAverager = nullptr,
+                                 QObject *parent = nullptr);
+    static QObject *qmlInstance(QQmlEngine *engine, QJSEngine *scriptEngine);
+
     void initialize();
     bool validateDependencies();
 
@@ -50,6 +56,8 @@ public:
     Q_INVOKABLE void setEmaPeriod(int newEmaPeriod);
 
 private:
+    static QScopedPointer<LiveDataAPI> _instance;
+
     int _smaPeriod;
     int _emaPeriod;
     int _sensorValue;

@@ -1,5 +1,7 @@
 #include "trenddataapi.h"
 
+QScopedPointer<TrendDataAPI> TrendDataAPI::_instance;
+
 TrendDataAPI::TrendDataAPI(DataBufferManager *dataBufferManager, QObject *parent)
     : QObject(parent)
     , _dataBufferManager(dataBufferManager)
@@ -8,7 +10,23 @@ TrendDataAPI::TrendDataAPI(DataBufferManager *dataBufferManager, QObject *parent
 TrendDataAPI::~TrendDataAPI()
 {
     qDebug() << "TrendDataAPI destroyed";
-    //unregister from all buffers
+    //TODO: unregister from all buffers
+}
+
+TrendDataAPI *TrendDataAPI::instance(DataBufferManager *dataBufferManager, QObject *parent)
+{
+    if (!_instance) {
+        _instance.reset(new TrendDataAPI(dataBufferManager, parent));
+    }
+    return _instance.data();
+}
+
+QObject *TrendDataAPI::qmlInstance(QQmlEngine *engine, QJSEngine *scriptEngine)
+{
+    Q_UNUSED(engine);
+    Q_UNUSED(scriptEngine);
+
+    return TrendDataAPI::instance();
 }
 
 void TrendDataAPI::initialize()

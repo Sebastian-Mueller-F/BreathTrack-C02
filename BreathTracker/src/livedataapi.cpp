@@ -1,5 +1,7 @@
 #include "livedataapi.h"
 
+QScopedPointer<LiveDataAPI> LiveDataAPI::_instance;
+
 LiveDataAPI::LiveDataAPI(I_Sensor *sensor,
                          I_Averager *smaAverager,
                          I_Averager *emaAverager,
@@ -24,6 +26,26 @@ LiveDataAPI::~LiveDataAPI()
     disconnect(SensorSimulator::instance().get(), nullptr, this, nullptr);
     disconnect(SMAAverager::instance().get(), nullptr, this, nullptr);
     disconnect(EMAAverager::instance().get(), nullptr, this, nullptr);
+}
+
+LiveDataAPI *LiveDataAPI::instance(I_Sensor *sensor,
+                                   I_Averager *smaAverager,
+                                   I_Averager *emaAverager,
+                                   QObject *parent)
+{
+    if (!_instance) {
+        _instance.reset(new LiveDataAPI(sensor, smaAverager, emaAverager, parent));
+    }
+    return _instance.data();
+}
+
+QObject *LiveDataAPI::qmlInstance(QQmlEngine *engine, QJSEngine *scriptEngine)
+{
+    Q_UNUSED(scriptEngine)
+    Q_UNUSED(engine)
+
+    // Return the singleton instance
+    return LiveDataAPI::instance();
 }
 
 void LiveDataAPI::initialize()

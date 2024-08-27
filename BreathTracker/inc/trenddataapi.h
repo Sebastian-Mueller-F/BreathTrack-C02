@@ -24,9 +24,13 @@ class TrendDataAPI : public QObject, public I_Subscriber, public I_FrontendAPIMo
     Q_PROPERTY(QVariantList ema READ ema WRITE setEma NOTIFY emaChanged)
 
 public:
-    explicit TrendDataAPI(DataBufferManager *dataBufferManager, QObject *parent = nullptr);
+    explicit TrendDataAPI(DataBufferManager *dataBufferManager = nullptr, QObject *parent = nullptr);
 
     ~TrendDataAPI() override;
+
+    static TrendDataAPI *instance(DataBufferManager *dataBufferManager = nullptr,
+                                  QObject *parent = nullptr);
+    static QObject *qmlInstance(QQmlEngine *engine, QJSEngine *scriptEngine);
 
     void initialize(); // Method to set up subscriptions
 
@@ -45,6 +49,8 @@ signals:
   void emaChanged(QVariantList &newData);
 
 private:
+    static QScopedPointer<TrendDataAPI> _instance;
+
     DataBufferManager *_dataBufferManager;
 
     QVariantList _raw;
