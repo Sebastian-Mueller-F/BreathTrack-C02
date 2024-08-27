@@ -94,8 +94,8 @@ void BufferSubscription::onDataAddedToBuffer(int dataIntervalsMS) {
 
       // Pass the values to the subscriber
       if (_subscribers[i] != nullptr) {
-        // qDebug() << "On New Data for " << &this->_buffer;
-        _subscribers[i]->onNewData(values, _sensorDataTypes[i]);
+          qDebug() << "On New Data for " << &this->_buffer;
+          _subscribers[i]->onNewData(values, _sensorDataTypes[i]);
       } else {
         throw std::runtime_error("Subscriber is null.");
       }

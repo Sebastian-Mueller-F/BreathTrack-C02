@@ -10,6 +10,7 @@
 
 #include <I_Sensor.h>
 #include <I_Subscriber.h>
+#include <averagecalculator.h>
 #include <buffersubscription.h>
 #include <circularbuffer.h>
 #include <databuffermanager.h>
@@ -41,32 +42,15 @@ int main(int argc, char *argv[]) {
   }
   sensor->startMeasurement();
 
-  std::shared_ptr<I_Subscriber> sma = SMAAverager::instance();
-  std::shared_ptr<I_Subscriber> ema = EMAAverager::instance();
+  AverageCalculator avgCalc(sensor, 60); // Puffergröße 60, könnte auch konfigurierbar sein
+  avgCalc.start();
 
-  // create buffer for averagers
-  CircularBuffer averagerBuffer(60); // TODO: variable instead of hardcoded 6
-  // add data from Sensor into averagerBuffer
-  bool receivingSensorDataSucess = QObject::connect(sensor.get(),
-                                                    &I_Sensor::newCo2Value,
-                                                    [&](double newCo2Value) {
-                                                        averagerBuffer.writeNewItem(newCo2Value);
-                                                    });
-  if (!receivingSensorDataSucess) {
-      qCritical() << "Failed to connect signal to slot!";
-  }
+  std::shared_ptr<I_Averager> sma = SMAAverager::instance();
+  std::shared_ptr<I_Averager> ema = EMAAverager::instance();
 
-  BufferSubscription averagerBufferSubscription(averagerBuffer);
-  averagerBufferSubscription.registerSubscriber(
-      sma, 5000, SensorDataType::RAW); // 5 seconds
-  averagerBufferSubscription.registerSubscriber(
-      ema, 10000, SensorDataType::RAW); // 10 seconds
+  std::shared_ptr<DataBufferManager> dataBuffer = DataBufferManager::instance(sensor, sma, ema);
 
-  std::shared_ptr<I_Averager> smaA = SMAAverager::instance();
-  std::shared_ptr<I_Averager> emaA = EMAAverager::instance();
-  std::shared_ptr<DataBufferManager> dataBuffer = DataBufferManager::instance(sensor, smaA, emaA);
-
-  BackendDependencies backendDeps(sensor, smaA, emaA, dataBuffer);
+  BackendDependencies backendDeps(sensor, sma, ema, dataBuffer);
 
   FrontendApi frontendApi(backendDeps);
 

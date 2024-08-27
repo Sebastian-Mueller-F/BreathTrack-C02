@@ -22,12 +22,13 @@ std::shared_ptr<SMAAverager> SMAAverager::instance()
 
 void SMAAverager::onNewData(const std::vector<double> &data,
                             SensorDataType type) {
-  _recentData = data;
+    qDebug() << "SMA On New Data";
+    _recentData = data;
 
-  double sma = calculate();
+    double sma = calculate();
 
-  emit averageUpdated(sma, this->_averageType);
-  // qDebug() << "Emitted averageUpdated signal with SMA:" << sma;
+    emit averageUpdated(sma, this->_averageType);
+    qDebug() << "Emitted averageUpdated signal with SMA:" << sma;
 }
 
 double SMAAverager::calculate() {
