@@ -33,13 +33,13 @@ int main(int argc, char *argv[]) {
   }
 
   // Initialize the sensor (using the simulator for now)
-  std::shared_ptr<I_Sensor> CO2sensor = SensorFactory::createSensor(
+  std::shared_ptr<I_Sensor> sensor = SensorFactory::createSensor(
       true); // Change to false when using the hardware sensor
-  if (CO2sensor == nullptr) {
-    qCritical() << "Failed to initialize CO2 sensor.";
-    return -1;
+  if (sensor == nullptr) {
+      qCritical() << "Failed to initialize CO2 sensor.";
+      return -1;
   }
-  CO2sensor->startMeasurement();
+  sensor->startMeasurement();
 
   std::shared_ptr<I_Subscriber> sma = SMAAverager::instance();
   std::shared_ptr<I_Subscriber> ema = EMAAverager::instance();
@@ -47,7 +47,7 @@ int main(int argc, char *argv[]) {
   // create buffer for averagers
   CircularBuffer averagerBuffer(60); // TODO: variable instead of hardcoded 6
   // add data from Sensor into averagerBuffer
-  bool receivingSensorDataSucess = QObject::connect(CO2sensor.get(),
+  bool receivingSensorDataSucess = QObject::connect(sensor.get(),
                                                     &I_Sensor::newCo2Value,
                                                     [&](double newCo2Value) {
                                                         averagerBuffer.writeNewItem(newCo2Value);
@@ -62,7 +62,13 @@ int main(int argc, char *argv[]) {
   averagerBufferSubscription.registerSubscriber(
       ema, 10000, SensorDataType::RAW); // 10 seconds
 
-  std::shared_ptr<DataBufferManager> dataBuffer = DataBufferManager::instance();
+  std::shared_ptr<I_Averager> smaA = SMAAverager::instance();
+  std::shared_ptr<I_Averager> emaA = EMAAverager::instance();
+  std::shared_ptr<DataBufferManager> dataBuffer = DataBufferManager::instance(sensor, smaA, emaA);
+
+  BackendDependencies backendDeps(sensor, smaA, emaA, dataBuffer);
+
+  FrontendModuleManager frontendApi(backendDeps);
 
   QQmlApplicationEngine engine;
 
@@ -76,9 +82,8 @@ int main(int argc, char *argv[]) {
   // LiveDataAPI::instance();
   // TrendDataAPI::instance();
 
-  FrontendModuleManager frontendManager;
-  qmlRegisterType<LiveDataAPI>("com.mycompany.frontend", 1, 0, "LiveDataAPI");
-  qmlRegisterType<TrendDataAPI>("com.mycompany.frontend", 1, 0, "TrendDataAPI");
+  qmlRegisterType<LiveDataAPI>("BreathTracker.LiveData", 1, 0, "BELiveData");
+  qmlRegisterType<TrendDataAPI>("BreathTracker.TrendData", 1, 0, "BETrendData");
 
   const QUrl url(QStringLiteral("qrc:/BreathTracker/qml/main.qml"));
   QObject::connect(
