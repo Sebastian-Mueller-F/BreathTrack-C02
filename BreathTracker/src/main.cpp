@@ -74,16 +74,18 @@ int main(int argc, char *argv[]) {
 
   qmlRegisterType<FrontendTypes>("BreathTracker.FrontendTypes", 1, 0,
                                  "FrontendTypes");
-  // qmlRegisterSingletonType<LiveDataAPI>("BreathTracker.LiveData", 1, 0,
-  //                                       "BELiveData", LiveDataAPI::qmlInstance);
-  // qmlRegisterSingletonType<TrendDataAPI>("BreathTracker.TrendData", 1, 0,
-  //                                        "BETrendData",
-  //                                        TrendDataAPI::qmlInstance);
+  qmlRegisterSingletonType<LiveDataAPI>("BreathTracker.LiveData",
+                                        1,
+                                        0,
+                                        "BELiveData",
+                                        LiveDataAPI::qmlInstance);
+  qmlRegisterSingletonType<TrendDataAPI>("BreathTracker.TrendData",
+                                         1,
+                                         0,
+                                         "BETrendData",
+                                         TrendDataAPI::qmlInstance);
   // LiveDataAPI::instance();
   // TrendDataAPI::instance();
-
-  qmlRegisterType<LiveDataAPI>("BreathTracker.LiveData", 1, 0, "BELiveData");
-  qmlRegisterType<TrendDataAPI>("BreathTracker.TrendData", 1, 0, "BETrendData");
 
   const QUrl url(QStringLiteral("qrc:/BreathTracker/qml/main.qml"));
   QObject::connect(
