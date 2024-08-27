@@ -32,7 +32,7 @@ int main(int argc, char *argv[]) {
   }
 
   // Initialize the sensor (using the simulator for now)
-  I_Sensor *CO2sensor = SensorFactory::createSensor(
+  std::shared_ptr<I_Sensor> CO2sensor = SensorFactory::createSensor(
       true); // Change to false when using the hardware sensor
   if (CO2sensor == nullptr) {
     qCritical() << "Failed to initialize CO2 sensor.";
@@ -46,11 +46,13 @@ int main(int argc, char *argv[]) {
   // create buffer for averagers
   CircularBuffer averagerBuffer(60); // TODO: variable instead of hardcoded 6
   // add data from Sensor into averagerBuffer
-  bool receivingSensorDataSucess = QObject::connect(
-      CO2sensor, &I_Sensor::newCo2Value,
-      [&](double newCo2Value) { averagerBuffer.writeNewItem(newCo2Value); });
+  bool receivingSensorDataSucess = QObject::connect(CO2sensor.get(),
+                                                    &I_Sensor::newCo2Value,
+                                                    [&](double newCo2Value) {
+                                                        averagerBuffer.writeNewItem(newCo2Value);
+                                                    });
   if (!receivingSensorDataSucess) {
-    qCritical() << "Failed to connect signal to slot!";
+      qCritical() << "Failed to connect signal to slot!";
   }
 
   BufferSubscription averagerBufferSubscription(averagerBuffer);

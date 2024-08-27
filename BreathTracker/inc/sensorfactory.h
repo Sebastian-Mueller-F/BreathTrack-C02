@@ -2,19 +2,22 @@
 #define SENSORFACTORY_H
 
 #include <I_Sensor.h>
+#include <memory> // For std::shared_ptr
 #include <sensorsimulator.h>
 
-class SensorFactory {
+class SensorFactory
+{
 public:
-  static I_Sensor *createSensor(bool useSimulator) {
-    if (useSimulator) {
-      return SensorSimulator::instance();
-    } else {
-      // Replace with hardware sensor initialization when implemented
-      // return new HardwareSensor();
-      return nullptr; // Placeholder until hardware sensor is available
+    static std::shared_ptr<I_Sensor> createSensor(bool useSimulator)
+    {
+        if (useSimulator) {
+            return SensorSimulator::instance();
+        } else {
+            // Replace with hardware sensor initialization when implemented
+            // return std::make_shared<HardwareSensor>();
+            return nullptr;
+        }
     }
-  }
 };
 
 #endif // SENSORFACTORY_H
