@@ -18,14 +18,8 @@
 #include <sensorfactory.h>
 #include <smaaverager.h>
 
-// Register QVector<double> as a Qt meta-type
-Q_DECLARE_METATYPE(QList<double>)
-
 int main(int argc, char *argv[]) {
   QGuiApplication app(argc, argv);
-
-  // register Metatypes
-  int registeredQList = qRegisterMetaType<QList<double>>("QList<double>");
 
   QTranslator translator;
   const QStringList uiLanguages = QLocale::system().uiLanguages();

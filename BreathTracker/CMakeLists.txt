@@ -27,8 +27,8 @@ qt_add_qml_module(appBreathTracker
     SOURCES I_Subscriber.h
     SOURCES emaaverager.h emaaverager.cpp
     SOURCES types.h
-    QML_FILES RawSensorData.qml
-    QML_FILES AveragedSensorData.qml
+    QML_FILES
+    QML_FILES
     QML_FILES DataTrends.qml
     SOURCES I_FrontendAPI.h
     SOURCES livedataapi.h livedataapi.cpp
