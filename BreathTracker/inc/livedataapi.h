@@ -13,8 +13,9 @@
 #include <smaaverager.h>
 
 // Singleton
-class LiveDataAPI : public QObject, public I_FrontendAPI {
-  Q_OBJECT
+class LiveDataAPI : public QObject, public I_FrontendAPIModule
+{
+    Q_OBJECT
 public:
   LiveDataAPI(QObject *parent = nullptr);
 

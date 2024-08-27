@@ -14,8 +14,9 @@
  * @brief The TrendDataAPI class
  */
 
-class TrendDataAPI : public QObject, public I_Subscriber, public I_FrontendAPI {
-  Q_OBJECT
+class TrendDataAPI : public QObject, public I_Subscriber, public I_FrontendAPIModule
+{
+    Q_OBJECT
 
 public:
   TrendDataAPI(QObject *parent = nullptr);

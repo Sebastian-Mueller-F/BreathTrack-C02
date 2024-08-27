@@ -63,7 +63,7 @@ source_group("Header Files// Averager" FILES inc/I_Averager.h inc/smaaverager.h 
 source_group("Source Files// Averager" FILES src/smaaverager.cpp src/emaaverager.cpp)
 
 # Backend Frontend Interface
-source_group("Header Files// Backend Frontend Interface" FILES inc/I_FrontendAPI.h inc/livedataapi.h inc/trenddataapi.h)
+source_group("Header Files// Backend Frontend Interface" FILES inc/I_FrontendAPI.h inc/I_FrontendAPIModule.h inc/livedataapi.h inc/trenddataapi.h)
 source_group("Source Files// Backend Frontend Interface" FILES src/livedataapi.cpp src/trenddataapi.cpp)
 
 # Utils

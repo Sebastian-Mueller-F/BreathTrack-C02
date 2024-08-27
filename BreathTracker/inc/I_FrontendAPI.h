@@ -4,8 +4,8 @@
 #include <QObject>
 #include <QSettings>
 
-class I_FrontendAPI {
-
+class I_FrontendAPIModule
+{
 public:
   virtual void getBackendData() = 0;
   virtual void handleFrontendRequest() = 0;
@@ -13,7 +13,7 @@ public:
   virtual void saveSettings(QString key, QVariant val) = 0;
   virtual void loadSettings() = 0;
 
-  virtual ~I_FrontendAPI() = default;
+  virtual ~I_FrontendAPIModule() = default;
 };
 
 #endif // I_FRONTENDAPI_H
