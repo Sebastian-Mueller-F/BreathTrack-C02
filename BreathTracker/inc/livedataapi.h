@@ -34,6 +34,7 @@ public:
     ~LiveDataAPI() override;
 
     void initialize();
+    bool validateDependencies();
 
     int sensorValue() const;
     void setSensorValue(int newSensorValue);

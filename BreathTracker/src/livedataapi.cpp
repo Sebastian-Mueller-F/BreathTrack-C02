@@ -20,6 +20,7 @@ LiveDataAPI::~LiveDataAPI()
     Der Rest wird vom ScopedPointer übernommen. Da die FrontendAPIs eng mit QT verbunden sind
     wurde auch QScopedPointer statt std::unique_ptr verwendet
     */
+    qDebug() << "LiveDataAPI destroyed";
     disconnect(SensorSimulator::instance().get(), nullptr, this, nullptr);
     disconnect(SMAAverager::instance().get(), nullptr, this, nullptr);
     disconnect(EMAAverager::instance().get(), nullptr, this, nullptr);
@@ -27,7 +28,28 @@ LiveDataAPI::~LiveDataAPI()
 
 void LiveDataAPI::initialize()
 {
-    this->getBackendData();
+    if (!validateDependencies()) {
+        qWarning() << "LiveDataAPI: Dependencies validation failed. Aborting data retrieval.";
+        return;
+    }
+    getBackendData();
+}
+
+bool LiveDataAPI::validateDependencies()
+{
+    if (!_sensor) {
+        qWarning() << "LiveDataAPI: Sensor is not initialized.";
+        return false;
+    }
+    if (_averageType == 0 && !_smaAverager) {
+        qWarning() << "LiveDataAPI: SMAAverager is not initialized.";
+        return false;
+    }
+    if (_averageType != 0 && !_emaAverager) {
+        qWarning() << "LiveDataAPI: EMAAverager is not initialized.";
+        return false;
+    }
+    return true;
 }
 
 int LiveDataAPI::emaPeriod() const
