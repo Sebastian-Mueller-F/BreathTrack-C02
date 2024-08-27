@@ -3,31 +3,33 @@
 
 std::shared_ptr<DataBufferManager> DataBufferManager::_instance = nullptr;
 
-DataBufferManager::DataBufferManager(QObject *parent)
-    : QObject(parent)
+DataBufferManager::DataBufferManager(std::shared_ptr<I_Sensor> sensor,
+                                     std::shared_ptr<I_Averager> smaAverager,
+                                     std::shared_ptr<I_Averager> emaAverager,
+                                     QObject *parent)
+    : _sensor(sensor)
+    , _smaAverager(smaAverager)
+    , _emaAverager(emaAverager)
+    , QObject(parent)
+
 {
     initializeBuffers();
+    validateDependecies();
 
     // Connect data input sources to buffers
-    connect(SensorSimulator::instance().get(),
-            &SensorSimulator::newCo2Value,
-            this,
-            &DataBufferManager::onNewData);
-    connect(SMAAverager::instance().get(),
-            &SMAAverager::averageUpdated,
-            this,
-            &DataBufferManager::onNewData);
-    connect(EMAAverager::instance().get(),
-            &EMAAverager::averageUpdated,
-            this,
-            &DataBufferManager::onNewData);
+    connect(_sensor.get(), &SensorSimulator::newCo2Value, this, &DataBufferManager::onNewData);
+    connect(_smaAverager.get(), &SMAAverager::averageUpdated, this, &DataBufferManager::onNewData);
+    connect(_emaAverager.get(), &EMAAverager::averageUpdated, this, &DataBufferManager::onNewData);
 }
 
-std::shared_ptr<DataBufferManager> DataBufferManager::instance()
+std::shared_ptr<DataBufferManager> DataBufferManager::instance(
+    std::shared_ptr<I_Sensor> sensorSimulator,
+    std::shared_ptr<I_Averager> smaAverager,
+    std::shared_ptr<I_Averager> emaAverager)
 {
     if (!_instance) {
-        _instance = std::shared_ptr<DataBufferManager>(new DataBufferManager);
-        qDebug() << "DataBufferManager instance created.";
+        _instance = std::make_shared<DataBufferManager>(sensorSimulator, smaAverager, emaAverager);
+        qDebug() << "DataBufferManager Singleton instance created.";
     }
     return _instance;
 }
@@ -70,6 +72,27 @@ void DataBufferManager::initializeBuffers()
     if (!_buffers[SensorDataType::RAW] || !_buffers[SensorDataType::SMA]
         || !_buffers[SensorDataType::EMA]) {
         qDebug() << "Error: One or more buffers are not initialized correctly!";
+    }
+}
+
+void DataBufferManager::validateDependecies()
+{
+    if (!_sensor) {
+        qCritical() << "SensorSimulator instance is nullptr!";
+    } else {
+        qDebug() << "SensorSimulator instance is valid.";
+    }
+
+    if (!_smaAverager) {
+        qCritical() << "SMAAverager instance is nullptr!";
+    } else {
+        qDebug() << "SMAAverager instance is valid.";
+    }
+
+    if (!_emaAverager) {
+        qCritical() << "EMAAverager instance is nullptr!";
+    } else {
+        qDebug() << "EMAAverger instance is valid.";
     }
 }
 

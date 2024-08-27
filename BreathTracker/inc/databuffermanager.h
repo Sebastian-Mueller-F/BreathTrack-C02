@@ -14,9 +14,14 @@ class DataBufferManager : public QObject
 {
     Q_OBJECT
 public:
-    explicit DataBufferManager(QObject *parent = nullptr);
+    explicit DataBufferManager(std::shared_ptr<I_Sensor> sensor,
+                               std::shared_ptr<I_Averager> smaAverager,
+                               std::shared_ptr<I_Averager> emaAverager,
+                               QObject *parent = nullptr);
 
-    static std::shared_ptr<DataBufferManager> instance();
+    static std::shared_ptr<DataBufferManager> instance(std::shared_ptr<I_Sensor> sensor,
+                                                       std::shared_ptr<I_Averager> smaAverager,
+                                                       std::shared_ptr<I_Averager> emaAverager);
 
     CircularBuffer *getBuffer(SensorDataType type);
 
@@ -33,8 +38,13 @@ signals:
 
 private:
     void initializeBuffers();
+    void validateDependecies();
 
     static std::shared_ptr<DataBufferManager> _instance;
+
+    std::shared_ptr<I_Sensor> _sensor;
+    std::shared_ptr<I_Averager> _smaAverager;
+    std::shared_ptr<I_Averager> _emaAverager;
 
     size_t _rawCapacity = 1000;     // Example: 10 minutes at 1-second intervals
     size_t _averageCapacity = 1000; // Example: 5 minutes at 5-second intervals
