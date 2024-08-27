@@ -11,6 +11,7 @@ CircularBuffer::CircularBuffer(size_t capacity, int newDataIntervalMS,
 
 CircularBuffer::~CircularBuffer()
 {
+    qDebug() << "Circular Buffer destroyed at adress: " << this;
     /* Es sind keine zusätzlichen Aufräumaktionen erforderlich,
     // da alle verwendeten Ressourcen (std::vector, std::mutex)
      ihre Speicherverwaltung selbst handhaben. */
