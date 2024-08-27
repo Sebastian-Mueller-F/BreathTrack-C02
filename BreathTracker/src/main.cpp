@@ -14,6 +14,7 @@
 #include <circularbuffer.h>
 #include <databuffermanager.h>
 #include <emaaverager.h>
+#include <frontendapi.h>
 #include <livedataapi.h>
 #include <sensorfactory.h>
 #include <smaaverager.h>
@@ -40,8 +41,8 @@ int main(int argc, char *argv[]) {
   }
   CO2sensor->startMeasurement();
 
-  QSharedPointer<I_Subscriber> sma = SMAAverager::instance();
-  QSharedPointer<I_Subscriber> ema = EMAAverager::instance();
+  std::shared_ptr<I_Subscriber> sma = SMAAverager::instance();
+  std::shared_ptr<I_Subscriber> ema = EMAAverager::instance();
 
   // create buffer for averagers
   CircularBuffer averagerBuffer(60); // TODO: variable instead of hardcoded 6
@@ -67,13 +68,17 @@ int main(int argc, char *argv[]) {
 
   qmlRegisterType<FrontendTypes>("BreathTracker.FrontendTypes", 1, 0,
                                  "FrontendTypes");
-  qmlRegisterSingletonType<LiveDataAPI>("BreathTracker.LiveData", 1, 0,
-                                        "BELiveData", LiveDataAPI::qmlInstance);
-  qmlRegisterSingletonType<TrendDataAPI>("BreathTracker.TrendData", 1, 0,
-                                         "BETrendData",
-                                         TrendDataAPI::qmlInstance);
-  LiveDataAPI::instance();
-  TrendDataAPI::instance();
+  // qmlRegisterSingletonType<LiveDataAPI>("BreathTracker.LiveData", 1, 0,
+  //                                       "BELiveData", LiveDataAPI::qmlInstance);
+  // qmlRegisterSingletonType<TrendDataAPI>("BreathTracker.TrendData", 1, 0,
+  //                                        "BETrendData",
+  //                                        TrendDataAPI::qmlInstance);
+  // LiveDataAPI::instance();
+  // TrendDataAPI::instance();
+
+  FrontendModuleManager frontendManager;
+  qmlRegisterType<LiveDataAPI>("com.mycompany.frontend", 1, 0, "LiveDataAPI");
+  qmlRegisterType<TrendDataAPI>("com.mycompany.frontend", 1, 0, "TrendDataAPI");
 
   const QUrl url(QStringLiteral("qrc:/BreathTracker/qml/main.qml"));
   QObject::connect(
