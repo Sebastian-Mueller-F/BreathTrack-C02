@@ -46,7 +46,7 @@ void CircularBuffer::writeNewItem(const double &newItem) {
 
     // Emit the dataAdded signal
     emit dataAdded(_newDataIntervalMS);
-    // qDebug() << "dataAdded signal emitted from buffer" << this;
+    qDebug() << "dataAdded signal emitted from buffer" << this;
 
   } catch (const std::runtime_error &e) {
     // Handle runtime errors, such as uninitialized buffer or zero capacity
