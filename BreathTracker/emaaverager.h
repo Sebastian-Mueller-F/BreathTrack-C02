@@ -8,36 +8,36 @@
 #include "I_Subscriber.h"
 #include <types.h>
 
-
 class EMAAverager : public I_Averager, public I_Subscriber {
-    Q_OBJECT
+  Q_OBJECT
 
 public:
-    EMAAverager(size_t period, QObject *parent = nullptr);
+  EMAAverager(size_t period, QObject *parent = nullptr);
 
-    ~EMAAverager() override {
-        // Destructor code, if any specific cleanup is needed
-    }
+  ~EMAAverager() override {
+    // Destructor code, if any specific cleanup is needed
+  }
 
-    //singleton
-    static QSharedPointer<EMAAverager> instance();
+  // singleton
+  static QSharedPointer<EMAAverager> instance();
 
-    double calculate() override;
-    size_t getPeriod() const override;
-    void setPeriod(size_t period) override;
+  double calculate() override;
+  size_t getPeriod() const override;
+  void setPeriod(size_t period) override;
 
-    // Implement the Subscriber interface
-    void onNewData(const std::vector<double>& data, SensorDataType type = SensorDataType::RAW) override ;
-    void onPeriodChanged() override;
+  // Implement the Subscriber interface
+  void onNewData(const std::vector<double> &data,
+                 SensorDataType type = SensorDataType::RAW) override;
+  void onPeriodChanged() override;
 
 private:
-    //singleton
-    static QSharedPointer<EMAAverager> _instance;
+  // singleton
+  static QSharedPointer<EMAAverager> _instance;
 
-    size_t _period;
-    double _previousEMA;
-    bool _isFirstCalculation;
-    double _alpha;
+  size_t _period;
+  double _previousEMA;
+  bool _isFirstCalculation;
+  double _alpha;
 };
 
 #endif // EMAAVERAGER_H

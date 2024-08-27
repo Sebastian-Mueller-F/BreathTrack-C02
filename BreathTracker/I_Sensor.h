@@ -4,20 +4,19 @@
 #include <QObject>
 #include <types.h>
 
-class I_Sensor : public QObject
-{
-    Q_OBJECT
+class I_Sensor : public QObject {
+  Q_OBJECT
 public:
-    explicit I_Sensor(QObject *parent = nullptr) : QObject(parent) {}
+  explicit I_Sensor(QObject *parent = nullptr) : QObject(parent) {}
 
-    virtual ~I_Sensor() = default;
+  virtual ~I_Sensor() = default;
 
-    virtual void startMeasurement() = 0;
-    virtual void stopMeasurement() = 0;
-    virtual SensorDataType sensorDataType() const = 0;
+  virtual void startMeasurement() = 0;
+  virtual void stopMeasurement() = 0;
+  virtual SensorDataType sensorDataType() const = 0;
 
 signals:
-    void newCo2Value(double value, SensorDataType type);
+  void newCo2Value(double value, SensorDataType type);
 };
 
 #endif // ISENSOR_H

@@ -2,19 +2,19 @@
 #define SUBSCRIBER_H
 
 #include <QObject>
-#include <vector>
 #include <types.h>
+#include <vector>
 
-class I_Subscriber  {
-
+class I_Subscriber {
 
 public:
-    //No constructor due to double inheritance, and no initialization needed here
+  // No constructor due to double inheritance, and no initialization needed here
 
-    // virtual ~Subscriber() {}
+  // virtual ~Subscriber() {}
 
-    // Pure virtual function to be implemented by all subscribers
-    virtual void onNewData(const std::vector<double>& data, SensorDataType type = SensorDataType::RAW) = 0;
+  // Pure virtual function to be implemented by all subscribers
+  virtual void onNewData(const std::vector<double> &data,
+                         SensorDataType type = SensorDataType::RAW) = 0;
 };
 
 #endif // SUBSCRIBER_H
