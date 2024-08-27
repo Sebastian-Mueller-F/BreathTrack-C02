@@ -31,39 +31,39 @@ BufferSubscription::~BufferSubscription()
     */
 }
 
-void BufferSubscription::registerSubscriber(
-    QSharedPointer<I_Subscriber> subscriber, int lookBackPeriodMS,
-    SensorDataType type) {
-  qDebug() << "Registering new subscriber for buffer " << &_buffer;
-  _subscribers.push_back(subscriber);
-  _lookBackPeriods.push_back(lookBackPeriodMS);
-  _sensorDataTypes.push_back(type); // Store the data type
-  qDebug() << "Subscriber registered. Total subscribers:"
-           << _subscribers.size();
+void BufferSubscription::registerSubscriber(std::shared_ptr<I_Subscriber> subscriber,
+                                            int lookBackPeriodMS,
+                                            SensorDataType type)
+{
+    qDebug() << "Registering new subscriber for buffer " << &_buffer;
+    _subscribers.push_back(subscriber);
+    _lookBackPeriods.push_back(lookBackPeriodMS);
+    _sensorDataTypes.push_back(type); // Store the data type
+    qDebug() << "Subscriber registered. Total subscribers:" << _subscribers.size();
 }
 
-void BufferSubscription::unregisterSubscriber(
-    QSharedPointer<I_Subscriber> subscriber) {
-  qDebug() << "Attempting to unregister subscriber";
-  bool success = false;
+void BufferSubscription::unregisterSubscriber(std::shared_ptr<I_Subscriber> subscriber)
+{
+    qDebug() << "Attempting to unregister subscriber";
+    bool success = false;
 
-  for (int i = 0; i < _subscribers.size(); ++i) {
-    if (_subscribers[i] == subscriber) {
-      qDebug() << "Subscriber found. Removing subscriber at index:" << i;
-      _subscribers.erase(_subscribers.begin() + i);
-      _lookBackPeriods.erase(_lookBackPeriods.begin() + i);
-      _sensorDataTypes.erase(_sensorDataTypes.begin() + i);
-      success = true;
-      break; // Exit the loop after removing the subscriber
+    for (int i = 0; i < _subscribers.size(); ++i) {
+        if (_subscribers[i] == subscriber) {
+            qDebug() << "Subscriber found. Removing subscriber at index:" << i;
+            _subscribers.erase(_subscribers.begin() + i);
+            _lookBackPeriods.erase(_lookBackPeriods.begin() + i);
+            _sensorDataTypes.erase(_sensorDataTypes.begin() + i);
+            success = true;
+            break; // Exit the loop after removing the subscriber
+        }
     }
-  }
-  if (success) {
-    qDebug() << "Subscriber successfully unregistered. Total subscribers:"
-             << _subscribers.size();
-  } else {
-    qDebug() << "Subscriber not found. Throwing SubscriberNotFoundException.";
-    throw SubscriberNotFoundException();
-  }
+    if (success) {
+        qDebug() << "Subscriber successfully unregistered. Total subscribers:"
+                 << _subscribers.size();
+    } else {
+        qDebug() << "Subscriber not found. Throwing SubscriberNotFoundException.";
+        throw SubscriberNotFoundException();
+    }
 }
 
 void BufferSubscription::onDataAddedToBuffer(int dataIntervalsMS) {
