@@ -27,6 +27,7 @@ std::shared_ptr<DataBufferManager> DataBufferManager::instance()
 {
     if (!_instance) {
         _instance = std::shared_ptr<DataBufferManager>(new DataBufferManager);
+        qDebug() << "DataBufferManager instance created.";
     }
     return _instance;
 }

@@ -19,6 +19,7 @@ public:
     static std::shared_ptr<DataBufferManager> instance();
 
     CircularBuffer *getBuffer(SensorDataType type);
+
     void subscribe(std::shared_ptr<I_Subscriber> subscriber,
                    SensorDataType type,
                    int lookBackPeriodMS);
