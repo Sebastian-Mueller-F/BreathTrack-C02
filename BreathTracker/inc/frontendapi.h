@@ -38,8 +38,6 @@ public:
     TrendDataAPI *trendDataAPI() const;
 
 private:
-    QScopedPointer<LiveDataAPI> _liveDataAPI;
-    QScopedPointer<TrendDataAPI> _trendDataAPI;
 
     BackendDependencies _backendDependencies;
 };

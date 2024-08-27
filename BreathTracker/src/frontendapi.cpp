@@ -8,24 +8,21 @@ FrontendModuleManager::FrontendModuleManager(const BackendDependencies &backendD
 {
     qDebug() << "frontend api created";
 
-    // Initialize _liveDataAPI and _trendDataAPI in the constructor body
-    _liveDataAPI.reset(new LiveDataAPI(backendDependencies.sensor.get(),
-                                       backendDependencies.sma.get(),
-                                       backendDependencies.ema.get(),
-                                       this));
+    // Initialize the singletons
+    LiveDataAPI::instance(backendDependencies.sensor.get(),
+                          backendDependencies.sma.get(),
+                          backendDependencies.ema.get(),
+                          this)
+        ->initialize();
 
-    _trendDataAPI.reset(new TrendDataAPI(backendDependencies.dataBuffer.get(), this));
-
-    // Initialize TrendDataAPI
-    _liveDataAPI->initialize();
-    _trendDataAPI->initialize();
+    TrendDataAPI::instance(backendDependencies.dataBuffer.get(), this)->initialize();
 }
 LiveDataAPI *FrontendModuleManager::liveDataAPI() const
 {
-    return _liveDataAPI.data();
+    return LiveDataAPI::instance();
 }
 
 TrendDataAPI *FrontendModuleManager::trendDataAPI() const
 {
-    return _trendDataAPI.data();
+    return TrendDataAPI::instance();
 }
