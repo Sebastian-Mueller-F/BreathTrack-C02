@@ -8,50 +8,40 @@
 #include <emaaverager.h>
 #include <sensorsimulator.h>
 #include <smaaverager.h>
-#include <trenddataapi.h>
 #include <types.h>
 
-class DataBufferManager : public QObject {
-  Q_OBJECT
+class DataBufferManager : public QObject
+{
+    Q_OBJECT
 public:
-  DataBufferManager(QObject *parent = nullptr);
+    explicit DataBufferManager(QObject *parent = nullptr);
 
-  // TODO: Include Buffer Subscription Class
-  /* TODO: add data into buffers from..
-   *      .. sensor
-   *      .. sma
-   *      .. ema
-   */
+    static std::shared_ptr<DataBufferManager> instance();
 
-  /* TODO: add subscribers to each buffer ..
-   *      .. raw: Trend Calculator, FrontendAPI
-   *      .. sma: Trend Calculator, FrontendAPI
-   *      .. ema: Trend Calculator, FrontendAPI
-   */
-
-  // Singleton
-  static std::shared_ptr<DataBufferManager> instance();
-
-  CircularBuffer *getBuffer(SensorDataType type);
+    CircularBuffer *getBuffer(SensorDataType type);
+    void subscribe(std::shared_ptr<I_Subscriber> subscriber,
+                   SensorDataType type,
+                   int lookBackPeriodMS);
+    void subscribeToAll(std::shared_ptr<I_Subscriber> subscriber, int lookBackPeriodMS);
 
 private slots:
-  void onNewData(double newData, SensorDataType sensorDataType);
+    void onNewData(double newData, SensorDataType sensorDataType);
+
+signals:
+    void bufferInitialized(SensorDataType type, CircularBuffer *buffer);
 
 private:
-  std::map<SensorDataType, CircularBuffer *> _buffers;
-  void initializeBuffers();
+    void initializeBuffers();
 
-  size_t _rawCapacity = 1000;     // Example: 10 minutes at 1-second intervals
-  size_t _averageCapacity = 1000; // Example: 5 minutes at 5-second intervals
+    static std::shared_ptr<DataBufferManager> _instance;
 
-  static std::shared_ptr<DataBufferManager> _instance;
+    size_t _rawCapacity = 1000;     // Example: 10 minutes at 1-second intervals
+    size_t _averageCapacity = 1000; // Example: 5 minutes at 5-second intervals
+    std::unordered_map<SensorDataType, CircularBuffer *> _buffers;
+    std::unordered_map<SensorDataType, std::shared_ptr<BufferSubscription>> _subscriptions;
 
-  std::shared_ptr<BufferSubscription> _rawTrendBufferSubscription;
-  std::shared_ptr<BufferSubscription> _smaTrendBufferSubscription;
-  std::shared_ptr<BufferSubscription> _emaTrendBufferSubscription;
-
-  // development functions
-  void printBufferValues();
+    // development functions
+    void printBufferValues();
 };
 
 #endif // DATABUFFERMANAGER_H
