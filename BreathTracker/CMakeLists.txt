@@ -13,16 +13,11 @@ include_directories(${CMAKE_SOURCE_DIR}/inc)
 find_package(Qt6 6.2 COMPONENTS Quick REQUIRED)
 
 # Source and header files
-file(GLOB_RECURSE SOURCES "src/*.cpp")
-file(GLOB_RECURSE HEADERS "inc/*.h")
-
-# QML files
-file(GLOB QML_FILES "qml/*.qml")
+file(GLOB_RECURSE SOURCES "src/*.cpp" "inc/*.h")
 
 # Add executable with Qt
 qt_add_executable(appBreathTracker
     ${SOURCES}
-    ${HEADERS}
 )
 
 # Qt Add QML Module
@@ -33,80 +28,24 @@ qt_add_qml_module(appBreathTracker
     QML_FILES
     qml/main.qml
     qml/DataTrends.qml
-    qml/ArcItem.qml
-    qml/ArcLeft.qml
-    qml/ArcRight.qml
-    qml/CircleIndicator.qml
-    qml/CustomLabel.qml
-    qml/LiveDataBackground.qml
     qml/LiveData.qml
-    qml/ModeToggle.qml
+    qml/LiveDataBackground.qml
     qml/SettingsDrawer.qml
     qml/SettingsSection.qml
-
-    # Source Files
-    SOURCES
-    src/sensorsimulator.cpp
-    src/circularbuffer.cpp
-    src/buffersubscription.cpp
-    src/databuffermanager.cpp
-    src/smaaverager.cpp
-    src/emaaverager.cpp
-    src/livedataapi.cpp
-    src/trenddataapi.cpp
-
-    # Header Files
-    SOURCES
-    inc/sensorsimulator.h
-    inc/circularbuffer.h
-    inc/buffersubscription.h
-    inc/databuffermanager.h
-    inc/I_Averager.h
-    inc/smaaverager.h
-    inc/I_Subscriber.h
-    inc/emaaverager.h
-    inc/types.h
-    inc/I_FrontendAPI.h
-    inc/livedataapi.h
-    inc/trenddataapi.h
-    inc/FrontendTypes.h
-    inc/I_Sensor.h
-    inc/sensorfactory.h
-
-    # Resources (if any)
+    qml/ArcRight.qml
+    qml/ArcLeft.qml
+    qml/ArcItem.qml
+    qml/CircleIndicator.qml
+    qml/CustomLabel.qml
     RESOURCES
-    resources/fonts/fonts.txt
-    resources/images/arrow_left.png
-    resources/images/arrow_right.png
-    resources/images/assist.png
-    resources/images/battery.png
-    resources/images/bike-rearwheel.png
-    resources/images/blue_circle_gps_area.png
-    resources/images/calories.png
-    resources/images/curtain_shadow_handle.png
-    resources/images/info.png
-    resources/images/info_selected.png
-    resources/images/lights_off.png
-    resources/images/lights_on.png
-    resources/images/list.png
-    resources/images/list_selected.png
-    resources/images/map_locate.png
-    resources/images/map_location_arrow.png
-    resources/images/map_zoomin.png
-    resources/images/map_zoomout.png
-    resources/images/nav_nodir.png
-    resources/images/search_cancel.png
-    resources/images/settings.png
-    resources/images/settings_selected.png
-    resources/images/small_speedometer_shadow.png
-    resources/images/speed.png
-    resources/images/top_curtain_drag.png
-    resources/images/top_curtain_drag_back.png
-    resources/images/trip.png
-    resources/images/sma.png
-    resources/images/ema.png
-    resources/images/raw.png
+    qml/images/ema.png
+    qml/images/sma.png
+    qml/images/raw.png
+    qml/images/assist.png
+    qml/images/speed.png
+    qml/images/calories.png
 )
+
 
 
 # source_group("Source Files// Sensor" FILES sensorsimulator.h sensorsimulator.cpp I_Sensor.h sensorfactory.h)
