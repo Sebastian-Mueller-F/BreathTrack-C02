@@ -7,6 +7,7 @@ TrendDataAPI::TrendDataAPI(DataBufferManager *dataBufferManager, QObject *parent
 
 TrendDataAPI::~TrendDataAPI()
 {
+    qDebug() << "TrendDataAPI destroyed";
     //unregister from all buffers
 }
 
