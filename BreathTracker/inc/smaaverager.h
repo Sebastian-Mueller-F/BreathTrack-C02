@@ -22,7 +22,7 @@ public:
     // Destructor code, if any specific cleanup is needed
   }
 
-  static QSharedPointer<SMAAverager> instance();
+  static std::shared_ptr<SMAAverager> instance();
 
   double calculate() override;
   size_t getPeriod() const override;
@@ -34,10 +34,10 @@ public:
   void onPeriodChanged() override;
 
 private:
-  static QSharedPointer<SMAAverager> _instance;
+    static std::shared_ptr<SMAAverager> _instance;
 
-  size_t _period;
-  std::vector<double> _recentData;
+    size_t _period;
+    std::vector<double> _recentData;
 };
 
 #endif // SMAAVERGER_H

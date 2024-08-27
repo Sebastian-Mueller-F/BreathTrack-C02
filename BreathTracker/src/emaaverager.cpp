@@ -2,7 +2,7 @@
 #include <QDebug>
 #include <stdexcept>
 
-QSharedPointer<EMAAverager> EMAAverager::_instance = nullptr;
+std::shared_ptr<EMAAverager> EMAAverager::_instance = nullptr;
 
 EMAAverager::EMAAverager(size_t period, QObject *parent)
     : I_Averager(parent), _period(period), _previousEMA(0.0),
@@ -13,11 +13,12 @@ EMAAverager::EMAAverager(size_t period, QObject *parent)
   _alpha = 2.0 / (static_cast<double>(_period) + 1.0);
 }
 
-QSharedPointer<EMAAverager> EMAAverager::instance() {
-  if (_instance.isNull()) {
-    _instance = QSharedPointer<EMAAverager>::create(2);
-  }
-  return _instance;
+std::shared_ptr<EMAAverager> EMAAverager::instance()
+{
+    if (_instance == nullptr) {
+        _instance = std::make_shared<EMAAverager>(2);
+    }
+    return _instance;
 }
 
 void EMAAverager::onNewData(const std::vector<double> &data,

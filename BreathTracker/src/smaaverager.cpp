@@ -3,7 +3,7 @@
 #include <numeric> // for std::accumulate
 #include <stdexcept>
 
-QSharedPointer<SMAAverager> SMAAverager::_instance = nullptr;
+std::shared_ptr<SMAAverager> SMAAverager::_instance = nullptr;
 
 SMAAverager::SMAAverager(size_t period, QObject *parent)
     : I_Averager(parent), _period(period) {
@@ -11,11 +11,12 @@ SMAAverager::SMAAverager(size_t period, QObject *parent)
   _averageType = SensorDataType::SMA;
 }
 
-QSharedPointer<SMAAverager> SMAAverager::instance() {
-  if (_instance.isNull()) {
-    _instance = QSharedPointer<SMAAverager>::create(2);
-  }
-  return _instance;
+std::shared_ptr<SMAAverager> SMAAverager::instance()
+{
+    if (_instance) {
+        _instance = std::make_shared<SMAAverager>(10);
+    }
+    return _instance;
 }
 
 void SMAAverager::onNewData(const std::vector<double> &data,
