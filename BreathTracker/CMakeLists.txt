@@ -8,50 +8,116 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 
+include_directories(${CMAKE_SOURCE_DIR}/inc)
+
 find_package(Qt6 6.2 COMPONENTS Quick REQUIRED)
 
+# Source and header files
+file(GLOB_RECURSE SOURCES "src/*.cpp")
+file(GLOB_RECURSE HEADERS "inc/*.h")
+
+# QML files
+file(GLOB QML_FILES "qml/*.qml")
+
+# Add executable with Qt
 qt_add_executable(appBreathTracker
-    main.cpp
+    ${SOURCES}
+    ${HEADERS}
 )
 
+# Qt Add QML Module
 qt_add_qml_module(appBreathTracker
     URI BreathTracker
     VERSION 1.0
-    QML_FILES main.qml
-    SOURCES sensorsimulator.h sensorsimulator.cpp
-    SOURCES circularbuffer.h circularbuffer.cpp
-    SOURCES buffersubscription.h buffersubscription.cpp
-    SOURCES databuffermanager.h databuffermanager.cpp
-    SOURCES I_Averager.h
-    SOURCES smaaverager.h smaaverager.cpp
-    SOURCES I_Subscriber.h
-    SOURCES emaaverager.h emaaverager.cpp
-    SOURCES types.h
+    # QML Files
     QML_FILES
-    QML_FILES
-    QML_FILES DataTrends.qml
-    SOURCES I_FrontendAPI.h
-    SOURCES livedataapi.h livedataapi.cpp
-    SOURCES trenddataapi.h trenddataapi.cpp
-    QML_FILES ArcItem.qml ArcLeft.qml ArcRight.qml CircleIndicator.qml CustomLabel.qml LiveDataBackground.qml LiveData.qml ModeToggle.qml
-    SOURCES FrontendTypes.h
-    RESOURCES fonts/fonts.txt images/arrow_left.png images/arrow_right.png images/assist.png images/battery.png images/bike-rearwheel.png images/blue_circle_gps_area.png images/calories.png images/curtain_shadow_handle.png images/info.png images/info_selected.png images/lights_off.png images/lights_on.png images/list.png images/list_selected.png images/map_locate.png images/map_location_arrow.png images/map_zoomin.png images/map_zoomout.png images/nav_nodir.png images/search_cancel.png images/settings.png images/settings_selected.png images/small_speedometer_shadow.png images/speed.png images/top_curtain_drag.png images/top_curtain_drag_back.png images/trip.png images/sma.png images/ema.png images/raw.png
-    SOURCES I_Sensor.h
-    SOURCES sensorfactory.h
-    QML_FILES SettingsDrawer.qml
-    QML_FILES SettingsSection.qml
+    qml/main.qml
+    qml/DataTrends.qml
+    qml/ArcItem.qml
+    qml/ArcLeft.qml
+    qml/ArcRight.qml
+    qml/CircleIndicator.qml
+    qml/CustomLabel.qml
+    qml/LiveDataBackground.qml
+    qml/LiveData.qml
+    qml/ModeToggle.qml
+    qml/SettingsDrawer.qml
+    qml/SettingsSection.qml
+
+    # Source Files
+    SOURCES
+    src/sensorsimulator.cpp
+    src/circularbuffer.cpp
+    src/buffersubscription.cpp
+    src/databuffermanager.cpp
+    src/smaaverager.cpp
+    src/emaaverager.cpp
+    src/livedataapi.cpp
+    src/trenddataapi.cpp
+
+    # Header Files
+    SOURCES
+    inc/sensorsimulator.h
+    inc/circularbuffer.h
+    inc/buffersubscription.h
+    inc/databuffermanager.h
+    inc/I_Averager.h
+    inc/smaaverager.h
+    inc/I_Subscriber.h
+    inc/emaaverager.h
+    inc/types.h
+    inc/I_FrontendAPI.h
+    inc/livedataapi.h
+    inc/trenddataapi.h
+    inc/FrontendTypes.h
+    inc/I_Sensor.h
+    inc/sensorfactory.h
+
+    # Resources (if any)
+    RESOURCES
+    resources/fonts/fonts.txt
+    resources/images/arrow_left.png
+    resources/images/arrow_right.png
+    resources/images/assist.png
+    resources/images/battery.png
+    resources/images/bike-rearwheel.png
+    resources/images/blue_circle_gps_area.png
+    resources/images/calories.png
+    resources/images/curtain_shadow_handle.png
+    resources/images/info.png
+    resources/images/info_selected.png
+    resources/images/lights_off.png
+    resources/images/lights_on.png
+    resources/images/list.png
+    resources/images/list_selected.png
+    resources/images/map_locate.png
+    resources/images/map_location_arrow.png
+    resources/images/map_zoomin.png
+    resources/images/map_zoomout.png
+    resources/images/nav_nodir.png
+    resources/images/search_cancel.png
+    resources/images/settings.png
+    resources/images/settings_selected.png
+    resources/images/small_speedometer_shadow.png
+    resources/images/speed.png
+    resources/images/top_curtain_drag.png
+    resources/images/top_curtain_drag_back.png
+    resources/images/trip.png
+    resources/images/sma.png
+    resources/images/ema.png
+    resources/images/raw.png
 )
 
 
-source_group("Source Files// Sensor" FILES sensorsimulator.h sensorsimulator.cpp I_Sensor.h sensorfactory.h)
-source_group("Source Files// Data Structures" FILES circularbuffer.h circularbuffer.cpp buffersubscription.h buffersubscription.cpp I_Subscriber.h)
-source_group("Source Files// Data" FILES databuffermanager.h databuffermanager.cpp)
-source_group("Source Files// Averager" FILES I_Averager.h smaaverager.h smaaverager.cpp emaaverager.h emaaverager.cpp)
-source_group("Source Files// Backend Frontend Interface" FILES I_FrontendAPI.h livedataapi.h livedataapi.cpp trenddataapi.h trenddataapi.cpp )
-source_group("Source Files// Utils" FILES types.h FrontendTypes.h)
-source_group("QML " FILES main.qml LiveData.qml LiveDataBackground.qml LiveDataMeter.qml )
-source_group("QML// Components // Arcs" FILES ArcItem.qml ArcLeft.qml ArcRight.qml CircleIndicator.qml)
-source_group("QML// Components " FILES CustomLabel.qml ModeToggle.qml)
+# source_group("Source Files// Sensor" FILES sensorsimulator.h sensorsimulator.cpp I_Sensor.h sensorfactory.h)
+# source_group("Source Files// Data Structures" FILES circularbuffer.h circularbuffer.cpp buffersubscription.h buffersubscription.cpp I_Subscriber.h)
+# source_group("Source Files// Data" FILES databuffermanager.h databuffermanager.cpp)
+# source_group("Source Files// Averager" FILES I_Averager.h smaaverager.h smaaverager.cpp emaaverager.h emaaverager.cpp)
+# source_group("Source Files// Backend Frontend Interface" FILES I_FrontendAPI.h livedataapi.h livedataapi.cpp trenddataapi.h trenddataapi.cpp )
+# source_group("Source Files// Utils" FILES types.h FrontendTypes.h)
+# source_group("QML " FILES main.qml LiveData.qml LiveDataBackground.qml LiveDataMeter.qml )
+# source_group("QML// Components // Arcs" FILES ArcItem.qml ArcLeft.qml ArcRight.qml CircleIndicator.qml)
+# source_group("QML// Components " FILES CustomLabel.qml ModeToggle.qml)
 
 
 
