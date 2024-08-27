@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QQmlEngine>
+#include <QScopedPointer>
 
 #include <FrontendTypes.h>
 #include <I_FrontendAPI.h>
@@ -17,40 +18,35 @@ class LiveDataAPI : public QObject, public I_FrontendAPI {
 public:
   LiveDataAPI(QObject *parent = nullptr);
 
-  ~LiveDataAPI() override {
-    // Destructor
-  }
+  ~LiveDataAPI() override;
 
   static QObject *qmlInstance(QQmlEngine *engine, QJSEngine *scriptEngine);
   // TODO: Change to std::unique / std::shared ?
   static LiveDataAPI *instance();
 
 private:
-  static LiveDataAPI *_instance;
+    static QScopedPointer<LiveDataAPI> _instance;
 
-  int _smaPeriod;
-  int _emaPeriod;
-  int _sensorValue;
-  int _averagedValue;
-  FrontendTypes::AverageType _averageType;
+    int _smaPeriod;
+    int _emaPeriod;
+    int _sensorValue;
+    int _averagedValue;
+    FrontendTypes::AverageType _averageType;
 
-  Q_PROPERTY(int smaPeriod READ smaPeriod WRITE setSmaPeriod NOTIFY
-                 smaPeriodChanged FINAL)
-  Q_PROPERTY(int emaPeriod READ emaPeriod WRITE setEmaPeriod NOTIFY
-                 emaPeriodChanged FINAL)
-  Q_PROPERTY(int sensorValue READ sensorValue WRITE setSensorValue NOTIFY
-                 sensorValueChanged)
-  Q_PROPERTY(int averagedValue READ averagedValue WRITE setAveragedValue NOTIFY
-                 averagedValueChanged)
-  Q_PROPERTY(FrontendTypes::AverageType averageType READ averageType WRITE
-                 setAverageType NOTIFY averageTypeChanged)
+    Q_PROPERTY(int smaPeriod READ smaPeriod WRITE setSmaPeriod NOTIFY smaPeriodChanged FINAL)
+    Q_PROPERTY(int emaPeriod READ emaPeriod WRITE setEmaPeriod NOTIFY emaPeriodChanged FINAL)
+    Q_PROPERTY(int sensorValue READ sensorValue WRITE setSensorValue NOTIFY sensorValueChanged)
+    Q_PROPERTY(
+        int averagedValue READ averagedValue WRITE setAveragedValue NOTIFY averagedValueChanged)
+    Q_PROPERTY(FrontendTypes::AverageType averageType READ averageType WRITE setAverageType NOTIFY
+                   averageTypeChanged)
 
-  void getBackendData() override;
-  void handleFrontendRequest() override;
-  void saveSettings(QString key, QVariant val) override;
-  void loadSettings() override;
+    void getBackendData() override;
+    void handleFrontendRequest() override;
+    void saveSettings(QString key, QVariant val) override;
+    void loadSettings() override;
 
-  void updatePeriodInAveragers();
+    void updatePeriodInAveragers();
 
 public:
   int sensorValue() const;

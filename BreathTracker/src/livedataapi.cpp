@@ -1,11 +1,21 @@
 #include "livedataapi.h"
 
-LiveDataAPI *LiveDataAPI::_instance = nullptr;
+QScopedPointer<LiveDataAPI> LiveDataAPI::_instance;
 
 LiveDataAPI::LiveDataAPI(QObject *parent)
     : QObject(parent), _sensorValue(0), _averagedValue(0),
       _averageType(FrontendTypes::AverageType::SMA) {
   this->getBackendData();
+}
+
+LiveDataAPI::~LiveDataAPI()
+{
+    /* Alle Signalverbindungen trennen, um sicherzustellen, dass keine
+    Verbindungen auf eine gelöschte Instanz zeigen.
+    */
+    disconnect(SensorSimulator::instance().get(), nullptr, this, nullptr);
+    disconnect(SMAAverager::instance().data(), nullptr, this, nullptr);
+    disconnect(EMAAverager::instance().data(), nullptr, this, nullptr);
 }
 
 // QML INSTANCE
@@ -17,10 +27,10 @@ QObject *LiveDataAPI::qmlInstance(QQmlEngine *engine, QJSEngine *scriptEngine) {
 }
 
 LiveDataAPI *LiveDataAPI::instance() {
-  if (!_instance) {
-    _instance = new LiveDataAPI;
-  }
-  return _instance;
+    if (!_instance) {
+        _instance.reset(new LiveDataAPI);
+    }
+    return _instance.data();
 }
 
 int LiveDataAPI::emaPeriod() const { return _emaPeriod; }
