@@ -4,13 +4,10 @@
 #include <QObject>
 
 class FrontendTypes : public QObject {
-    Q_OBJECT
+  Q_OBJECT
 public:
-    enum AverageType {
-        SMA,
-        EMA
-    };
-    Q_ENUM(AverageType)
+  enum AverageType { SMA, EMA };
+  Q_ENUM(AverageType)
 };
 
 #endif // FRONTENDTYPES_H

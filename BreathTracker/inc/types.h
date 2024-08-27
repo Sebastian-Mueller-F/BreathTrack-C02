@@ -3,5 +3,4 @@
 
 enum SensorDataType { RAW, SMA, EMA };
 
-
 #endif // TYPES_H

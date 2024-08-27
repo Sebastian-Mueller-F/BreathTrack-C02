@@ -47,7 +47,7 @@ Window {
     }
 
     Column {
-        spacing: 10
+        spacing: 20
         z: 0  // Set a lower z value for the Column and its children
 
         LiveData {
