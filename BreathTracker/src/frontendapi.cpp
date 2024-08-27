@@ -1,15 +1,16 @@
-#include "frontendmodulemanager.h"
+#include <frontendapi.h>
 
 FrontendModuleManager::FrontendModuleManager(QObject *parent)
     : QObject(parent)
     , _dataBufferManager(DataBufferManager::instance())
-    , _liveDataAPI(new LiveDataAPI(SMAAverager::instance().data(),
-                                   EMAAverager::instance().data(),
+    , _liveDataAPI(new LiveDataAPI(SMAAverager::instance().get(),
+                                   EMAAverager::instance().get(),
                                    SensorSimulator::instance().get(),
                                    this))
     , _trendDataAPI(new TrendDataAPI(_dataBufferManager.get(), this))
 {
-    // The TrendDataAPI will handle its own subscriptions using the DataBufferManager
+    // Initialize TrendDataAPI
+    _trendDataAPI->initialize();
 }
 
 LiveDataAPI *FrontendModuleManager::liveDataAPI() const
