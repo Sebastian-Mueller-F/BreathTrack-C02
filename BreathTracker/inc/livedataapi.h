@@ -25,9 +25,10 @@ class LiveDataAPI : public QObject, public I_FrontendAPIModule
                    averageTypeChanged)
 
 public:
-    explicit LiveDataAPI(SMAAverager *smaAverager,
-                         EMAAverager *emaAverager,
-                         SensorSimulator *sensorSimulator,
+    explicit LiveDataAPI(I_Sensor *sensorSimulator,
+                         I_Averager *smaAverager,
+                         I_Averager *emaAverager,
+
                          QObject *parent = nullptr);
 
     ~LiveDataAPI() override;
@@ -61,9 +62,9 @@ private:
 
     void updatePeriodInAveragers();
 
-    SMAAverager *_smaAverager;
-    EMAAverager *_emaAverager;
-    SensorSimulator *_sensorSimulator;
+    I_Sensor *_sensor;
+    I_Averager *_smaAverager;
+    I_Averager *_emaAverager;
 
 signals:
 

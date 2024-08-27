@@ -1,10 +1,13 @@
 #include "livedataapi.h"
 
-LiveDataAPI::LiveDataAPI(SMAAverager *smaAverager,
-                         EMAAverager *emaAverager,
-                         SensorSimulator *sensorSimulator,
+LiveDataAPI::LiveDataAPI(I_Sensor *sensor,
+                         I_Averager *smaAverager,
+                         I_Averager *emaAverager,
                          QObject *parent)
     : QObject(parent)
+    , _sensor(sensor)
+    , _smaAverager(smaAverager)
+    , _emaAverager(emaAverager)
     , _sensorValue(0)
     , _averagedValue(0)
     , _averageType(FrontendTypes::AverageType::SMA)
@@ -77,7 +80,7 @@ void LiveDataAPI::setAverageType(const FrontendTypes::AverageType &newAverageTyp
 void LiveDataAPI::getBackendData()
 {
     // get sensor data
-    connect(_sensorSimulator, &SensorSimulator::newCo2Value, this, [this](double newValue) {
+    connect(_sensor, &SensorSimulator::newCo2Value, this, [this](double newValue) {
         int val = static_cast<int>(newValue);
         // qDebug() << "Setting Sensor Value for FE = " << val;
         setSensorValue(val);
