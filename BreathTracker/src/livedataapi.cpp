@@ -12,6 +12,8 @@ LiveDataAPI::~LiveDataAPI()
 {
     /* Alle Signalverbindungen trennen, um sicherzustellen, dass keine
     Verbindungen auf eine gelöschte Instanz zeigen.
+    Der Rest wird vom ScopedPointer übernommen. Da die FrontendAPIs eng mit QT verbunden sind
+    wurde auch QScopedPointer statt std::unique_ptr verwendet
     */
     disconnect(SensorSimulator::instance().get(), nullptr, this, nullptr);
     disconnect(SMAAverager::instance().data(), nullptr, this, nullptr);
