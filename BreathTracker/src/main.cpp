@@ -68,7 +68,7 @@ int main(int argc, char *argv[]) {
 
   BackendDependencies backendDeps(sensor, smaA, emaA, dataBuffer);
 
-  FrontendModuleManager frontendApi(backendDeps);
+  FrontendApi frontendApi(backendDeps);
 
   QQmlApplicationEngine engine;
 

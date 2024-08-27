@@ -14,7 +14,6 @@ struct BackendDependencies
     std::shared_ptr<I_Averager> ema;
     std::shared_ptr<DataBufferManager> dataBuffer;
 
-    // Constructor (optional) to initialize the struct
     BackendDependencies(std::shared_ptr<I_Sensor> sensor,
                         std::shared_ptr<I_Averager> sma,
                         std::shared_ptr<I_Averager> ema,
@@ -26,13 +25,12 @@ struct BackendDependencies
     {}
 };
 
-class FrontendModuleManager : public QObject
+class FrontendApi : public QObject
 {
     Q_OBJECT
 
 public:
-    explicit FrontendModuleManager(const BackendDependencies &backendDependencies,
-                                   QObject *parent = nullptr);
+    explicit FrontendApi(const BackendDependencies &backendDependencies, QObject *parent = nullptr);
 
     LiveDataAPI *liveDataAPI() const;
     TrendDataAPI *trendDataAPI() const;

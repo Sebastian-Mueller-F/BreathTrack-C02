@@ -1,8 +1,7 @@
 #include <QDebug>
 #include <frontendapi.h>
 
-FrontendModuleManager::FrontendModuleManager(const BackendDependencies &backendDependencies,
-                                             QObject *parent)
+FrontendApi::FrontendApi(const BackendDependencies &backendDependencies, QObject *parent)
     : QObject(parent)
     , _backendDependencies(backendDependencies)
 {
@@ -17,12 +16,12 @@ FrontendModuleManager::FrontendModuleManager(const BackendDependencies &backendD
 
     TrendDataAPI::instance(backendDependencies.dataBuffer.get(), this)->initialize();
 }
-LiveDataAPI *FrontendModuleManager::liveDataAPI() const
+LiveDataAPI *FrontendApi::liveDataAPI() const
 {
     return LiveDataAPI::instance();
 }
 
-TrendDataAPI *FrontendModuleManager::trendDataAPI() const
+TrendDataAPI *FrontendApi::trendDataAPI() const
 {
     return TrendDataAPI::instance();
 }
