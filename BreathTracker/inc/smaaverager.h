@@ -12,8 +12,9 @@
 // TODO 2. do we need to limit the number of values that are being taking into
 // account for the averager ?
 
-class SMAAverager : public I_Averager, public I_Subscriber {
-  Q_OBJECT
+class SMAAverager : public I_Averager, public I_Subscriber
+{
+    Q_OBJECT
 
 public:
   SMAAverager(size_t period, QObject *parent = nullptr);

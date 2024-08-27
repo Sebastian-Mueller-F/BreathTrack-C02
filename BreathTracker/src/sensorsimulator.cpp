@@ -25,6 +25,7 @@ std::shared_ptr<SensorSimulator> SensorSimulator::instance()
 {
     if (!_instance) {
         _instance = std::shared_ptr<SensorSimulator>(new SensorSimulator());
+        qDebug() << "SensorSimulator Singleton instance created.";
     }
     return _instance;
 }

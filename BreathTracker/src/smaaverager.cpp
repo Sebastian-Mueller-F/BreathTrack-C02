@@ -13,8 +13,9 @@ SMAAverager::SMAAverager(size_t period, QObject *parent)
 
 std::shared_ptr<SMAAverager> SMAAverager::instance()
 {
-    if (_instance) {
-        _instance = std::make_shared<SMAAverager>(10);
+    if (_instance == nullptr) {
+        _instance = std::shared_ptr<SMAAverager>(new SMAAverager(10));
+        qDebug() << "SMAAverager Singleton instance created.";
     }
     return _instance;
 }
