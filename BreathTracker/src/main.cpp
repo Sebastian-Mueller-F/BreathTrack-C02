@@ -84,8 +84,6 @@ int main(int argc, char *argv[]) {
                                          0,
                                          "BETrendData",
                                          TrendDataAPI::qmlInstance);
-  // LiveDataAPI::instance();
-  // TrendDataAPI::instance();
 
   const QUrl url(QStringLiteral("qrc:/BreathTracker/qml/main.qml"));
   QObject::connect(
