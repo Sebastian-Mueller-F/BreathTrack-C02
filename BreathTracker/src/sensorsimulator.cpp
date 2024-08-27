@@ -2,7 +2,7 @@
 #include <QDebug>
 #include <QRandomGenerator>
 
-SensorSimulator *SensorSimulator::_instance = nullptr;
+std::shared_ptr<SensorSimulator> SensorSimulator::_instance = nullptr;
 
 SensorSimulator::SensorSimulator(double baseline, double amplitude,
                                  int interval, QObject *parent)
@@ -21,11 +21,12 @@ SensorSimulator::SensorSimulator(double baseline, double amplitude,
           });
 }
 
-SensorSimulator *SensorSimulator::instance() {
-  if (_instance == nullptr) {
-    _instance = new SensorSimulator;
-  }
-  return _instance;
+std::shared_ptr<SensorSimulator> SensorSimulator::instance()
+{
+    if (!_instance) {
+        _instance = std::shared_ptr<SensorSimulator>(new SensorSimulator());
+    }
+    return _instance;
 }
 
 void SensorSimulator::startMeasurement() {
@@ -44,6 +45,12 @@ void SensorSimulator::stopMeasurement() {
 
 SensorDataType SensorSimulator::sensorDataType() const {
   return _sensorDataType;
+}
+
+SensorSimulator::~SensorSimulator()
+{
+    // Da QScopedPointer automatisch aufgeräumt wird, ist hier keine zusätzliche Implementierung nötig
+    // Falls zusätzliche dynamische Ressourcen hinzugefügt werden, sollten sie hier freigegeben werden
 }
 
 void SensorSimulator::generateNewCo2Value() {

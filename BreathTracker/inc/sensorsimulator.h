@@ -11,23 +11,25 @@ public:
   explicit SensorSimulator(double baseline = 55.0, double amplitude = 20.0,
                            int interval = 1000, QObject *parent = nullptr);
 
-  static SensorSimulator *instance();
+  static std::shared_ptr<SensorSimulator> instance();
 
   void startMeasurement() override;
   void stopMeasurement() override;
   SensorDataType sensorDataType() const override;
 
-private slots:
+  ~SensorSimulator() override; // Destruktor hinzugefügt
+
+  private slots:
   void generateNewCo2Value();
 
 private:
-  static SensorSimulator *_instance;
+    static std::shared_ptr<SensorSimulator> _instance;
 
-  SensorDataType _sensorDataType = SensorDataType::RAW;
-  QScopedPointer<QTimer> _timer;
-  double _baseline;
-  double _amplitude;
-  int _interval;
+    SensorDataType _sensorDataType = SensorDataType::RAW;
+    QScopedPointer<QTimer> _timer;
+    double _baseline;
+    double _amplitude;
+    int _interval;
 };
 
 #endif // SENSORSIMULATOR_H
