@@ -9,7 +9,12 @@ CircularBuffer::CircularBuffer(size_t capacity, int newDataIntervalMS,
     : _buffer(capacity), _newDataIntervalMS(newDataIntervalMS), _start(0),
       _end(0), _capacity(capacity), _size(0) {}
 
-CircularBuffer::~CircularBuffer() {}
+CircularBuffer::~CircularBuffer()
+{
+    /* Es sind keine zusätzlichen Aufräumaktionen erforderlich,
+    // da alle verwendeten Ressourcen (std::vector, std::mutex)
+     ihre Speicherverwaltung selbst handhaben. */
+}
 
 void CircularBuffer::writeNewItem(const double &newItem) {
   try {
