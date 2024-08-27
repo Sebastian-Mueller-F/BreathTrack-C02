@@ -21,6 +21,16 @@ BufferSubscription::BufferSubscription(CircularBuffer &buffer, QObject *parent)
     qDebug() << "Failed to connect signal and slot for buffer:" << &_buffer;
   }
 }
+
+BufferSubscription::~BufferSubscription()
+{
+    /* Derzeit sind keine expliziten Freigabeaktionen erforderlich,
+    // da alle Ressourcen automatisch verwaltet werden.
+    // _buffer ist eine Referenz und wird extern verwaltet,
+    während QVector und QSharedPointer ihre Speicherfreigabe selbst handhaben.
+    */
+}
+
 void BufferSubscription::registerSubscriber(
     QSharedPointer<I_Subscriber> subscriber, int lookBackPeriodMS,
     SensorDataType type) {

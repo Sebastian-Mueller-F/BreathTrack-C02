@@ -14,6 +14,8 @@ class BufferSubscription : public QObject {
 public:
   BufferSubscription(CircularBuffer &buffer, QObject *parent = nullptr);
 
+  ~BufferSubscription();
+
   void registerSubscriber(QSharedPointer<I_Subscriber> subscriber,
                           int lookBackPeriodMS,
                           SensorDataType dataType = SensorDataType::RAW);
