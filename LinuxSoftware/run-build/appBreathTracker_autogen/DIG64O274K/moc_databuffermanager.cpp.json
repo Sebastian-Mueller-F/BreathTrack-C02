@@ -1,0 +1,51 @@
+{
+    "classes": [
+        {
+            "className": "DataBufferManager",
+            "object": true,
+            "qualifiedClassName": "DataBufferManager",
+            "signals": [
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "type",
+                            "type": "SensorDataType"
+                        },
+                        {
+                            "name": "buffer",
+                            "type": "CircularBuffer*"
+                        }
+                    ],
+                    "name": "bufferInitialized",
+                    "returnType": "void"
+                }
+            ],
+            "slots": [
+                {
+                    "access": "private",
+                    "arguments": [
+                        {
+                            "name": "newData",
+                            "type": "double"
+                        },
+                        {
+                            "name": "sensorDataType",
+                            "type": "SensorDataType"
+                        }
+                    ],
+                    "name": "onNewData",
+                    "returnType": "void"
+                }
+            ],
+            "superClasses": [
+                {
+                    "access": "public",
+                    "name": "QObject"
+                }
+            ]
+        }
+    ],
+    "inputFile": "databuffermanager.h",
+    "outputRevision": 68
+}

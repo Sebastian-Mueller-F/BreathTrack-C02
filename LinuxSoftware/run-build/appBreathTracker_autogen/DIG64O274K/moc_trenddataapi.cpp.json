@@ -1,0 +1,107 @@
+{
+    "classes": [
+        {
+            "className": "TrendDataAPI",
+            "object": true,
+            "properties": [
+                {
+                    "constant": false,
+                    "designable": true,
+                    "final": false,
+                    "index": 0,
+                    "name": "raw",
+                    "notify": "rawChanged",
+                    "read": "raw",
+                    "required": false,
+                    "scriptable": true,
+                    "stored": true,
+                    "type": "QVariantList",
+                    "user": false,
+                    "write": "setRaw"
+                },
+                {
+                    "constant": false,
+                    "designable": true,
+                    "final": false,
+                    "index": 1,
+                    "name": "sma",
+                    "notify": "smaChanged",
+                    "read": "sma",
+                    "required": false,
+                    "scriptable": true,
+                    "stored": true,
+                    "type": "QVariantList",
+                    "user": false,
+                    "write": "setSma"
+                },
+                {
+                    "constant": false,
+                    "designable": true,
+                    "final": false,
+                    "index": 2,
+                    "name": "ema",
+                    "notify": "emaChanged",
+                    "read": "ema",
+                    "required": false,
+                    "scriptable": true,
+                    "stored": true,
+                    "type": "QVariantList",
+                    "user": false,
+                    "write": "setEma"
+                }
+            ],
+            "qualifiedClassName": "TrendDataAPI",
+            "signals": [
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "newData",
+                            "type": "QVariantList&"
+                        }
+                    ],
+                    "name": "rawChanged",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "newData",
+                            "type": "QVariantList&"
+                        }
+                    ],
+                    "name": "smaChanged",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "newData",
+                            "type": "QVariantList&"
+                        }
+                    ],
+                    "name": "emaChanged",
+                    "returnType": "void"
+                }
+            ],
+            "superClasses": [
+                {
+                    "access": "public",
+                    "name": "QObject"
+                },
+                {
+                    "access": "public",
+                    "name": "I_Subscriber"
+                },
+                {
+                    "access": "public",
+                    "name": "I_FrontendAPIModule"
+                }
+            ]
+        }
+    ],
+    "inputFile": "trenddataapi.h",
+    "outputRevision": 68
+}

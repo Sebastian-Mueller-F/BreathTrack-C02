@@ -1,0 +1,14 @@
+module BreathTracker
+typeinfo appBreathTracker.qmltypes
+prefer :/BreathTracker/
+DataTrends 1.0 qml/DataTrends.qml
+LiveData 1.0 qml/LiveData.qml
+LiveDataBackground 1.0 qml/LiveDataBackground.qml
+SettingsDrawer 1.0 qml/SettingsDrawer.qml
+SettingsSection 1.0 qml/SettingsSection.qml
+ArcRight 1.0 qml/ArcRight.qml
+ArcLeft 1.0 qml/ArcLeft.qml
+ArcItem 1.0 qml/ArcItem.qml
+CircleIndicator 1.0 qml/CircleIndicator.qml
+CustomLabel 1.0 qml/CustomLabel.qml
+

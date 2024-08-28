@@ -1,0 +1,14 @@
+-rootPath
+/home/ccs/01_Repos/BreathTrack-C02/BreathTracker
+-cmake-output
+-output-file
+/home/ccs/01_Repos/BreathTrack-C02/build-BreathTracker-Desktop_Qt_6_4_1-Release/.qt_plugins/Qt6_QmlPlugins_Imports_appBreathTracker.cmake
+-importPath
+/home/ccs/01_Repos/BreathTrack-C02/build-BreathTracker-Desktop_Qt_6_4_1-Release/BreathTracker
+-importPath
+/home/ccs/01_Repos/BreathTrack-C02/build-BreathTracker-Desktop_Qt_6_4_1-Release
+-importPath
+/opt/VM/Qt-6.4.1/./qml
+-qrcFiles
+/home/ccs/01_Repos/BreathTrack-C02/build-BreathTracker-Desktop_Qt_6_4_1-Release/.rcc/qmake_BreathTracker.qrc
+/home/ccs/01_Repos/BreathTrack-C02/build-BreathTracker-Desktop_Qt_6_4_1-Release/.rcc/appBreathTracker_raw_qml_0.qrc

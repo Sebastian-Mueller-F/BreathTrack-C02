@@ -1,0 +1,34 @@
+{
+    "classes": [
+        {
+            "className": "I_Averager",
+            "object": true,
+            "qualifiedClassName": "I_Averager",
+            "signals": [
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "newAverage",
+                            "type": "double"
+                        },
+                        {
+                            "name": "averageType",
+                            "type": "SensorDataType"
+                        }
+                    ],
+                    "name": "averageUpdated",
+                    "returnType": "void"
+                }
+            ],
+            "superClasses": [
+                {
+                    "access": "public",
+                    "name": "QObject"
+                }
+            ]
+        }
+    ],
+    "inputFile": "i_averager.h",
+    "outputRevision": 68
+}

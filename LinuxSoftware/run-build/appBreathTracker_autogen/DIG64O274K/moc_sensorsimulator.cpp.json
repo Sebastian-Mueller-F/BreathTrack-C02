@@ -1,0 +1,24 @@
+{
+    "classes": [
+        {
+            "className": "SensorSimulator",
+            "object": true,
+            "qualifiedClassName": "SensorSimulator",
+            "slots": [
+                {
+                    "access": "private",
+                    "name": "generateNewCo2Value",
+                    "returnType": "void"
+                }
+            ],
+            "superClasses": [
+                {
+                    "access": "public",
+                    "name": "I_Sensor"
+                }
+            ]
+        }
+    ],
+    "inputFile": "sensorsimulator.h",
+    "outputRevision": 68
+}

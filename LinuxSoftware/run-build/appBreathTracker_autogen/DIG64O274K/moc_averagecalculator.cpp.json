@@ -1,0 +1,17 @@
+{
+    "classes": [
+        {
+            "className": "AverageCalculator",
+            "object": true,
+            "qualifiedClassName": "AverageCalculator",
+            "superClasses": [
+                {
+                    "access": "public",
+                    "name": "QObject"
+                }
+            ]
+        }
+    ],
+    "inputFile": "averagecalculator.h",
+    "outputRevision": 68
+}

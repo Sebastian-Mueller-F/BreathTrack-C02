@@ -1,0 +1,154 @@
+{
+    "classes": [
+        {
+            "className": "LiveDataAPI",
+            "methods": [
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "newSmaPeriod",
+                            "type": "int"
+                        }
+                    ],
+                    "name": "setSmaPeriod",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "newEmaPeriod",
+                            "type": "int"
+                        }
+                    ],
+                    "name": "setEmaPeriod",
+                    "returnType": "void"
+                }
+            ],
+            "object": true,
+            "properties": [
+                {
+                    "constant": false,
+                    "designable": true,
+                    "final": true,
+                    "index": 0,
+                    "name": "smaPeriod",
+                    "notify": "smaPeriodChanged",
+                    "read": "smaPeriod",
+                    "required": false,
+                    "scriptable": true,
+                    "stored": true,
+                    "type": "int",
+                    "user": false,
+                    "write": "setSmaPeriod"
+                },
+                {
+                    "constant": false,
+                    "designable": true,
+                    "final": true,
+                    "index": 1,
+                    "name": "emaPeriod",
+                    "notify": "emaPeriodChanged",
+                    "read": "emaPeriod",
+                    "required": false,
+                    "scriptable": true,
+                    "stored": true,
+                    "type": "int",
+                    "user": false,
+                    "write": "setEmaPeriod"
+                },
+                {
+                    "constant": false,
+                    "designable": true,
+                    "final": false,
+                    "index": 2,
+                    "name": "sensorValue",
+                    "notify": "sensorValueChanged",
+                    "read": "sensorValue",
+                    "required": false,
+                    "scriptable": true,
+                    "stored": true,
+                    "type": "int",
+                    "user": false,
+                    "write": "setSensorValue"
+                },
+                {
+                    "constant": false,
+                    "designable": true,
+                    "final": false,
+                    "index": 3,
+                    "name": "averagedValue",
+                    "notify": "averagedValueChanged",
+                    "read": "averagedValue",
+                    "required": false,
+                    "scriptable": true,
+                    "stored": true,
+                    "type": "int",
+                    "user": false,
+                    "write": "setAveragedValue"
+                },
+                {
+                    "constant": false,
+                    "designable": true,
+                    "final": false,
+                    "index": 4,
+                    "name": "averageType",
+                    "notify": "averageTypeChanged",
+                    "read": "averageType",
+                    "required": false,
+                    "scriptable": true,
+                    "stored": true,
+                    "type": "FrontendTypes::AverageType",
+                    "user": false,
+                    "write": "setAverageType"
+                }
+            ],
+            "qualifiedClassName": "LiveDataAPI",
+            "signals": [
+                {
+                    "access": "public",
+                    "name": "sensorValueChanged",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "name": "averagedValueChanged",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "name": "averageTypeChanged",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "name": "averagingPeriodChanged",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "name": "smaPeriodChanged",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "name": "emaPeriodChanged",
+                    "returnType": "void"
+                }
+            ],
+            "superClasses": [
+                {
+                    "access": "public",
+                    "name": "QObject"
+                },
+                {
+                    "access": "public",
+                    "name": "I_FrontendAPIModule"
+                }
+            ]
+        }
+    ],
+    "inputFile": "livedataapi.h",
+    "outputRevision": 68
+}

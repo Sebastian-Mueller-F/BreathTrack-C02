@@ -1,0 +1,439 @@
+{
+	"backtrace" : 6,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_custom_target",
+			"_qt_internal_expose_source_file_to_ide",
+			"_qt_internal_process_resource",
+			"qt6_add_resources",
+			"qt6_add_qml_module",
+			"qt_add_qml_module",
+			"set_property",
+			"qt6_target_qml_sources"
+		],
+		"files" : 
+		[
+			"/opt/VM/Qt-6.4.1/lib/cmake/Qt6Core/Qt6CoreMacros.cmake",
+			"/opt/VM/Qt-6.4.1/lib/cmake/Qt6Qml/Qt6QmlMacros.cmake",
+			"CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 2
+			},
+			{
+				"command" : 5,
+				"file" : 2,
+				"line" : 24,
+				"parent" : 0
+			},
+			{
+				"command" : 4,
+				"file" : 1,
+				"line" : 670,
+				"parent" : 1
+			},
+			{
+				"command" : 3,
+				"file" : 1,
+				"line" : 561,
+				"parent" : 2
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 342,
+				"parent" : 3
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 1727,
+				"parent" : 4
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 1584,
+				"parent" : 5
+			},
+			{
+				"command" : 7,
+				"file" : 1,
+				"line" : 611,
+				"parent" : 2
+			},
+			{
+				"command" : 3,
+				"file" : 1,
+				"line" : 2205,
+				"parent" : 7
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 342,
+				"parent" : 8
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 1727,
+				"parent" : 9
+			},
+			{
+				"command" : 6,
+				"file" : 0,
+				"line" : 1594,
+				"parent" : 10
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 1727,
+				"parent" : 9
+			},
+			{
+				"command" : 6,
+				"file" : 0,
+				"line" : 1594,
+				"parent" : 12
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 1727,
+				"parent" : 9
+			},
+			{
+				"command" : 6,
+				"file" : 0,
+				"line" : 1594,
+				"parent" : 14
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 1727,
+				"parent" : 9
+			},
+			{
+				"command" : 6,
+				"file" : 0,
+				"line" : 1594,
+				"parent" : 16
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 1727,
+				"parent" : 9
+			},
+			{
+				"command" : 6,
+				"file" : 0,
+				"line" : 1594,
+				"parent" : 18
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 1727,
+				"parent" : 9
+			},
+			{
+				"command" : 6,
+				"file" : 0,
+				"line" : 1594,
+				"parent" : 20
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 1727,
+				"parent" : 9
+			},
+			{
+				"command" : 6,
+				"file" : 0,
+				"line" : 1594,
+				"parent" : 22
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 1727,
+				"parent" : 9
+			},
+			{
+				"command" : 6,
+				"file" : 0,
+				"line" : 1594,
+				"parent" : 24
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 1727,
+				"parent" : 9
+			},
+			{
+				"command" : 6,
+				"file" : 0,
+				"line" : 1594,
+				"parent" : 26
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 1727,
+				"parent" : 9
+			},
+			{
+				"command" : 6,
+				"file" : 0,
+				"line" : 1594,
+				"parent" : 28
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 1727,
+				"parent" : 9
+			},
+			{
+				"command" : 6,
+				"file" : 0,
+				"line" : 1594,
+				"parent" : 30
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 1727,
+				"parent" : 9
+			},
+			{
+				"command" : 6,
+				"file" : 0,
+				"line" : 1594,
+				"parent" : 32
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 1727,
+				"parent" : 9
+			},
+			{
+				"command" : 6,
+				"file" : 0,
+				"line" : 1594,
+				"parent" : 34
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 1727,
+				"parent" : 9
+			},
+			{
+				"command" : 6,
+				"file" : 0,
+				"line" : 1594,
+				"parent" : 36
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 1727,
+				"parent" : 9
+			},
+			{
+				"command" : 6,
+				"file" : 0,
+				"line" : 1594,
+				"parent" : 38
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 1727,
+				"parent" : 9
+			},
+			{
+				"command" : 6,
+				"file" : 0,
+				"line" : 1594,
+				"parent" : 40
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 1727,
+				"parent" : 9
+			},
+			{
+				"command" : 6,
+				"file" : 0,
+				"line" : 1594,
+				"parent" : 42
+			}
+		]
+	},
+	"id" : "appBreathTracker_other_files::@6890427a1f51a3e7e1df",
+	"name" : "appBreathTracker_other_files",
+	"paths" : 
+	{
+		"build" : ".",
+		"source" : "."
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "",
+			"sourceIndexes" : 
+			[
+				0
+			]
+		},
+		{
+			"name" : "QML",
+			"sourceIndexes" : 
+			[
+				1,
+				2,
+				3,
+				4
+			]
+		},
+		{
+			"name" : "QML\\ Components",
+			"sourceIndexes" : 
+			[
+				5,
+				6,
+				11
+			]
+		},
+		{
+			"name" : "QML\\ Components \\ Arcs",
+			"sourceIndexes" : 
+			[
+				7,
+				8,
+				9,
+				10
+			]
+		},
+		{
+			"name" : "Resources",
+			"sourceIndexes" : 
+			[
+				12,
+				13,
+				14,
+				15,
+				16,
+				17
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 6,
+			"path" : "/home/ccs/01_Repos/BreathTrack-C02/build-BreathTracker-Desktop_Qt_6_4_1-Release/BreathTracker/qmldir",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 11,
+			"path" : "qml/main.qml",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 13,
+			"path" : "qml/DataTrends.qml",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 15,
+			"path" : "qml/LiveData.qml",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 17,
+			"path" : "qml/LiveDataBackground.qml",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 19,
+			"path" : "qml/SettingsDrawer.qml",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 21,
+			"path" : "qml/SettingsSection.qml",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 23,
+			"path" : "qml/ArcRight.qml",
+			"sourceGroupIndex" : 3
+		},
+		{
+			"backtrace" : 25,
+			"path" : "qml/ArcLeft.qml",
+			"sourceGroupIndex" : 3
+		},
+		{
+			"backtrace" : 27,
+			"path" : "qml/ArcItem.qml",
+			"sourceGroupIndex" : 3
+		},
+		{
+			"backtrace" : 29,
+			"path" : "qml/CircleIndicator.qml",
+			"sourceGroupIndex" : 3
+		},
+		{
+			"backtrace" : 31,
+			"path" : "qml/CustomLabel.qml",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 33,
+			"path" : "qml/images/ema.png",
+			"sourceGroupIndex" : 4
+		},
+		{
+			"backtrace" : 35,
+			"path" : "qml/images/sma.png",
+			"sourceGroupIndex" : 4
+		},
+		{
+			"backtrace" : 37,
+			"path" : "qml/images/raw.png",
+			"sourceGroupIndex" : 4
+		},
+		{
+			"backtrace" : 39,
+			"path" : "qml/images/assist.png",
+			"sourceGroupIndex" : 4
+		},
+		{
+			"backtrace" : 41,
+			"path" : "qml/images/speed.png",
+			"sourceGroupIndex" : 4
+		},
+		{
+			"backtrace" : 43,
+			"path" : "qml/images/calories.png",
+			"sourceGroupIndex" : 4
+		}
+	],
+	"type" : "UTILITY"
+}

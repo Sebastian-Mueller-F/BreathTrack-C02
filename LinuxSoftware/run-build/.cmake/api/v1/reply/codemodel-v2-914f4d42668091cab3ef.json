@@ -1,0 +1,160 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Release-1e7ee1bab02056451478.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7,
+						8,
+						9,
+						10,
+						11
+					]
+				}
+			],
+			"name" : "Release",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "BreathTracker",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7,
+						8,
+						9,
+						10,
+						11
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "all_qmllint::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-all_qmllint-Release-46f7ffccd26b18bb35e9.json",
+					"name" : "all_qmllint",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "all_qmllint_json::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-all_qmllint_json-Release-5a2f30a1960b2dcf7ff3.json",
+					"name" : "all_qmllint_json",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "all_qmltyperegistrations::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-all_qmltyperegistrations-Release-f5c3afd0f698ccc65860.json",
+					"name" : "all_qmltyperegistrations",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appBreathTracker::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appBreathTracker-Release-658506c0d517204484cd.json",
+					"name" : "appBreathTracker",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appBreathTracker_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appBreathTracker_autogen-Release-8bc6ed667f5bf53de66c.json",
+					"name" : "appBreathTracker_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appBreathTracker_automoc_json_extraction::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appBreathTracker_automoc_json_extraction-Release-46fe710766fdd5cdf8ea.json",
+					"name" : "appBreathTracker_automoc_json_extraction",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appBreathTracker_other_files::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appBreathTracker_other_files-Release-cea5d44e642750e3b40a.json",
+					"name" : "appBreathTracker_other_files",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appBreathTracker_qmlimportscan::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appBreathTracker_qmlimportscan-Release-8615a29a7d17ec24ec0d.json",
+					"name" : "appBreathTracker_qmlimportscan",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appBreathTracker_qmllint::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appBreathTracker_qmllint-Release-851d1f5327563f274933.json",
+					"name" : "appBreathTracker_qmllint",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appBreathTracker_qmllint_json::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appBreathTracker_qmllint_json-Release-8ce13211041db57b32a3.json",
+					"name" : "appBreathTracker_qmllint_json",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appBreathTracker_qmltyperegistration::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appBreathTracker_qmltyperegistration-Release-b85c883585f8ba4064a9.json",
+					"name" : "appBreathTracker_qmltyperegistration",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appBreathTracker_tooling::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appBreathTracker_tooling-Release-1742247361f1c169b67c.json",
+					"name" : "appBreathTracker_tooling",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/ccs/01_Repos/BreathTrack-C02/build-BreathTracker-Desktop_Qt_6_4_1-Release",
+		"source" : "/home/ccs/01_Repos/BreathTrack-C02/BreathTracker"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 4
+	}
+}

@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="/BreathTracker">
+    <file alias="qmldir">/home/ccs/01_Repos/BreathTrack-C02/build-BreathTracker-Desktop_Qt_6_4_1-Release/BreathTracker/qmldir</file>
+  </qresource>
+</RCC>
+
