@@ -21,7 +21,7 @@ AverageCalculator::~AverageCalculator()
 {
     qDebug() << "AverageCalculator destroyed";
     // Disconnect the signal-slot connection to avoid issues when this object is destroyed
-    bool disconnected = QObject::disconnect(_sensor.get(), &I_Sensor::newCo2Value, this, nullptr);
+    bool disconnected = QObject::disconnect(_sensor.get(), &I_Sensor::newCo2ValueGenerated, this, nullptr);
     if (disconnected) {
         qDebug() << "Successfully disconnected sensor signal.";
     } else {
@@ -50,7 +50,7 @@ void AverageCalculator::start()
 {
     qDebug() << "Starting AverageCalculator, connecting sensor signals...";
     bool receivingSensorDataSucess = QObject::connect(_sensor.get(),
-                                                      &I_Sensor::newCo2Value,
+                                                      &I_Sensor::newCo2ValueGenerated,
                                                       this,
                                                       [&](double newCo2Value) {
                                                           onNewSensorData(newCo2Value);

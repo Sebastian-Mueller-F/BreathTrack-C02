@@ -4,21 +4,25 @@
 
 std::shared_ptr<SensorSimulator> SensorSimulator::_instance = nullptr;
 
-SensorSimulator::SensorSimulator(double baseline, double amplitude,
-                                 int interval, QObject *parent)
-    : I_Sensor(parent), // Initialize QObject
-      _baseline(baseline), _amplitude(amplitude), _interval(interval) {
-  _timer.reset(new QTimer(this));
+SensorSimulator::SensorSimulator(double baseline, double amplitude, int interval, QObject *parent)
+    : I_Sensor(parent)
+    , // Initialize QObject
+    _baseline(baseline)
+    , _amplitude(amplitude)
+    , _interval(interval)
+    , _sensorDataType(SensorDataType::RAW)
+{
+    _timer.reset(new QTimer(this));
 
-  // Connect timer to the generateNewCo2Value slot
-  connect(_timer.data(), &QTimer::timeout, this,
-          &SensorSimulator::generateNewCo2Value);
+    // Connect timer to the generateNewCo2Value slot
+    connect(_timer.data(), &QTimer::timeout, this, &SensorSimulator::generateNewCo2Value);
 
-  // Example debug output connection
-  connect(this, &SensorSimulator::newCo2Value,
-          [&](double sensorValue, SensorDataType type) {
-            // qDebug() << "Sensor Co2 value: " << sensorValue;
-          });
+    // Example debug output connection
+    connect(this,
+            &SensorSimulator::newCo2ValueGenerated,
+            [&](double sensorValue, SensorDataType type) {
+                // qDebug() << "Sensor Co2 value: " << sensorValue;
+            });
 }
 
 std::shared_ptr<SensorSimulator> SensorSimulator::instance()
@@ -61,5 +65,5 @@ void SensorSimulator::generateNewCo2Value() {
 
   double sensorValue = _baseline + (transformedValue * _amplitude);
 
-  emit newCo2Value(sensorValue, _sensorDataType);
+  emit newCo2ValueGenerated(sensorValue, _sensorDataType);
 }

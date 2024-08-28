@@ -16,7 +16,7 @@ public:
   virtual SensorDataType sensorDataType() const = 0;
 
 signals:
-  void newCo2Value(double value, SensorDataType type);
+    void newCo2ValueGenerated(double value, SensorDataType type);
 };
 
 #endif // ISENSOR_H

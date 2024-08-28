@@ -17,7 +17,7 @@ DataBufferManager::DataBufferManager(std::shared_ptr<I_Sensor> sensor,
     validateDependecies();
 
     // Connect data input sources to buffers
-    connect(_sensor.get(), &SensorSimulator::newCo2Value, this, &DataBufferManager::onNewData);
+    connect(_sensor.get(), &SensorSimulator::newCo2ValueGenerated, this, &DataBufferManager::onNewData);
     connect(_smaAverager.get(), &SMAAverager::averageUpdated, this, &DataBufferManager::onNewData);
     connect(_emaAverager.get(), &EMAAverager::averageUpdated, this, &DataBufferManager::onNewData);
 }

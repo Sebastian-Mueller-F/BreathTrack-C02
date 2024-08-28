@@ -124,7 +124,7 @@ void LiveDataAPI::setAverageType(const FrontendTypes::AverageType &newAverageTyp
 void LiveDataAPI::getBackendData()
 {
     // get sensor data
-    connect(_sensor, &SensorSimulator::newCo2Value, this, [this](double newValue) {
+    connect(_sensor, &SensorSimulator::newCo2ValueGenerated, this, [this](double newValue) {
         int val = static_cast<int>(newValue);
         // qDebug() << "Setting Sensor Value for FE = " << val;
         setSensorValue(val);
