@@ -222,7 +222,7 @@ Item {
                     Layout.margins: 0
 
                     Text {
-                        text: 100 - model.index * (100 / Math.floor((sensorGraph.height) / gridSpacing))
+                        text: parseInt(100 - model.index * (100 / Math.floor(sensorGraph.height / gridSpacing)), 10)
                         font.pixelSize: 14
                         font.family: "Arial"
                         color: "white"
