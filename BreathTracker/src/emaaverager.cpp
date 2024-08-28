@@ -18,10 +18,10 @@ EMAAverager::~EMAAverager()
     qDebug() << "EMA Averager destroyed";
 }
 
-std::shared_ptr<EMAAverager> EMAAverager::instance()
+std::shared_ptr<EMAAverager> EMAAverager::instance(size_t period, QObject *parent)
 {
     if (_instance == nullptr) {
-        _instance = std::shared_ptr<EMAAverager>(new EMAAverager(10));
+        _instance = std::shared_ptr<EMAAverager>(new EMAAverager(period, parent));
         qDebug() << "EMAAverager Singleton instance created.";
     }
     return _instance;

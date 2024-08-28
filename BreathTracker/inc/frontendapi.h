@@ -33,6 +33,8 @@ class FrontendApi : public QObject
 public:
     explicit FrontendApi(const BackendDependencies &backendDependencies, QObject *parent = nullptr);
 
+    ~FrontendApi();
+
     LiveDataAPI *liveDataAPI() const;
     TrendDataAPI *trendDataAPI() const;
 
