@@ -12,10 +12,30 @@
 #include <emaaverager.h>
 #include <frontendapi.h>
 #include <i_sensor.h>
+#include <iostream>
 #include <livedataapi.h>
 #include <sensorfactory.h>
 #include <sensorsimulator.h>
 #include <smaaverager.h>
+
+void printCppVersion()
+{
+    std::cout << "__cplusplus value: " << __cplusplus << std::endl;
+
+    if (__cplusplus == 201703L) {
+        std::cout << "C++17 is used." << std::endl;
+    } else if (__cplusplus == 201402L) {
+        std::cout << "C++14 is used." << std::endl;
+    } else if (__cplusplus == 201103L) {
+        std::cout << "C++11 is used." << std::endl;
+    } else if (__cplusplus == 199711L) {
+        std::cout << "C++98 is used." << std::endl;
+    } else if (__cplusplus == 202002L) {
+        std::cout << "C++20 is used." << std::endl;
+    } else {
+        std::cout << "A newer or unknown C++ version is used." << std::endl;
+    }
+}
 
 struct PermanentBackendObjects
 {
@@ -122,6 +142,8 @@ int main(int argc, char *argv[])
     // Initialize QML engine
     QQmlApplicationEngine engine;
     initializeQmlEngine(engine, app, frontendApi);
+
+    printCppVersion();
 
     // Execute application
     return app.exec();
