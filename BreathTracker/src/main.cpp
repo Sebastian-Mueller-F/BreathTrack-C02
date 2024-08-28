@@ -63,11 +63,11 @@ std::unique_ptr<PermanentBackendObjects> initializeBackend()
     auto ema = EMAAverager::instance();
 
     // Initialize DataBufferManager
-    auto dataBuffer = DataBufferManager::instance(sensor, sma, ema);
+    auto trendDataBuffer = DataBufferManager::instance(sensor, sma, ema);
 
     // Create and initialize BackendDependencies
     auto backendDependenciesForFrontend = std::make_shared<BackendDependencies>();
-    backendDependenciesForFrontend->init(sensor, sma, ema, dataBuffer);
+    backendDependenciesForFrontend->init(sensor, sma, ema, trendDataBuffer);
 
     // Return the permanent backend objects wrapped in a unique_ptr
     return std::make_unique<PermanentBackendObjects>(backendDependenciesForFrontend, avgCalc);
