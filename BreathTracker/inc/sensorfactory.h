@@ -15,7 +15,7 @@ public:
         } else {
             // Replace with hardware sensor initialization when implemented
             // return std::make_shared<HardwareSensor>();
-            return nullptr;
+            throw std::logic_error("Hardware sensor initialization not implemented.");
         }
     }
 };
