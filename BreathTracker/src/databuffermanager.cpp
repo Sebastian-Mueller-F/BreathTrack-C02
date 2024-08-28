@@ -22,6 +22,51 @@ DataBufferManager::DataBufferManager(std::shared_ptr<I_Sensor> sensor,
     connect(_emaAverager.get(), &EMAAverager::averageUpdated, this, &DataBufferManager::onNewData);
 }
 
+DataBufferManager::~DataBufferManager()
+{
+    // Log the destruction for debugging
+    qDebug() << "Destroying DataBufferManager Singleton instance.";
+
+    // Disconnect all connected signals to this instance
+    bool disconnected = disconnect(_sensor.get(),
+                                   &SensorSimulator::newCo2ValueGenerated,
+                                   this,
+                                   &DataBufferManager::onNewData);
+    if (!disconnected) {
+        qWarning() << "Failed to disconnect sensor signal in DataBufferManager!";
+    }
+    disconnected = disconnect(_smaAverager.get(),
+                              &SMAAverager::averageUpdated,
+                              this,
+                              &DataBufferManager::onNewData);
+    if (!disconnected) {
+        qWarning() << "Failed to disconnect SMAAverager signal in DataBufferManager!";
+    }
+    disconnected = disconnect(_emaAverager.get(),
+                              &EMAAverager::averageUpdated,
+                              this,
+                              &DataBufferManager::onNewData);
+    if (!disconnected) {
+        qWarning() << "Failed to disconnect EMAAverager signal in DataBufferManager!";
+    }
+
+    // Delete dynamically allocated buffers before destroying them in heap automatically
+    for (auto &[type, buffer] : _buffers) {
+        if (buffer) {
+            delete buffer;
+            buffer = nullptr;
+            qDebug() << "Buffer for" << type << "destroyed.";
+        }
+    }
+
+    // Clear the subscriptions map to release all shared_ptr instances
+    _subscriptions.clear();
+    qDebug() << "All subscriptions cleared.";
+
+    // Reset the singleton instance
+    _instance.reset();
+}
+
 std::shared_ptr<DataBufferManager> DataBufferManager::instance(
     std::shared_ptr<I_Sensor> sensorSimulator,
     std::shared_ptr<I_Averager> smaAverager,
@@ -57,6 +102,16 @@ void DataBufferManager::subscribeToAll(std::shared_ptr<I_Subscriber> subscriber,
     }
 }
 
+void DataBufferManager::unsubscribeFromAll(std::shared_ptr<I_Subscriber> subscriber)
+{
+    for (auto &[type, subscription] : _subscriptions) {
+        if (subscription) {
+            subscription->unregisterSubscriber(subscriber);
+            qDebug() << "Unsubscribed" << subscriber.get() << "from buffer" << type;
+        }
+    }
+}
+
 void DataBufferManager::onNewData(double newData, SensorDataType sensorDataType)
 {
     _buffers[sensorDataType]->writeNewItem(newData);
@@ -64,9 +119,10 @@ void DataBufferManager::onNewData(double newData, SensorDataType sensorDataType)
 
 void DataBufferManager::initializeBuffers()
 {
-    _buffers[SensorDataType::RAW] = new CircularBuffer(_rawCapacity, 1000);
-    _buffers[SensorDataType::SMA] = new CircularBuffer(_averageCapacity, 1000);
-    _buffers[SensorDataType::EMA] = new CircularBuffer(_averageCapacity, 1000);
+    //third argument make this the parent which automatically deleted the _buffers as they are QObjects
+    _buffers[SensorDataType::RAW] = new CircularBuffer(_rawCapacity, 1000, this);
+    _buffers[SensorDataType::SMA] = new CircularBuffer(_averageCapacity, 1000, this);
+    _buffers[SensorDataType::EMA] = new CircularBuffer(_averageCapacity, 1000, this);
 
     // Ensure all buffers are initialized correctly
     if (!_buffers[SensorDataType::RAW] || !_buffers[SensorDataType::SMA]

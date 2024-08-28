@@ -19,6 +19,8 @@ public:
                                std::shared_ptr<I_Averager> emaAverager,
                                QObject *parent = nullptr);
 
+    ~DataBufferManager();
+
     static std::shared_ptr<DataBufferManager> instance(std::shared_ptr<I_Sensor> sensor,
                                                        std::shared_ptr<I_Averager> smaAverager,
                                                        std::shared_ptr<I_Averager> emaAverager);
@@ -29,6 +31,8 @@ public:
                    SensorDataType type,
                    int lookBackPeriodMS);
     void subscribeToAll(std::shared_ptr<I_Subscriber> subscriber, int lookBackPeriodMS);
+
+    void unsubscribeFromAll(std::shared_ptr<I_Subscriber> subscriber);
 
 private slots:
     void onNewData(double newData, SensorDataType sensorDataType);
