@@ -28,6 +28,13 @@ import BreathTracker.FrontendTypes 1.0
                 antialiasing: true
 
                 value: background.sensorData
+
+                Behavior on value {
+                           NumberAnimation {
+                               duration: 800  // Duration of 800ms for a smooth transition
+                               easing.type: Easing.InOutQuad  // Easing function for smoothness
+                           }
+                       }
             }
 
 
@@ -38,6 +45,13 @@ import BreathTracker.FrontendTypes 1.0
             strokeColor: averageType == FrontendTypes.SMA ? "#00FF00" : "#E69FFF"
             antialiasing: true
             value: background.averagedData
+
+            Behavior on value {
+                       NumberAnimation {
+                           duration: 800  // Duration of 800ms for a smooth transition
+                           easing.type: Easing.InOutQuad  // Easing function for smoothness
+                       }
+                   }
         }
 
 
