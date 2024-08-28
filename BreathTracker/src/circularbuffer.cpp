@@ -124,3 +124,13 @@ size_t CircularBuffer::getBufferCapacity() {
   std::lock_guard<std::mutex> lock(_mtx);
   return _capacity;
 }
+
+void CircularBuffer::clear()
+{
+    std::vector<double>().swap(_buffer);
+    qDebug() << "vector cleared of buffer at " << this;
+
+    _start = 0;
+    _end = 0;
+    _size = 0;
+}
