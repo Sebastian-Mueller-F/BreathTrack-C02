@@ -9,20 +9,21 @@
 
 struct BackendDependencies
 {
+    void init(std::shared_ptr<I_Sensor> sensor,
+              std::shared_ptr<I_Averager> sma,
+              std::shared_ptr<I_Averager> ema,
+              std::shared_ptr<DataBufferManager> dataBuffer)
+    {
+        this->sensor = sensor;
+        this->sma = sma;
+        this->ema = ema;
+        this->dataBuffer = dataBuffer;
+    }
+
     std::shared_ptr<I_Sensor> sensor;
     std::shared_ptr<I_Averager> sma;
     std::shared_ptr<I_Averager> ema;
     std::shared_ptr<DataBufferManager> dataBuffer;
-
-    BackendDependencies(std::shared_ptr<I_Sensor> sensor,
-                        std::shared_ptr<I_Averager> sma,
-                        std::shared_ptr<I_Averager> ema,
-                        std::shared_ptr<DataBufferManager> buffer)
-        : sensor(sensor)
-        , sma(sma)
-        , ema(ema)
-        , dataBuffer(buffer)
-    {}
 };
 
 class FrontendApi : public QObject
