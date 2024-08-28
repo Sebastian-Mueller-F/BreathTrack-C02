@@ -1,7 +1,7 @@
 #ifndef SENSORFACTORY_H
 #define SENSORFACTORY_H
 
-#include <I_Sensor.h>
+#include <i_sensor.h>
 #include <memory> // For std::shared_ptr
 #include <sensorsimulator.h>
 
