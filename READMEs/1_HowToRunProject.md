@@ -8,12 +8,6 @@
   ```bash
   git clone https://github.com/Sebastian-Mueller-F/BreathTrack-C02.git
   ```
-- Laden Sie das benötigte Submodul herunter:
-  ```bash
-  cd BreathTrack-C02
-  git submodule update --init --recursive
-  ```
-- Das Submodul enthält eine Version, in der zusätzliche Trenddaten in einer Graphanzeige integriert wurden. Stellen Sie sicher, dass das Submodul korrekt geladen wurde, um diese Funktionalität zu nutzen.
 
 ### Entwicklungsumgebung und Voraussetzungen
 
