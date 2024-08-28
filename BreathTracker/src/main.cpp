@@ -54,13 +54,13 @@ std::unique_ptr<PermanentBackendObjects> initializeBackend()
     }
     sensor->startMeasurement();
 
-    // Initialize Averagers
-    auto sma = SMAAverager::instance();
-    auto ema = EMAAverager::instance();
-
     // Initialize AverageCalculator
     auto avgCalc = std::make_shared<AverageCalculator>(sensor, 60); // Buffer size 60
     avgCalc->start();
+
+    //get address from SMA und EMA singletons which already were created within the AverageCaalculator object
+    auto sma = SMAAverager::instance();
+    auto ema = EMAAverager::instance();
 
     // Initialize DataBufferManager
     auto dataBuffer = DataBufferManager::instance(sensor, sma, ema);
