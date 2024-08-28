@@ -85,7 +85,7 @@ ArcItem {
 
             Keyframe {
                 value: 82
-                frame: 600
+                frame: 1000
             }
         }
     }
