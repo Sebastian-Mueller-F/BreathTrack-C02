@@ -1,15 +1,12 @@
 #include <QGuiApplication>
-#include <QQmlApplicationEngine>
-#include <sensorsimulator.h>
-
 #include <QLocale>
 #include <QMetaType>
+#include <QQmlApplicationEngine>
 #include <QQmlEngine>
 #include <QTranslator>
 #include <QVector>
 
 #include <I_Sensor.h>
-#include <I_Subscriber.h>
 #include <averagecalculator.h>
 #include <buffersubscription.h>
 #include <databuffermanager.h>
@@ -17,12 +14,23 @@
 #include <frontendapi.h>
 #include <livedataapi.h>
 #include <sensorfactory.h>
+#include <sensorsimulator.h>
 #include <smaaverager.h>
 
-int main(int argc, char *argv[])
+struct PermanentBackendObjects
 {
-    QGuiApplication app(argc, argv);
+    PermanentBackendObjects(std::shared_ptr<BackendDependencies> backendDeps,
+                            std::shared_ptr<AverageCalculator> avgCalc)
+        : backendDependencies(backendDeps)
+        , avgCalc(avgCalc)
+    {}
 
+    std::shared_ptr<BackendDependencies> backendDependencies;
+    std::shared_ptr<AverageCalculator> avgCalc;
+};
+
+void initializeTranslator(QGuiApplication &app)
+{
     QTranslator translator;
     const QStringList uiLanguages = QLocale::system().uiLanguages();
     for (const QString &locale : uiLanguages) {
@@ -32,30 +40,44 @@ int main(int argc, char *argv[])
             break;
         }
     }
+}
 
+// initalize backend und return pointer to all backend objects that need to be kept alive
+std::unique_ptr<PermanentBackendObjects> initializeBackend()
+{
     // Initialize the sensor (using the simulator for now)
     std::shared_ptr<I_Sensor> sensor = SensorFactory::createSensor(
         true); // Change to false when using the hardware sensor
     if (sensor == nullptr) {
         qCritical() << "Failed to initialize CO2 sensor.";
-        return -1;
+        return nullptr;
     }
     sensor->startMeasurement();
 
-    AverageCalculator avgCalc(sensor, 60); // Puffergröße 60, könnte auch konfigurierbar sein
-    avgCalc.start();
+    // Initialize Averagers
+    auto sma = SMAAverager::instance();
+    auto ema = EMAAverager::instance();
 
-    std::shared_ptr<I_Averager> sma = SMAAverager::instance();
-    std::shared_ptr<I_Averager> ema = EMAAverager::instance();
+    // Initialize AverageCalculator
+    auto avgCalc = std::make_shared<AverageCalculator>(sensor, 60); // Buffer size 60
+    avgCalc->start();
 
-    std::shared_ptr<DataBufferManager> dataBuffer = DataBufferManager::instance(sensor, sma, ema);
+    // Initialize DataBufferManager
+    auto dataBuffer = DataBufferManager::instance(sensor, sma, ema);
 
-    BackendDependencies backendDeps(sensor, sma, ema, dataBuffer);
+    // Create and initialize BackendDependencies
+    auto backendDependenciesForFrontend = std::make_shared<BackendDependencies>();
+    backendDependenciesForFrontend->init(sensor, sma, ema, dataBuffer);
 
-    FrontendApi frontendApi(backendDeps);
+    // Return the permanent backend objects wrapped in a unique_ptr
+    return std::make_unique<PermanentBackendObjects>(backendDependenciesForFrontend, avgCalc);
+}
 
-    QQmlApplicationEngine engine;
-
+// Function to initialize QML engine
+void initializeQmlEngine(QQmlApplicationEngine &engine,
+                         QGuiApplication &app,
+                         FrontendApi &frontendApi)
+{
     qmlRegisterType<FrontendTypes>("BreathTracker.FrontendTypes", 1, 0, "FrontendTypes");
     qmlRegisterSingletonType<LiveDataAPI>("BreathTracker.LiveData",
                                           1,
@@ -79,8 +101,28 @@ int main(int argc, char *argv[])
         },
         Qt::QueuedConnection);
     engine.load(url);
+}
 
-    // Frontend API
+int main(int argc, char *argv[])
+{
+    QGuiApplication app(argc, argv);
 
+    // Initialize translator
+    initializeTranslator(app);
+
+    // Initialize backend
+    auto permanentBackendObjects = initializeBackend();
+    if (!permanentBackendObjects) {
+        return -1; // Exit if backend initialization fails
+    }
+
+    // Initialize frontend API with backend dependencies
+    FrontendApi frontendApi(*permanentBackendObjects->backendDependencies);
+
+    // Initialize QML engine
+    QQmlApplicationEngine engine;
+    initializeQmlEngine(engine, app, frontendApi);
+
+    // Execute application
     return app.exec();
 }
