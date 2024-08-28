@@ -9,10 +9,7 @@ Window {
     visible: true
     title: qsTr("CO2 Breath Tracker")
 
-    Rectangle {
-        anchors.fill: parent
-        color: "#191E26"
-    }
+
 
     // Import and instantiate the settings drawer
     SettingsDrawer {
@@ -46,41 +43,57 @@ Window {
         z: 1  // Ensure button is still above the background
     }
 
-    Column {
-        spacing: 20
-        z: 0  // Set a lower z value for the Column and its children
+    Rectangle {
+        anchors.fill: parent
+        color: "#191E26"
 
-        LiveData {
-            id: liveData
-            color: "#191E26"
-            anchors.horizontalCenter: parent.horizontalCenter
-            z: 0  // Ensure it's below the overlay
-        }
+        Column {
+            anchors.fill: parent
+            spacing: 20
+            z: 0  // Set a lower z value for the Column and its children
 
-        DataTrends {
-            id: rawTrend
-            height: 250
-            width: 750
-            sensorData1: BETrendData.raw
-            z: 0  // Ensure it's below the overlay
-        }
+            LiveData {
+                id: liveData
+                color: "#191E26"
+                anchors.horizontalCenter: parent.horizontalCenter
+                z: 0  // Ensure it's below the overlay
 
-        DataTrends {
-            id: averagedTrend
-            height: 250
-            width: 750
-            hasTwoDataSets: true
-            sensorData1: BETrendData.sma
-            lineStartColor: "#00FF57"
-            lineEndColor: "#00FFAD"
-            fillStartColor: "rgba(0, 255, 87, 0.4)"
-            fillEndColor: "rgba(0, 255, 173, 0.2)"
-            sensorData2: BETrendData.ema
-            line2StartColor: "#E79EFF"
-            line2EndColor: "#C79EFF"
-            fill2StartColor: "rgba(231, 158, 255, 0.4)"
-            fill2EndColor: "rgba(199, 158, 255, 0.2)"
-            z: 0  // Ensure it's below the overlay
+                // Scale transformation
+                   transform: Scale {
+                       origin.x: liveData.width / 2
+                       origin.y: liveData.height / 2
+                       xScale: 0.8  // Scale down to 80% of original size
+                       yScale: 0.8  // Scale down to 80% of original size
+                   }
+            }
+
+            DataTrends {
+                id: rawTrend
+                height: 200
+                width: 750
+                sensorData1: BETrendData.raw
+                z: 0  // Ensure it's below the overlay
+            }
+
+            DataTrends {
+                id: averagedTrend
+                height: 200
+                width: 750
+                hasTwoDataSets: true
+                sensorData1: BETrendData.sma
+                lineStartColor: "#00FF57"
+                lineEndColor: "#00FFAD"
+                fillStartColor: "rgba(0, 255, 87, 0.4)"
+                fillEndColor: "rgba(0, 255, 173, 0.2)"
+                sensorData2: BETrendData.ema
+                line2StartColor: "#E79EFF"
+                line2EndColor: "#C79EFF"
+                fill2StartColor: "rgba(231, 158, 255, 0.4)"
+                fill2EndColor: "rgba(199, 158, 255, 0.2)"
+                z: 0  // Ensure it's below the overlay
+            }
         }
     }
+
+
 }
