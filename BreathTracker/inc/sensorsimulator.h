@@ -25,11 +25,11 @@ public:
 private:
     static std::shared_ptr<SensorSimulator> _instance;
 
-    SensorDataType _sensorDataType = SensorDataType::RAW;
     QScopedPointer<QTimer> _timer;
     double _baseline;
     double _amplitude;
     int _interval;
+    SensorDataType _sensorDataType;
 };
 
 #endif // SENSORSIMULATOR_H
