@@ -1,9 +1,9 @@
 #ifndef AVERAGECALCULATOR_H
 #define AVERAGECALCULATOR_H
 
-#include "CircularBuffer.h"
-#include "I_Sensor.h"
-#include "I_Subscriber.h"
+#include "circularbuffer.h"
+#include "i_sensor.h"
+#include "i_subscriber.h"
 #include <buffersubscription.h>
 #include <memory>
 

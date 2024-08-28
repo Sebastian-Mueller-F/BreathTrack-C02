@@ -1,5 +1,5 @@
-#ifndef I_FRONTENDAPI_H
-#define I_FRONTENDAPI_H
+#ifndef I_FRONTENDAPIMODULE_H
+#define I_FRONTENDAPIMODULE_H
 
 #include <QObject>
 #include <QSettings>
@@ -16,4 +16,4 @@ public:
   virtual ~I_FrontendAPIModule() = default;
 };
 
-#endif // I_FRONTENDAPI_H
+#endif // I_FRONTENDAPIMODULE_H

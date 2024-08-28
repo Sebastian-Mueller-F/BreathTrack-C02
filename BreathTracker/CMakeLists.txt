@@ -51,7 +51,7 @@ source_group("Header Files//  Sensor" FILES inc/sensorsimulator.h  inc/I_Sensor.
 source_group("Source Files// Header Files // Sensor" FILES src/sensorsimulator.cpp)
 
 # Data Structures
-source_group("Header Files// Data Structures" FILES inc/circularbuffer.h inc/buffersubscription.h inc/I_Subscriber.h)
+source_group("Header Files// Data Structures" FILES inc/circularbuffer.h inc/buffersubscription.h inc/i_subscriber.h)
 source_group("Source Files// Data Structures" FILES src/circularbuffer.cpp src/buffersubscription.cpp)
 
 # Data Management
@@ -59,11 +59,11 @@ source_group("Header Files// Data" FILES inc/databuffermanager.h)
 source_group("Source Files// Data" FILES src/databuffermanager.cpp)
 
 # Averagers
-source_group("Header Files// Averager" FILES inc/I_Averager.h inc/smaaverager.h inc/emaaverager.h inc/averagecalculator.h)
+source_group("Header Files// Averager" FILES inc/i_averager.h inc/smaaverager.h inc/emaaverager.h inc/averagecalculator.h)
 source_group("Source Files// Averager" FILES src/smaaverager.cpp src/emaaverager.cpp src/averagecalculator.cpp)
 
 # Backend Frontend Interface
-source_group("Header Files// Backend Frontend Interface" FILES inc/I_FrontendAPI.h inc/livedataapi.h inc/trenddataapi.h inc/frontendapi.h)
+source_group("Header Files// Backend Frontend Interface" FILES inc/i_frontendapimodule.h inc/livedataapi.h inc/trenddataapi.h inc/frontendapi.h)
 source_group("Source Files// Backend Frontend Interface" FILES src/livedataapi.cpp src/trenddataapi.cpp frontendapi.cpp)
 
 # Utils

@@ -6,12 +6,12 @@
 #include <QTranslator>
 #include <QVector>
 
-#include <I_Sensor.h>
 #include <averagecalculator.h>
 #include <buffersubscription.h>
 #include <databuffermanager.h>
 #include <emaaverager.h>
 #include <frontendapi.h>
+#include <i_sensor.h>
 #include <livedataapi.h>
 #include <sensorfactory.h>
 #include <sensorsimulator.h>
@@ -113,7 +113,7 @@ int main(int argc, char *argv[])
     // Initialize backend
     auto permanentBackendObjects = initializeBackend();
     if (!permanentBackendObjects) {
-        return -1; // Exit if backend initialization fails
+        throw std::runtime_error("Failed to initialize backend.");
     }
 
     // Initialize frontend API with backend dependencies

@@ -1,8 +1,8 @@
 #ifndef BUFFERSUBSCRIPTION_H
 #define BUFFERSUBSCRIPTION_H
 
-#include "I_Subscriber.h"
 #include <QObject>
+#include "i_subscriber.h"
 #include <circularbuffer.h>
 #include <types.h>
 

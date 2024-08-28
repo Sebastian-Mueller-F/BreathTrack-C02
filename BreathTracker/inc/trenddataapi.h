@@ -6,9 +6,9 @@
 #include <QSharedPointer>
 #include <QVariantList>
 
-#include <I_FrontendAPI.h>
-#include <I_Subscriber.h>
 #include <databuffermanager.h>
+#include <i_frontendapimodule.h>
+#include <i_subscriber.h>
 #include <types.h>
 
 /**

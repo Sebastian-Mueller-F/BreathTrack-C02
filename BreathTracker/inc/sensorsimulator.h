@@ -1,7 +1,7 @@
 #ifndef SENSORSIMULATOR_H
 #define SENSORSIMULATOR_H
 
-#include "I_Sensor.h"
+#include "i_sensor.h"
 #include <QObject>
 #include <QTimer>
 

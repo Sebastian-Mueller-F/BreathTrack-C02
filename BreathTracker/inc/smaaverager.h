@@ -4,8 +4,8 @@
 #include <QObject>
 #include <QSharedPointer>
 
-#include "I_Averager.h"
-#include "I_Subscriber.h"
+#include "i_averager.h"
+#include "i_subscriber.h"
 #include <types.h>
 
 // TODO: 1. do we need period ?

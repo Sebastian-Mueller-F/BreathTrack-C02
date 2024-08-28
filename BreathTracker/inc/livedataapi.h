@@ -6,9 +6,9 @@
 #include <QScopedPointer>
 
 #include <FrontendTypes.h>
-#include <I_FrontendAPI.h>
-#include <I_Subscriber.h>
 #include <emaaverager.h>
+#include <i_frontendapimodule.h>
+#include <i_subscriber.h>
 #include <sensorsimulator.h>
 #include <smaaverager.h>
 
