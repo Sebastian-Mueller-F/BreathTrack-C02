@@ -1,0 +1,34 @@
+{
+    "classes": [
+        {
+            "className": "I_Sensor",
+            "object": true,
+            "qualifiedClassName": "I_Sensor",
+            "signals": [
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "value",
+                            "type": "double"
+                        },
+                        {
+                            "name": "type",
+                            "type": "SensorDataType"
+                        }
+                    ],
+                    "name": "newCo2ValueGenerated",
+                    "returnType": "void"
+                }
+            ],
+            "superClasses": [
+                {
+                    "access": "public",
+                    "name": "QObject"
+                }
+            ]
+        }
+    ],
+    "inputFile": "i_sensor.h",
+    "outputRevision": 68
+}

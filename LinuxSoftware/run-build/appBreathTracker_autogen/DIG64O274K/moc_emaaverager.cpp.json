@@ -1,0 +1,21 @@
+{
+    "classes": [
+        {
+            "className": "EMAAverager",
+            "object": true,
+            "qualifiedClassName": "EMAAverager",
+            "superClasses": [
+                {
+                    "access": "public",
+                    "name": "I_Averager"
+                },
+                {
+                    "access": "public",
+                    "name": "I_Subscriber"
+                }
+            ]
+        }
+    ],
+    "inputFile": "emaaverager.h",
+    "outputRevision": 68
+}

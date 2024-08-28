@@ -1,0 +1,13 @@
+/home/ccs/01_Repos/BreathTrack-C02/build-BreathTracker-Desktop_Qt_6_4_1-Release/appBreathTracker_autogen/include/../DIG64O274K/moc_FrontendTypes.cpp.json
+/home/ccs/01_Repos/BreathTrack-C02/build-BreathTracker-Desktop_Qt_6_4_1-Release/appBreathTracker_autogen/include/../DIG64O274K/moc_averagecalculator.cpp.json
+/home/ccs/01_Repos/BreathTrack-C02/build-BreathTracker-Desktop_Qt_6_4_1-Release/appBreathTracker_autogen/include/../DIG64O274K/moc_buffersubscription.cpp.json
+/home/ccs/01_Repos/BreathTrack-C02/build-BreathTracker-Desktop_Qt_6_4_1-Release/appBreathTracker_autogen/include/../DIG64O274K/moc_circularbuffer.cpp.json
+/home/ccs/01_Repos/BreathTrack-C02/build-BreathTracker-Desktop_Qt_6_4_1-Release/appBreathTracker_autogen/include/../DIG64O274K/moc_databuffermanager.cpp.json
+/home/ccs/01_Repos/BreathTrack-C02/build-BreathTracker-Desktop_Qt_6_4_1-Release/appBreathTracker_autogen/include/../DIG64O274K/moc_emaaverager.cpp.json
+/home/ccs/01_Repos/BreathTrack-C02/build-BreathTracker-Desktop_Qt_6_4_1-Release/appBreathTracker_autogen/include/../DIG64O274K/moc_frontendapi.cpp.json
+/home/ccs/01_Repos/BreathTrack-C02/build-BreathTracker-Desktop_Qt_6_4_1-Release/appBreathTracker_autogen/include/../DIG64O274K/moc_i_averager.cpp.json
+/home/ccs/01_Repos/BreathTrack-C02/build-BreathTracker-Desktop_Qt_6_4_1-Release/appBreathTracker_autogen/include/../DIG64O274K/moc_i_sensor.cpp.json
+/home/ccs/01_Repos/BreathTrack-C02/build-BreathTracker-Desktop_Qt_6_4_1-Release/appBreathTracker_autogen/include/../DIG64O274K/moc_livedataapi.cpp.json
+/home/ccs/01_Repos/BreathTrack-C02/build-BreathTracker-Desktop_Qt_6_4_1-Release/appBreathTracker_autogen/include/../DIG64O274K/moc_sensorsimulator.cpp.json
+/home/ccs/01_Repos/BreathTrack-C02/build-BreathTracker-Desktop_Qt_6_4_1-Release/appBreathTracker_autogen/include/../DIG64O274K/moc_smaaverager.cpp.json
+/home/ccs/01_Repos/BreathTrack-C02/build-BreathTracker-Desktop_Qt_6_4_1-Release/appBreathTracker_autogen/include/../DIG64O274K/moc_trenddataapi.cpp.json

@@ -1,0 +1,21 @@
+{
+    "classes": [
+        {
+            "className": "SMAAverager",
+            "object": true,
+            "qualifiedClassName": "SMAAverager",
+            "superClasses": [
+                {
+                    "access": "public",
+                    "name": "I_Averager"
+                },
+                {
+                    "access": "public",
+                    "name": "I_Subscriber"
+                }
+            ]
+        }
+    ],
+    "inputFile": "smaaverager.h",
+    "outputRevision": 68
+}

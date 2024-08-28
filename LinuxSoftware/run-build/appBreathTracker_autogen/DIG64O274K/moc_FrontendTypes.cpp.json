@@ -1,0 +1,28 @@
+{
+    "classes": [
+        {
+            "className": "FrontendTypes",
+            "enums": [
+                {
+                    "isClass": false,
+                    "isFlag": false,
+                    "name": "AverageType",
+                    "values": [
+                        "SMA",
+                        "EMA"
+                    ]
+                }
+            ],
+            "object": true,
+            "qualifiedClassName": "FrontendTypes",
+            "superClasses": [
+                {
+                    "access": "public",
+                    "name": "QObject"
+                }
+            ]
+        }
+    ],
+    "inputFile": "FrontendTypes.h",
+    "outputRevision": 68
+}

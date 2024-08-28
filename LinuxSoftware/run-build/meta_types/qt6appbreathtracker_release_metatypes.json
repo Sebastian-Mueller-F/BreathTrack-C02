@@ -1,0 +1,570 @@
+[
+    {
+        "classes": [
+            {
+                "className": "FrontendTypes",
+                "enums": [
+                    {
+                        "isClass": false,
+                        "isFlag": false,
+                        "name": "AverageType",
+                        "values": [
+                            "SMA",
+                            "EMA"
+                        ]
+                    }
+                ],
+                "object": true,
+                "qualifiedClassName": "FrontendTypes",
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "QObject"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "FrontendTypes.h",
+        "outputRevision": 68
+    },
+    {
+        "classes": [
+            {
+                "className": "AverageCalculator",
+                "object": true,
+                "qualifiedClassName": "AverageCalculator",
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "QObject"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "averagecalculator.h",
+        "outputRevision": 68
+    },
+    {
+        "classes": [
+            {
+                "className": "BufferSubscription",
+                "object": true,
+                "qualifiedClassName": "BufferSubscription",
+                "slots": [
+                    {
+                        "access": "private",
+                        "arguments": [
+                            {
+                                "name": "dataIntervalsMS",
+                                "type": "int"
+                            }
+                        ],
+                        "name": "onDataAddedToBuffer",
+                        "returnType": "void"
+                    }
+                ],
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "QObject"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "buffersubscription.h",
+        "outputRevision": 68
+    },
+    {
+        "classes": [
+            {
+                "className": "CircularBuffer",
+                "object": true,
+                "qualifiedClassName": "CircularBuffer",
+                "signals": [
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "newDataIntervalMs",
+                                "type": "int"
+                            }
+                        ],
+                        "name": "dataAdded",
+                        "returnType": "void"
+                    }
+                ],
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "QObject"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "circularbuffer.h",
+        "outputRevision": 68
+    },
+    {
+        "classes": [
+            {
+                "className": "DataBufferManager",
+                "object": true,
+                "qualifiedClassName": "DataBufferManager",
+                "signals": [
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "type",
+                                "type": "SensorDataType"
+                            },
+                            {
+                                "name": "buffer",
+                                "type": "CircularBuffer*"
+                            }
+                        ],
+                        "name": "bufferInitialized",
+                        "returnType": "void"
+                    }
+                ],
+                "slots": [
+                    {
+                        "access": "private",
+                        "arguments": [
+                            {
+                                "name": "newData",
+                                "type": "double"
+                            },
+                            {
+                                "name": "sensorDataType",
+                                "type": "SensorDataType"
+                            }
+                        ],
+                        "name": "onNewData",
+                        "returnType": "void"
+                    }
+                ],
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "QObject"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "databuffermanager.h",
+        "outputRevision": 68
+    },
+    {
+        "classes": [
+            {
+                "className": "EMAAverager",
+                "object": true,
+                "qualifiedClassName": "EMAAverager",
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "I_Averager"
+                    },
+                    {
+                        "access": "public",
+                        "name": "I_Subscriber"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "emaaverager.h",
+        "outputRevision": 68
+    },
+    {
+        "classes": [
+            {
+                "className": "FrontendApi",
+                "object": true,
+                "qualifiedClassName": "FrontendApi",
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "QObject"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "frontendapi.h",
+        "outputRevision": 68
+    },
+    {
+        "classes": [
+            {
+                "className": "I_Averager",
+                "object": true,
+                "qualifiedClassName": "I_Averager",
+                "signals": [
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "newAverage",
+                                "type": "double"
+                            },
+                            {
+                                "name": "averageType",
+                                "type": "SensorDataType"
+                            }
+                        ],
+                        "name": "averageUpdated",
+                        "returnType": "void"
+                    }
+                ],
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "QObject"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "i_averager.h",
+        "outputRevision": 68
+    },
+    {
+        "classes": [
+            {
+                "className": "I_Sensor",
+                "object": true,
+                "qualifiedClassName": "I_Sensor",
+                "signals": [
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "value",
+                                "type": "double"
+                            },
+                            {
+                                "name": "type",
+                                "type": "SensorDataType"
+                            }
+                        ],
+                        "name": "newCo2ValueGenerated",
+                        "returnType": "void"
+                    }
+                ],
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "QObject"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "i_sensor.h",
+        "outputRevision": 68
+    },
+    {
+        "classes": [
+            {
+                "className": "LiveDataAPI",
+                "methods": [
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "newSmaPeriod",
+                                "type": "int"
+                            }
+                        ],
+                        "name": "setSmaPeriod",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "newEmaPeriod",
+                                "type": "int"
+                            }
+                        ],
+                        "name": "setEmaPeriod",
+                        "returnType": "void"
+                    }
+                ],
+                "object": true,
+                "properties": [
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": true,
+                        "index": 0,
+                        "name": "smaPeriod",
+                        "notify": "smaPeriodChanged",
+                        "read": "smaPeriod",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "int",
+                        "user": false,
+                        "write": "setSmaPeriod"
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": true,
+                        "index": 1,
+                        "name": "emaPeriod",
+                        "notify": "emaPeriodChanged",
+                        "read": "emaPeriod",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "int",
+                        "user": false,
+                        "write": "setEmaPeriod"
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 2,
+                        "name": "sensorValue",
+                        "notify": "sensorValueChanged",
+                        "read": "sensorValue",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "int",
+                        "user": false,
+                        "write": "setSensorValue"
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 3,
+                        "name": "averagedValue",
+                        "notify": "averagedValueChanged",
+                        "read": "averagedValue",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "int",
+                        "user": false,
+                        "write": "setAveragedValue"
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 4,
+                        "name": "averageType",
+                        "notify": "averageTypeChanged",
+                        "read": "averageType",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "FrontendTypes::AverageType",
+                        "user": false,
+                        "write": "setAverageType"
+                    }
+                ],
+                "qualifiedClassName": "LiveDataAPI",
+                "signals": [
+                    {
+                        "access": "public",
+                        "name": "sensorValueChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "averagedValueChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "averageTypeChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "averagingPeriodChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "smaPeriodChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "emaPeriodChanged",
+                        "returnType": "void"
+                    }
+                ],
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "QObject"
+                    },
+                    {
+                        "access": "public",
+                        "name": "I_FrontendAPIModule"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "livedataapi.h",
+        "outputRevision": 68
+    },
+    {
+        "classes": [
+            {
+                "className": "SensorSimulator",
+                "object": true,
+                "qualifiedClassName": "SensorSimulator",
+                "slots": [
+                    {
+                        "access": "private",
+                        "name": "generateNewCo2Value",
+                        "returnType": "void"
+                    }
+                ],
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "I_Sensor"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "sensorsimulator.h",
+        "outputRevision": 68
+    },
+    {
+        "classes": [
+            {
+                "className": "SMAAverager",
+                "object": true,
+                "qualifiedClassName": "SMAAverager",
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "I_Averager"
+                    },
+                    {
+                        "access": "public",
+                        "name": "I_Subscriber"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "smaaverager.h",
+        "outputRevision": 68
+    },
+    {
+        "classes": [
+            {
+                "className": "TrendDataAPI",
+                "object": true,
+                "properties": [
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 0,
+                        "name": "raw",
+                        "notify": "rawChanged",
+                        "read": "raw",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "QVariantList",
+                        "user": false,
+                        "write": "setRaw"
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 1,
+                        "name": "sma",
+                        "notify": "smaChanged",
+                        "read": "sma",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "QVariantList",
+                        "user": false,
+                        "write": "setSma"
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 2,
+                        "name": "ema",
+                        "notify": "emaChanged",
+                        "read": "ema",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "QVariantList",
+                        "user": false,
+                        "write": "setEma"
+                    }
+                ],
+                "qualifiedClassName": "TrendDataAPI",
+                "signals": [
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "newData",
+                                "type": "QVariantList&"
+                            }
+                        ],
+                        "name": "rawChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "newData",
+                                "type": "QVariantList&"
+                            }
+                        ],
+                        "name": "smaChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "newData",
+                                "type": "QVariantList&"
+                            }
+                        ],
+                        "name": "emaChanged",
+                        "returnType": "void"
+                    }
+                ],
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "QObject"
+                    },
+                    {
+                        "access": "public",
+                        "name": "I_Subscriber"
+                    },
+                    {
+                        "access": "public",
+                        "name": "I_FrontendAPIModule"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "trenddataapi.h",
+        "outputRevision": 68
+    }
+]

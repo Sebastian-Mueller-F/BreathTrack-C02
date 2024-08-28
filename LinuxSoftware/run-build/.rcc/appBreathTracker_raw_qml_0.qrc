@@ -1,0 +1,22 @@
+<RCC>
+  <qresource prefix="/BreathTracker/">
+    <file alias="qml/main.qml">/home/ccs/01_Repos/BreathTrack-C02/BreathTracker/qml/main.qml</file>
+    <file alias="qml/DataTrends.qml">/home/ccs/01_Repos/BreathTrack-C02/BreathTracker/qml/DataTrends.qml</file>
+    <file alias="qml/LiveData.qml">/home/ccs/01_Repos/BreathTrack-C02/BreathTracker/qml/LiveData.qml</file>
+    <file alias="qml/LiveDataBackground.qml">/home/ccs/01_Repos/BreathTrack-C02/BreathTracker/qml/LiveDataBackground.qml</file>
+    <file alias="qml/SettingsDrawer.qml">/home/ccs/01_Repos/BreathTrack-C02/BreathTracker/qml/SettingsDrawer.qml</file>
+    <file alias="qml/SettingsSection.qml">/home/ccs/01_Repos/BreathTrack-C02/BreathTracker/qml/SettingsSection.qml</file>
+    <file alias="qml/ArcRight.qml">/home/ccs/01_Repos/BreathTrack-C02/BreathTracker/qml/ArcRight.qml</file>
+    <file alias="qml/ArcLeft.qml">/home/ccs/01_Repos/BreathTrack-C02/BreathTracker/qml/ArcLeft.qml</file>
+    <file alias="qml/ArcItem.qml">/home/ccs/01_Repos/BreathTrack-C02/BreathTracker/qml/ArcItem.qml</file>
+    <file alias="qml/CircleIndicator.qml">/home/ccs/01_Repos/BreathTrack-C02/BreathTracker/qml/CircleIndicator.qml</file>
+    <file alias="qml/CustomLabel.qml">/home/ccs/01_Repos/BreathTrack-C02/BreathTracker/qml/CustomLabel.qml</file>
+    <file alias="qml/images/ema.png">/home/ccs/01_Repos/BreathTrack-C02/BreathTracker/qml/images/ema.png</file>
+    <file alias="qml/images/sma.png">/home/ccs/01_Repos/BreathTrack-C02/BreathTracker/qml/images/sma.png</file>
+    <file alias="qml/images/raw.png">/home/ccs/01_Repos/BreathTrack-C02/BreathTracker/qml/images/raw.png</file>
+    <file alias="qml/images/assist.png">/home/ccs/01_Repos/BreathTrack-C02/BreathTracker/qml/images/assist.png</file>
+    <file alias="qml/images/speed.png">/home/ccs/01_Repos/BreathTrack-C02/BreathTracker/qml/images/speed.png</file>
+    <file alias="qml/images/calories.png">/home/ccs/01_Repos/BreathTrack-C02/BreathTracker/qml/images/calories.png</file>
+  </qresource>
+</RCC>
+

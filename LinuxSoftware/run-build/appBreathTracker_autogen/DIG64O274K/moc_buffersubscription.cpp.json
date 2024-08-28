@@ -1,0 +1,30 @@
+{
+    "classes": [
+        {
+            "className": "BufferSubscription",
+            "object": true,
+            "qualifiedClassName": "BufferSubscription",
+            "slots": [
+                {
+                    "access": "private",
+                    "arguments": [
+                        {
+                            "name": "dataIntervalsMS",
+                            "type": "int"
+                        }
+                    ],
+                    "name": "onDataAddedToBuffer",
+                    "returnType": "void"
+                }
+            ],
+            "superClasses": [
+                {
+                    "access": "public",
+                    "name": "QObject"
+                }
+            ]
+        }
+    ],
+    "inputFile": "buffersubscription.h",
+    "outputRevision": 68
+}

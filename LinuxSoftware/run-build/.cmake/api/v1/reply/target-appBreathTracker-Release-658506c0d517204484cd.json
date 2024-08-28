@@ -1,0 +1,1559 @@
+{
+	"artifacts" : 
+	[
+		{
+			"path" : "appBreathTracker"
+		}
+	],
+	"backtrace" : 4,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_executable",
+			"_qt_internal_create_executable",
+			"qt6_add_executable",
+			"qt_add_executable",
+			"install",
+			"target_link_libraries",
+			"set_target_properties",
+			"include",
+			"find_package",
+			"qt6_add_qml_module",
+			"qt_add_qml_module",
+			"find_dependency",
+			"_qt_internal_find_qt_dependencies",
+			"set_property",
+			"_qt_internal_find_third_party_dependencies",
+			"add_dependencies",
+			"qt6_target_qml_sources",
+			"_qt_internal_scan_qml_imports",
+			"_qt_internal_generate_deploy_qml_imports_script",
+			"cmake_language",
+			"_qt_internal_finalize_executable",
+			"qt6_finalize_target",
+			"include_directories",
+			"target_include_directories",
+			"_qt_internal_qml_type_registration",
+			"target_sources",
+			"qt6_extract_metatypes",
+			"__qt_propagate_generated_resource",
+			"_qt_internal_process_resource",
+			"qt6_add_resources",
+			"_qt_internal_target_enable_qmlcachegen"
+		],
+		"files" : 
+		[
+			"/opt/VM/Qt-6.4.1/lib/cmake/Qt6Core/Qt6CoreMacros.cmake",
+			"CMakeLists.txt",
+			"/opt/VM/Qt-6.4.1/lib/cmake/Qt6Quick/Qt6QuickTargets.cmake",
+			"/opt/VM/Qt-6.4.1/lib/cmake/Qt6Quick/Qt6QuickConfig.cmake",
+			"/opt/VM/Qt-6.4.1/lib/cmake/Qt6/Qt6Config.cmake",
+			"/opt/VM/Qt-6.4.1/lib/cmake/Qt6Qml/Qt6QmlMacros.cmake",
+			"/opt/VM/Qt-6.4.1/lib/cmake/Qt6Qml/Qt6QmlTargets.cmake",
+			"/opt/VM/Qt-6.4.1/lib/cmake/Qt6Qml/Qt6QmlConfig.cmake",
+			"/usr/share/cmake-3.23/Modules/CMakeFindDependencyMacro.cmake",
+			"/opt/VM/Qt-6.4.1/lib/cmake/Qt6/QtPublicDependencyHelpers.cmake",
+			"/opt/VM/Qt-6.4.1/lib/cmake/Qt6Quick/Qt6QuickDependencies.cmake",
+			"/usr/share/cmake-3.23/Modules/FindOpenGL.cmake",
+			"/opt/VM/Qt-6.4.1/lib/cmake/Qt6/FindWrapOpenGL.cmake",
+			"/opt/VM/Qt-6.4.1/lib/cmake/Qt6Gui/Qt6GuiDependencies.cmake",
+			"/opt/VM/Qt-6.4.1/lib/cmake/Qt6Gui/Qt6GuiConfig.cmake",
+			"/usr/share/cmake-3.23/Modules/FindThreads.cmake",
+			"/opt/VM/Qt-6.4.1/lib/cmake/Qt6/Qt6Dependencies.cmake",
+			"/opt/VM/Qt-6.4.1/lib/cmake/Qt6Core/Qt6CoreMacros.cmake:685:EVAL"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 1
+			},
+			{
+				"command" : 3,
+				"file" : 1,
+				"line" : 19,
+				"parent" : 0
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 711,
+				"parent" : 1
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 548,
+				"parent" : 2
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 584,
+				"parent" : 3
+			},
+			{
+				"command" : 4,
+				"file" : 1,
+				"line" : 96,
+				"parent" : 0
+			},
+			{
+				"command" : 5,
+				"file" : 1,
+				"line" : 91,
+				"parent" : 0
+			},
+			{
+				"command" : 8,
+				"file" : 1,
+				"line" : 13,
+				"parent" : 0
+			},
+			{
+				"file" : 4,
+				"parent" : 7
+			},
+			{
+				"command" : 8,
+				"file" : 4,
+				"line" : 157,
+				"parent" : 8
+			},
+			{
+				"file" : 3,
+				"parent" : 9
+			},
+			{
+				"command" : 7,
+				"file" : 3,
+				"line" : 52,
+				"parent" : 10
+			},
+			{
+				"file" : 2,
+				"parent" : 11
+			},
+			{
+				"command" : 6,
+				"file" : 2,
+				"line" : 56,
+				"parent" : 12
+			},
+			{
+				"command" : 10,
+				"file" : 1,
+				"line" : 24,
+				"parent" : 0
+			},
+			{
+				"command" : 9,
+				"file" : 5,
+				"line" : 670,
+				"parent" : 14
+			},
+			{
+				"command" : 5,
+				"file" : 5,
+				"line" : 388,
+				"parent" : 15
+			},
+			{
+				"command" : 7,
+				"file" : 3,
+				"line" : 40,
+				"parent" : 10
+			},
+			{
+				"file" : 10,
+				"parent" : 17
+			},
+			{
+				"command" : 12,
+				"file" : 10,
+				"line" : 39,
+				"parent" : 18
+			},
+			{
+				"command" : 11,
+				"file" : 9,
+				"line" : 108,
+				"parent" : 19
+			},
+			{
+				"command" : 8,
+				"file" : 8,
+				"line" : 47,
+				"parent" : 20
+			},
+			{
+				"file" : 7,
+				"parent" : 21
+			},
+			{
+				"command" : 7,
+				"file" : 7,
+				"line" : 52,
+				"parent" : 22
+			},
+			{
+				"file" : 6,
+				"parent" : 23
+			},
+			{
+				"command" : 6,
+				"file" : 6,
+				"line" : 56,
+				"parent" : 24
+			},
+			{
+				"command" : 11,
+				"file" : 9,
+				"line" : 108,
+				"parent" : 19
+			},
+			{
+				"command" : 8,
+				"file" : 8,
+				"line" : 47,
+				"parent" : 26
+			},
+			{
+				"file" : 14,
+				"parent" : 27
+			},
+			{
+				"command" : 7,
+				"file" : 14,
+				"line" : 40,
+				"parent" : 28
+			},
+			{
+				"file" : 13,
+				"parent" : 29
+			},
+			{
+				"command" : 14,
+				"file" : 13,
+				"line" : 30,
+				"parent" : 30
+			},
+			{
+				"command" : 11,
+				"file" : 9,
+				"line" : 33,
+				"parent" : 31
+			},
+			{
+				"command" : 8,
+				"file" : 8,
+				"line" : 47,
+				"parent" : 32
+			},
+			{
+				"file" : 12,
+				"parent" : 33
+			},
+			{
+				"command" : 8,
+				"file" : 12,
+				"line" : 10,
+				"parent" : 34
+			},
+			{
+				"file" : 11,
+				"parent" : 35
+			},
+			{
+				"command" : 13,
+				"file" : 11,
+				"line" : 512,
+				"parent" : 36
+			},
+			{
+				"command" : 6,
+				"file" : 11,
+				"line" : 510,
+				"parent" : 36
+			},
+			{
+				"command" : 5,
+				"file" : 0,
+				"line" : 549,
+				"parent" : 2
+			},
+			{
+				"command" : 7,
+				"file" : 4,
+				"line" : 112,
+				"parent" : 8
+			},
+			{
+				"file" : 16,
+				"parent" : 40
+			},
+			{
+				"command" : 14,
+				"file" : 16,
+				"line" : 24,
+				"parent" : 41
+			},
+			{
+				"command" : 11,
+				"file" : 9,
+				"line" : 33,
+				"parent" : 42
+			},
+			{
+				"command" : 8,
+				"file" : 8,
+				"line" : 47,
+				"parent" : 43
+			},
+			{
+				"file" : 15,
+				"parent" : 44
+			},
+			{
+				"command" : 13,
+				"file" : 15,
+				"line" : 250,
+				"parent" : 45
+			},
+			{
+				"command" : 16,
+				"file" : 5,
+				"line" : 611,
+				"parent" : 15
+			},
+			{
+				"command" : 15,
+				"file" : 5,
+				"line" : 2187,
+				"parent" : 47
+			},
+			{
+				"file" : 1,
+				"line" : -1,
+				"parent" : 0
+			},
+			{
+				"command" : 21,
+				"file" : 17,
+				"line" : 1,
+				"parent" : 49
+			},
+			{
+				"command" : 20,
+				"file" : 0,
+				"line" : 705,
+				"parent" : 50
+			},
+			{
+				"command" : 19,
+				"file" : 0,
+				"line" : 640,
+				"parent" : 51
+			},
+			{
+				"command" : 18,
+				"file" : 0,
+				"line" : 640,
+				"parent" : 52
+			},
+			{
+				"command" : 17,
+				"file" : 5,
+				"line" : 2870,
+				"parent" : 53
+			},
+			{
+				"command" : 15,
+				"file" : 5,
+				"line" : 2723,
+				"parent" : 54
+			},
+			{
+				"command" : 22,
+				"file" : 1,
+				"line" : 11,
+				"parent" : 0
+			},
+			{
+				"command" : 24,
+				"file" : 5,
+				"line" : 517,
+				"parent" : 15
+			},
+			{
+				"command" : 23,
+				"file" : 5,
+				"line" : 2515,
+				"parent" : 57
+			},
+			{
+				"command" : 23,
+				"file" : 5,
+				"line" : 2540,
+				"parent" : 57
+			},
+			{
+				"command" : 26,
+				"file" : 5,
+				"line" : 2322,
+				"parent" : 57
+			},
+			{
+				"command" : 25,
+				"file" : 0,
+				"line" : 1077,
+				"parent" : 60
+			},
+			{
+				"command" : 25,
+				"file" : 5,
+				"line" : 2506,
+				"parent" : 57
+			},
+			{
+				"command" : 29,
+				"file" : 5,
+				"line" : 561,
+				"parent" : 15
+			},
+			{
+				"command" : 28,
+				"file" : 0,
+				"line" : 342,
+				"parent" : 63
+			},
+			{
+				"command" : 27,
+				"file" : 0,
+				"line" : 1810,
+				"parent" : 64
+			},
+			{
+				"command" : 25,
+				"file" : 0,
+				"line" : 1574,
+				"parent" : 65
+			},
+			{
+				"command" : 25,
+				"file" : 5,
+				"line" : 1987,
+				"parent" : 47
+			},
+			{
+				"command" : 30,
+				"file" : 5,
+				"line" : 2080,
+				"parent" : 47
+			},
+			{
+				"command" : 25,
+				"file" : 5,
+				"line" : 979,
+				"parent" : 68
+			},
+			{
+				"command" : 25,
+				"file" : 5,
+				"line" : 2129,
+				"parent" : 47
+			},
+			{
+				"command" : 25,
+				"file" : 5,
+				"line" : 1987,
+				"parent" : 47
+			},
+			{
+				"command" : 25,
+				"file" : 5,
+				"line" : 2129,
+				"parent" : 47
+			},
+			{
+				"command" : 25,
+				"file" : 5,
+				"line" : 1987,
+				"parent" : 47
+			},
+			{
+				"command" : 25,
+				"file" : 5,
+				"line" : 2129,
+				"parent" : 47
+			},
+			{
+				"command" : 25,
+				"file" : 5,
+				"line" : 1987,
+				"parent" : 47
+			},
+			{
+				"command" : 25,
+				"file" : 5,
+				"line" : 2129,
+				"parent" : 47
+			},
+			{
+				"command" : 25,
+				"file" : 5,
+				"line" : 1987,
+				"parent" : 47
+			},
+			{
+				"command" : 25,
+				"file" : 5,
+				"line" : 2129,
+				"parent" : 47
+			},
+			{
+				"command" : 25,
+				"file" : 5,
+				"line" : 1987,
+				"parent" : 47
+			},
+			{
+				"command" : 25,
+				"file" : 5,
+				"line" : 2129,
+				"parent" : 47
+			},
+			{
+				"command" : 25,
+				"file" : 5,
+				"line" : 1987,
+				"parent" : 47
+			},
+			{
+				"command" : 25,
+				"file" : 5,
+				"line" : 2129,
+				"parent" : 47
+			},
+			{
+				"command" : 25,
+				"file" : 5,
+				"line" : 1987,
+				"parent" : 47
+			},
+			{
+				"command" : 25,
+				"file" : 5,
+				"line" : 2129,
+				"parent" : 47
+			},
+			{
+				"command" : 25,
+				"file" : 5,
+				"line" : 1987,
+				"parent" : 47
+			},
+			{
+				"command" : 25,
+				"file" : 5,
+				"line" : 2129,
+				"parent" : 47
+			},
+			{
+				"command" : 25,
+				"file" : 5,
+				"line" : 1987,
+				"parent" : 47
+			},
+			{
+				"command" : 25,
+				"file" : 5,
+				"line" : 2129,
+				"parent" : 47
+			},
+			{
+				"command" : 25,
+				"file" : 5,
+				"line" : 1987,
+				"parent" : 47
+			},
+			{
+				"command" : 25,
+				"file" : 5,
+				"line" : 2129,
+				"parent" : 47
+			},
+			{
+				"command" : 29,
+				"file" : 5,
+				"line" : 2205,
+				"parent" : 47
+			},
+			{
+				"command" : 28,
+				"file" : 0,
+				"line" : 342,
+				"parent" : 91
+			},
+			{
+				"command" : 27,
+				"file" : 0,
+				"line" : 1810,
+				"parent" : 92
+			},
+			{
+				"command" : 25,
+				"file" : 0,
+				"line" : 1574,
+				"parent" : 93
+			}
+		]
+	},
+	"compileGroups" : 
+	[
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : "-O3 -DNDEBUG"
+				},
+				{
+					"backtrace" : 39,
+					"fragment" : "-fPIC"
+				},
+				{
+					"backtrace" : 39,
+					"fragment" : "-pthread"
+				},
+				{
+					"fragment" : "-std=gnu++17"
+				}
+			],
+			"defines" : 
+			[
+				{
+					"backtrace" : 39,
+					"define" : "QT_CORE_LIB"
+				},
+				{
+					"backtrace" : 6,
+					"define" : "QT_GUI_LIB"
+				},
+				{
+					"backtrace" : 16,
+					"define" : "QT_NETWORK_LIB"
+				},
+				{
+					"backtrace" : 39,
+					"define" : "QT_NO_DEBUG"
+				},
+				{
+					"backtrace" : 6,
+					"define" : "QT_OPENGL_LIB"
+				},
+				{
+					"backtrace" : 16,
+					"define" : "QT_QMLINTEGRATION_LIB"
+				},
+				{
+					"backtrace" : 6,
+					"define" : "QT_QMLMODELS_LIB"
+				},
+				{
+					"backtrace" : 16,
+					"define" : "QT_QML_LIB"
+				},
+				{
+					"backtrace" : 6,
+					"define" : "QT_QUICK_LIB"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 0,
+					"path" : "/home/ccs/01_Repos/BreathTrack-C02/build-BreathTracker-Desktop_Qt_6_4_1-Release/appBreathTracker_autogen/include"
+				},
+				{
+					"backtrace" : 56,
+					"path" : "/home/ccs/01_Repos/BreathTrack-C02/BreathTracker/inc"
+				},
+				{
+					"backtrace" : 58,
+					"path" : "/home/ccs/01_Repos/BreathTrack-C02/BreathTracker"
+				},
+				{
+					"backtrace" : 59,
+					"isSystem" : true,
+					"path" : "/opt/VM/Qt-6.4.1/include/QtQml/6.4.1"
+				},
+				{
+					"backtrace" : 59,
+					"isSystem" : true,
+					"path" : "/opt/VM/Qt-6.4.1/include/QtQml/6.4.1/QtQml"
+				},
+				{
+					"backtrace" : 59,
+					"isSystem" : true,
+					"path" : "/opt/VM/Qt-6.4.1/include/QtCore/6.4.1"
+				},
+				{
+					"backtrace" : 59,
+					"isSystem" : true,
+					"path" : "/opt/VM/Qt-6.4.1/include/QtCore/6.4.1/QtCore"
+				},
+				{
+					"backtrace" : 59,
+					"isSystem" : true,
+					"path" : "/opt/VM/Qt-6.4.1/include/QtCore"
+				},
+				{
+					"backtrace" : 59,
+					"isSystem" : true,
+					"path" : "/opt/VM/Qt-6.4.1/include"
+				},
+				{
+					"backtrace" : 59,
+					"isSystem" : true,
+					"path" : "/opt/VM/Qt-6.4.1/mkspecs/linux-g++"
+				},
+				{
+					"backtrace" : 59,
+					"isSystem" : true,
+					"path" : "/opt/VM/Qt-6.4.1/include/QtQml"
+				},
+				{
+					"backtrace" : 59,
+					"isSystem" : true,
+					"path" : "/opt/VM/Qt-6.4.1/include/QtQmlIntegration"
+				},
+				{
+					"backtrace" : 59,
+					"isSystem" : true,
+					"path" : "/opt/VM/Qt-6.4.1/include/QtNetwork"
+				},
+				{
+					"backtrace" : 6,
+					"isSystem" : true,
+					"path" : "/opt/VM/Qt-6.4.1/include/QtQuick"
+				},
+				{
+					"backtrace" : 6,
+					"isSystem" : true,
+					"path" : "/opt/VM/Qt-6.4.1/include/QtGui"
+				},
+				{
+					"backtrace" : 6,
+					"isSystem" : true,
+					"path" : "/opt/VM/Qt-6.4.1/include/QtQmlModels"
+				},
+				{
+					"backtrace" : 6,
+					"isSystem" : true,
+					"path" : "/opt/VM/Qt-6.4.1/include/QtOpenGL"
+				}
+			],
+			"language" : "CXX",
+			"languageStandard" : 
+			{
+				"backtraces" : 
+				[
+					39
+				],
+				"standard" : "17"
+			},
+			"sourceIndexes" : 
+			[
+				0,
+				18,
+				19,
+				20,
+				21,
+				22,
+				23,
+				24,
+				25,
+				26,
+				27,
+				28,
+				30,
+				31,
+				33,
+				34,
+				36,
+				38,
+				40,
+				42,
+				44,
+				46,
+				48,
+				50,
+				52,
+				54,
+				55
+			]
+		}
+	],
+	"dependencies" : 
+	[
+		{
+			"id" : "appBreathTracker_automoc_json_extraction::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 48,
+			"id" : "appBreathTracker_tooling::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 55,
+			"id" : "appBreathTracker_qmlimportscan::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 0,
+			"id" : "appBreathTracker_autogen::@6890427a1f51a3e7e1df"
+		}
+	],
+	"id" : "appBreathTracker::@6890427a1f51a3e7e1df",
+	"install" : 
+	{
+		"destinations" : 
+		[
+			{
+				"backtrace" : 5,
+				"path" : "bin"
+			}
+		],
+		"prefix" : 
+		{
+			"path" : "/usr/local"
+		}
+	},
+	"link" : 
+	{
+		"commandFragments" : 
+		[
+			{
+				"fragment" : "-O3 -DNDEBUG",
+				"role" : "flags"
+			},
+			{
+				"fragment" : "",
+				"role" : "flags"
+			},
+			{
+				"fragment" : "-Wl,-rpath,/opt/VM/Qt-6.4.1/lib:",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 6,
+				"fragment" : "/opt/VM/Qt-6.4.1/lib/libQt6Quick.so.6.4.1",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 13,
+				"fragment" : "/opt/VM/Qt-6.4.1/lib/libQt6QmlModels.so.6.4.1",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 16,
+				"fragment" : "/opt/VM/Qt-6.4.1/lib/libQt6Qml.so.6.4.1",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 25,
+				"fragment" : "/opt/VM/Qt-6.4.1/lib/libQt6Network.so.6.4.1",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 13,
+				"fragment" : "/opt/VM/Qt-6.4.1/lib/libQt6OpenGL.so.6.4.1",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 6,
+				"fragment" : "/opt/VM/Qt-6.4.1/lib/libQt6Gui.so.6.4.1",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 37,
+				"fragment" : "/usr/lib/x86_64-linux-gnu/libGLX.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 38,
+				"fragment" : "/usr/lib/x86_64-linux-gnu/libOpenGL.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 39,
+				"fragment" : "/opt/VM/Qt-6.4.1/lib/libQt6Core.so.6.4.1",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 46,
+				"fragment" : "-pthread",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-Wl,-rpath-link,/opt/VM/Qt-6.4.1/lib",
+				"role" : "libraries"
+			}
+		],
+		"language" : "CXX"
+	},
+	"name" : "appBreathTracker",
+	"nameOnDisk" : "appBreathTracker",
+	"paths" : 
+	{
+		"build" : ".",
+		"source" : "."
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "Source Files",
+			"sourceIndexes" : 
+			[
+				0,
+				23,
+				25,
+				30,
+				31,
+				33,
+				34,
+				36,
+				38,
+				40,
+				42,
+				44,
+				46,
+				48,
+				50,
+				52,
+				54,
+				55
+			]
+		},
+		{
+			"name" : "Header Files\\ Utils",
+			"sourceIndexes" : 
+			[
+				1,
+				17
+			]
+		},
+		{
+			"name" : "Header Files\\ Averager",
+			"sourceIndexes" : 
+			[
+				2,
+				6,
+				8,
+				15
+			]
+		},
+		{
+			"name" : "Header Files\\ Data Structures",
+			"sourceIndexes" : 
+			[
+				3,
+				4,
+				11
+			]
+		},
+		{
+			"name" : "Header Files\\ Data",
+			"sourceIndexes" : 
+			[
+				5
+			]
+		},
+		{
+			"name" : "Header Files\\ Backend Frontend Interface",
+			"sourceIndexes" : 
+			[
+				7,
+				9,
+				12,
+				16
+			]
+		},
+		{
+			"name" : "Header Files",
+			"sourceIndexes" : 
+			[
+				10
+			]
+		},
+		{
+			"name" : "Header Files\\  Sensor",
+			"sourceIndexes" : 
+			[
+				13,
+				14
+			]
+		},
+		{
+			"name" : "Source Files\\ Averager",
+			"sourceIndexes" : 
+			[
+				18,
+				22,
+				27
+			]
+		},
+		{
+			"name" : "Source Files\\ Data Structures",
+			"sourceIndexes" : 
+			[
+				19,
+				20
+			]
+		},
+		{
+			"name" : "Source Files\\ Data",
+			"sourceIndexes" : 
+			[
+				21
+			]
+		},
+		{
+			"name" : "Source Files\\ Backend Frontend Interface",
+			"sourceIndexes" : 
+			[
+				24,
+				28
+			]
+		},
+		{
+			"name" : "Source Files\\ Header Files \\ Sensor",
+			"sourceIndexes" : 
+			[
+				26
+			]
+		},
+		{
+			"name" : "",
+			"sourceIndexes" : 
+			[
+				29,
+				72,
+				73,
+				74,
+				75,
+				76,
+				77,
+				78
+			]
+		},
+		{
+			"name" : "QML",
+			"sourceIndexes" : 
+			[
+				32,
+				35,
+				37,
+				39
+			]
+		},
+		{
+			"name" : "QML\\ Components",
+			"sourceIndexes" : 
+			[
+				41,
+				43,
+				53
+			]
+		},
+		{
+			"name" : "QML\\ Components \\ Arcs",
+			"sourceIndexes" : 
+			[
+				45,
+				47,
+				49,
+				51
+			]
+		},
+		{
+			"name" : "CMake Rules",
+			"sourceIndexes" : 
+			[
+				56,
+				57,
+				58,
+				59,
+				60,
+				61,
+				62,
+				63,
+				64,
+				65,
+				66,
+				67,
+				68,
+				69,
+				70,
+				71
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 0,
+			"compileGroupIndex" : 0,
+			"isGenerated" : true,
+			"path" : "/home/ccs/01_Repos/BreathTrack-C02/build-BreathTracker-Desktop_Qt_6_4_1-Release/appBreathTracker_autogen/mocs_compilation.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 4,
+			"path" : "inc/FrontendTypes.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 4,
+			"path" : "inc/averagecalculator.h",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 4,
+			"path" : "inc/buffersubscription.h",
+			"sourceGroupIndex" : 3
+		},
+		{
+			"backtrace" : 4,
+			"path" : "inc/circularbuffer.h",
+			"sourceGroupIndex" : 3
+		},
+		{
+			"backtrace" : 4,
+			"path" : "inc/databuffermanager.h",
+			"sourceGroupIndex" : 4
+		},
+		{
+			"backtrace" : 4,
+			"path" : "inc/emaaverager.h",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 4,
+			"path" : "inc/frontendapi.h",
+			"sourceGroupIndex" : 5
+		},
+		{
+			"backtrace" : 4,
+			"path" : "inc/i_averager.h",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 4,
+			"path" : "inc/i_frontendapimodule.h",
+			"sourceGroupIndex" : 5
+		},
+		{
+			"backtrace" : 4,
+			"path" : "inc/i_sensor.h",
+			"sourceGroupIndex" : 6
+		},
+		{
+			"backtrace" : 4,
+			"path" : "inc/i_subscriber.h",
+			"sourceGroupIndex" : 3
+		},
+		{
+			"backtrace" : 4,
+			"path" : "inc/livedataapi.h",
+			"sourceGroupIndex" : 5
+		},
+		{
+			"backtrace" : 4,
+			"path" : "inc/sensorfactory.h",
+			"sourceGroupIndex" : 7
+		},
+		{
+			"backtrace" : 4,
+			"path" : "inc/sensorsimulator.h",
+			"sourceGroupIndex" : 7
+		},
+		{
+			"backtrace" : 4,
+			"path" : "inc/smaaverager.h",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 4,
+			"path" : "inc/trenddataapi.h",
+			"sourceGroupIndex" : 5
+		},
+		{
+			"backtrace" : 4,
+			"path" : "inc/types.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 4,
+			"compileGroupIndex" : 0,
+			"path" : "src/averagecalculator.cpp",
+			"sourceGroupIndex" : 8
+		},
+		{
+			"backtrace" : 4,
+			"compileGroupIndex" : 0,
+			"path" : "src/buffersubscription.cpp",
+			"sourceGroupIndex" : 9
+		},
+		{
+			"backtrace" : 4,
+			"compileGroupIndex" : 0,
+			"path" : "src/circularbuffer.cpp",
+			"sourceGroupIndex" : 9
+		},
+		{
+			"backtrace" : 4,
+			"compileGroupIndex" : 0,
+			"path" : "src/databuffermanager.cpp",
+			"sourceGroupIndex" : 10
+		},
+		{
+			"backtrace" : 4,
+			"compileGroupIndex" : 0,
+			"path" : "src/emaaverager.cpp",
+			"sourceGroupIndex" : 8
+		},
+		{
+			"backtrace" : 4,
+			"compileGroupIndex" : 0,
+			"path" : "src/frontendapi.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 4,
+			"compileGroupIndex" : 0,
+			"path" : "src/livedataapi.cpp",
+			"sourceGroupIndex" : 11
+		},
+		{
+			"backtrace" : 4,
+			"compileGroupIndex" : 0,
+			"path" : "src/main.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 4,
+			"compileGroupIndex" : 0,
+			"path" : "src/sensorsimulator.cpp",
+			"sourceGroupIndex" : 12
+		},
+		{
+			"backtrace" : 4,
+			"compileGroupIndex" : 0,
+			"path" : "src/smaaverager.cpp",
+			"sourceGroupIndex" : 8
+		},
+		{
+			"backtrace" : 4,
+			"compileGroupIndex" : 0,
+			"path" : "src/trenddataapi.cpp",
+			"sourceGroupIndex" : 11
+		},
+		{
+			"backtrace" : 61,
+			"isGenerated" : true,
+			"path" : "/home/ccs/01_Repos/BreathTrack-C02/build-BreathTracker-Desktop_Qt_6_4_1-Release/meta_types/qt6appbreathtracker_release_metatypes.json.gen",
+			"sourceGroupIndex" : 13
+		},
+		{
+			"backtrace" : 62,
+			"compileGroupIndex" : 0,
+			"isGenerated" : true,
+			"path" : "/home/ccs/01_Repos/BreathTrack-C02/build-BreathTracker-Desktop_Qt_6_4_1-Release/appbreathtracker_qmltyperegistrations.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 66,
+			"compileGroupIndex" : 0,
+			"isGenerated" : true,
+			"path" : "/home/ccs/01_Repos/BreathTrack-C02/build-BreathTracker-Desktop_Qt_6_4_1-Release/.rcc/qrc_qmake_BreathTracker.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 67,
+			"path" : "qml/main.qml",
+			"sourceGroupIndex" : 14
+		},
+		{
+			"backtrace" : 69,
+			"compileGroupIndex" : 0,
+			"isGenerated" : true,
+			"path" : "/home/ccs/01_Repos/BreathTrack-C02/build-BreathTracker-Desktop_Qt_6_4_1-Release/.rcc/qmlcache/appBreathTracker_qmlcache_loader.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 70,
+			"compileGroupIndex" : 0,
+			"isGenerated" : true,
+			"path" : "/home/ccs/01_Repos/BreathTrack-C02/build-BreathTracker-Desktop_Qt_6_4_1-Release/.rcc/qmlcache/appBreathTracker_qml/main_qml.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 71,
+			"path" : "qml/DataTrends.qml",
+			"sourceGroupIndex" : 14
+		},
+		{
+			"backtrace" : 72,
+			"compileGroupIndex" : 0,
+			"isGenerated" : true,
+			"path" : "/home/ccs/01_Repos/BreathTrack-C02/build-BreathTracker-Desktop_Qt_6_4_1-Release/.rcc/qmlcache/appBreathTracker_qml/DataTrends_qml.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 73,
+			"path" : "qml/LiveData.qml",
+			"sourceGroupIndex" : 14
+		},
+		{
+			"backtrace" : 74,
+			"compileGroupIndex" : 0,
+			"isGenerated" : true,
+			"path" : "/home/ccs/01_Repos/BreathTrack-C02/build-BreathTracker-Desktop_Qt_6_4_1-Release/.rcc/qmlcache/appBreathTracker_qml/LiveData_qml.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 75,
+			"path" : "qml/LiveDataBackground.qml",
+			"sourceGroupIndex" : 14
+		},
+		{
+			"backtrace" : 76,
+			"compileGroupIndex" : 0,
+			"isGenerated" : true,
+			"path" : "/home/ccs/01_Repos/BreathTrack-C02/build-BreathTracker-Desktop_Qt_6_4_1-Release/.rcc/qmlcache/appBreathTracker_qml/LiveDataBackground_qml.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 77,
+			"path" : "qml/SettingsDrawer.qml",
+			"sourceGroupIndex" : 15
+		},
+		{
+			"backtrace" : 78,
+			"compileGroupIndex" : 0,
+			"isGenerated" : true,
+			"path" : "/home/ccs/01_Repos/BreathTrack-C02/build-BreathTracker-Desktop_Qt_6_4_1-Release/.rcc/qmlcache/appBreathTracker_qml/SettingsDrawer_qml.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 79,
+			"path" : "qml/SettingsSection.qml",
+			"sourceGroupIndex" : 15
+		},
+		{
+			"backtrace" : 80,
+			"compileGroupIndex" : 0,
+			"isGenerated" : true,
+			"path" : "/home/ccs/01_Repos/BreathTrack-C02/build-BreathTracker-Desktop_Qt_6_4_1-Release/.rcc/qmlcache/appBreathTracker_qml/SettingsSection_qml.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 81,
+			"path" : "qml/ArcRight.qml",
+			"sourceGroupIndex" : 16
+		},
+		{
+			"backtrace" : 82,
+			"compileGroupIndex" : 0,
+			"isGenerated" : true,
+			"path" : "/home/ccs/01_Repos/BreathTrack-C02/build-BreathTracker-Desktop_Qt_6_4_1-Release/.rcc/qmlcache/appBreathTracker_qml/ArcRight_qml.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 83,
+			"path" : "qml/ArcLeft.qml",
+			"sourceGroupIndex" : 16
+		},
+		{
+			"backtrace" : 84,
+			"compileGroupIndex" : 0,
+			"isGenerated" : true,
+			"path" : "/home/ccs/01_Repos/BreathTrack-C02/build-BreathTracker-Desktop_Qt_6_4_1-Release/.rcc/qmlcache/appBreathTracker_qml/ArcLeft_qml.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 85,
+			"path" : "qml/ArcItem.qml",
+			"sourceGroupIndex" : 16
+		},
+		{
+			"backtrace" : 86,
+			"compileGroupIndex" : 0,
+			"isGenerated" : true,
+			"path" : "/home/ccs/01_Repos/BreathTrack-C02/build-BreathTracker-Desktop_Qt_6_4_1-Release/.rcc/qmlcache/appBreathTracker_qml/ArcItem_qml.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 87,
+			"path" : "qml/CircleIndicator.qml",
+			"sourceGroupIndex" : 16
+		},
+		{
+			"backtrace" : 88,
+			"compileGroupIndex" : 0,
+			"isGenerated" : true,
+			"path" : "/home/ccs/01_Repos/BreathTrack-C02/build-BreathTracker-Desktop_Qt_6_4_1-Release/.rcc/qmlcache/appBreathTracker_qml/CircleIndicator_qml.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 89,
+			"path" : "qml/CustomLabel.qml",
+			"sourceGroupIndex" : 15
+		},
+		{
+			"backtrace" : 90,
+			"compileGroupIndex" : 0,
+			"isGenerated" : true,
+			"path" : "/home/ccs/01_Repos/BreathTrack-C02/build-BreathTracker-Desktop_Qt_6_4_1-Release/.rcc/qmlcache/appBreathTracker_qml/CustomLabel_qml.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 94,
+			"compileGroupIndex" : 0,
+			"isGenerated" : true,
+			"path" : "/home/ccs/01_Repos/BreathTrack-C02/build-BreathTracker-Desktop_Qt_6_4_1-Release/.rcc/qrc_appBreathTracker_raw_qml_0.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "/home/ccs/01_Repos/BreathTrack-C02/build-BreathTracker-Desktop_Qt_6_4_1-Release/meta_types/qt6appbreathtracker_release_metatypes.json.gen.rule",
+			"sourceGroupIndex" : 17
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "/home/ccs/01_Repos/BreathTrack-C02/build-BreathTracker-Desktop_Qt_6_4_1-Release/appbreathtracker_qmltyperegistrations.cpp.rule",
+			"sourceGroupIndex" : 17
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "/home/ccs/01_Repos/BreathTrack-C02/build-BreathTracker-Desktop_Qt_6_4_1-Release/.rcc/qrc_qmake_BreathTracker.cpp.rule",
+			"sourceGroupIndex" : 17
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "/home/ccs/01_Repos/BreathTrack-C02/build-BreathTracker-Desktop_Qt_6_4_1-Release/.rcc/qmlcache/appBreathTracker_qmlcache_loader.cpp.rule",
+			"sourceGroupIndex" : 17
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "/home/ccs/01_Repos/BreathTrack-C02/build-BreathTracker-Desktop_Qt_6_4_1-Release/.rcc/qmlcache/appBreathTracker_qml/main_qml.cpp.rule",
+			"sourceGroupIndex" : 17
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "/home/ccs/01_Repos/BreathTrack-C02/build-BreathTracker-Desktop_Qt_6_4_1-Release/.rcc/qmlcache/appBreathTracker_qml/DataTrends_qml.cpp.rule",
+			"sourceGroupIndex" : 17
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "/home/ccs/01_Repos/BreathTrack-C02/build-BreathTracker-Desktop_Qt_6_4_1-Release/.rcc/qmlcache/appBreathTracker_qml/LiveData_qml.cpp.rule",
+			"sourceGroupIndex" : 17
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "/home/ccs/01_Repos/BreathTrack-C02/build-BreathTracker-Desktop_Qt_6_4_1-Release/.rcc/qmlcache/appBreathTracker_qml/LiveDataBackground_qml.cpp.rule",
+			"sourceGroupIndex" : 17
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "/home/ccs/01_Repos/BreathTrack-C02/build-BreathTracker-Desktop_Qt_6_4_1-Release/.rcc/qmlcache/appBreathTracker_qml/SettingsDrawer_qml.cpp.rule",
+			"sourceGroupIndex" : 17
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "/home/ccs/01_Repos/BreathTrack-C02/build-BreathTracker-Desktop_Qt_6_4_1-Release/.rcc/qmlcache/appBreathTracker_qml/SettingsSection_qml.cpp.rule",
+			"sourceGroupIndex" : 17
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "/home/ccs/01_Repos/BreathTrack-C02/build-BreathTracker-Desktop_Qt_6_4_1-Release/.rcc/qmlcache/appBreathTracker_qml/ArcRight_qml.cpp.rule",
+			"sourceGroupIndex" : 17
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "/home/ccs/01_Repos/BreathTrack-C02/build-BreathTracker-Desktop_Qt_6_4_1-Release/.rcc/qmlcache/appBreathTracker_qml/ArcLeft_qml.cpp.rule",
+			"sourceGroupIndex" : 17
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "/home/ccs/01_Repos/BreathTrack-C02/build-BreathTracker-Desktop_Qt_6_4_1-Release/.rcc/qmlcache/appBreathTracker_qml/ArcItem_qml.cpp.rule",
+			"sourceGroupIndex" : 17
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "/home/ccs/01_Repos/BreathTrack-C02/build-BreathTracker-Desktop_Qt_6_4_1-Release/.rcc/qmlcache/appBreathTracker_qml/CircleIndicator_qml.cpp.rule",
+			"sourceGroupIndex" : 17
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "/home/ccs/01_Repos/BreathTrack-C02/build-BreathTracker-Desktop_Qt_6_4_1-Release/.rcc/qmlcache/appBreathTracker_qml/CustomLabel_qml.cpp.rule",
+			"sourceGroupIndex" : 17
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "/home/ccs/01_Repos/BreathTrack-C02/build-BreathTracker-Desktop_Qt_6_4_1-Release/.rcc/qrc_appBreathTracker_raw_qml_0.cpp.rule",
+			"sourceGroupIndex" : 17
+		},
+		{
+			"backtrace" : 39,
+			"path" : "/opt/VM/Qt-6.4.1/lib/metatypes/qt6core_release_metatypes.json",
+			"sourceGroupIndex" : 13
+		},
+		{
+			"backtrace" : 16,
+			"path" : "/opt/VM/Qt-6.4.1/lib/metatypes/qt6qml_release_metatypes.json",
+			"sourceGroupIndex" : 13
+		},
+		{
+			"backtrace" : 16,
+			"path" : "/opt/VM/Qt-6.4.1/lib/metatypes/qt6network_release_metatypes.json",
+			"sourceGroupIndex" : 13
+		},
+		{
+			"backtrace" : 6,
+			"path" : "/opt/VM/Qt-6.4.1/lib/metatypes/qt6quick_release_metatypes.json",
+			"sourceGroupIndex" : 13
+		},
+		{
+			"backtrace" : 6,
+			"path" : "/opt/VM/Qt-6.4.1/lib/metatypes/qt6gui_release_metatypes.json",
+			"sourceGroupIndex" : 13
+		},
+		{
+			"backtrace" : 6,
+			"path" : "/opt/VM/Qt-6.4.1/lib/metatypes/qt6qmlmodels_release_metatypes.json",
+			"sourceGroupIndex" : 13
+		},
+		{
+			"backtrace" : 6,
+			"path" : "/opt/VM/Qt-6.4.1/lib/metatypes/qt6opengl_release_metatypes.json",
+			"sourceGroupIndex" : 13
+		}
+	],
+	"type" : "EXECUTABLE"
+}

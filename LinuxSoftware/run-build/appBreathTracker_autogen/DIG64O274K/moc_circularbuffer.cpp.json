@@ -1,0 +1,30 @@
+{
+    "classes": [
+        {
+            "className": "CircularBuffer",
+            "object": true,
+            "qualifiedClassName": "CircularBuffer",
+            "signals": [
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "newDataIntervalMs",
+                            "type": "int"
+                        }
+                    ],
+                    "name": "dataAdded",
+                    "returnType": "void"
+                }
+            ],
+            "superClasses": [
+                {
+                    "access": "public",
+                    "name": "QObject"
+                }
+            ]
+        }
+    ],
+    "inputFile": "circularbuffer.h",
+    "outputRevision": 68
+}

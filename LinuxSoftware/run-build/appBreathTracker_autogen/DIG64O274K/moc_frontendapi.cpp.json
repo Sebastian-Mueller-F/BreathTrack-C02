@@ -1,0 +1,17 @@
+{
+    "classes": [
+        {
+            "className": "FrontendApi",
+            "object": true,
+            "qualifiedClassName": "FrontendApi",
+            "superClasses": [
+                {
+                    "access": "public",
+                    "name": "QObject"
+                }
+            ]
+        }
+    ],
+    "inputFile": "frontendapi.h",
+    "outputRevision": 68
+}
