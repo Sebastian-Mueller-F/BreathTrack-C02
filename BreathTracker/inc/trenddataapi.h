@@ -8,37 +8,40 @@
 
 #include <I_FrontendAPI.h>
 #include <I_Subscriber.h>
+#include <databuffermanager.h>
 #include <types.h>
 
 /**
  * @brief The TrendDataAPI class
  */
 
-class TrendDataAPI : public QObject, public I_Subscriber, public I_FrontendAPI {
-  Q_OBJECT
+class TrendDataAPI : public QObject, public I_Subscriber, public I_FrontendAPIModule
+{
+    Q_OBJECT
+
+    Q_PROPERTY(QVariantList raw READ raw WRITE setRaw NOTIFY rawChanged)
+    Q_PROPERTY(QVariantList sma READ sma WRITE setSma NOTIFY smaChanged)
+    Q_PROPERTY(QVariantList ema READ ema WRITE setEma NOTIFY emaChanged)
 
 public:
-  TrendDataAPI(QObject *parent = nullptr);
+    explicit TrendDataAPI(DataBufferManager *dataBufferManager = nullptr, QObject *parent = nullptr);
 
-  ~TrendDataAPI() override {
-    // Destructor
-  }
+    ~TrendDataAPI() override;
 
-  static QObject *qmlInstance(QQmlEngine *engine, QJSEngine *scriptEngine);
-  static QSharedPointer<TrendDataAPI> instance();
+    static TrendDataAPI *instance(DataBufferManager *dataBufferManager = nullptr,
+                                  QObject *parent = nullptr);
+    static QObject *qmlInstance(QQmlEngine *engine, QJSEngine *scriptEngine);
 
-  Q_PROPERTY(QVariantList raw READ raw WRITE setRaw NOTIFY rawChanged)
-  Q_PROPERTY(QVariantList sma READ sma WRITE setSma NOTIFY smaChanged)
-  Q_PROPERTY(QVariantList ema READ ema WRITE setEma NOTIFY emaChanged)
+    void initialize(); // Method to set up subscriptions
 
-  QVariantList raw() const;
-  void setRaw(const QVariantList &newRaw);
+    QVariantList raw() const;
+    void setRaw(const QVariantList &newRaw);
 
-  QVariantList sma() const;
-  void setSma(const QVariantList &newSma);
+    QVariantList sma() const;
+    void setSma(const QVariantList &newSma);
 
-  QVariantList ema() const;
-  void setEma(const QVariantList &newEma);
+    QVariantList ema() const;
+    void setEma(const QVariantList &newEma);
 
 signals:
   void rawChanged(QVariantList &newData);
@@ -46,20 +49,22 @@ signals:
   void emaChanged(QVariantList &newData);
 
 private:
-  static QSharedPointer<TrendDataAPI> _instance;
+    static QScopedPointer<TrendDataAPI> _instance;
 
-  QVariantList _raw;
-  QVariantList _sma;
-  QVariantList _ema;
+    DataBufferManager *_dataBufferManager;
 
-  // FrontendAPI
-  void getBackendData() override;
-  void handleFrontendRequest() override;
-  void saveSettings(QString key, QVariant val) override;
-  void loadSettings() override;
+    QVariantList _raw;
+    QVariantList _sma;
+    QVariantList _ema;
 
-  // Subscriber
-  void onNewData(const std::vector<double> &data, SensorDataType type) override;
+    // FrontendAPI
+    void getBackendData() override;
+    void handleFrontendRequest() override;
+    void saveSettings(QString key, QVariant val) override;
+    void loadSettings() override;
+
+    // Subscriber
+    void onNewData(const std::vector<double> &data, SensorDataType type) override;
 };
 
 #endif // TRENDDATAAPI_H

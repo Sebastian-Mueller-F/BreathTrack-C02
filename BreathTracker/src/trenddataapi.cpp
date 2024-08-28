@@ -1,24 +1,38 @@
 #include "trenddataapi.h"
 
-QSharedPointer<TrendDataAPI> TrendDataAPI::_instance = nullptr;
+QScopedPointer<TrendDataAPI> TrendDataAPI::_instance;
 
-TrendDataAPI::TrendDataAPI(QObject *parent) {
-  // qRegisterMetaType<QList<double>>("QList<double>");
+TrendDataAPI::TrendDataAPI(DataBufferManager *dataBufferManager, QObject *parent)
+    : QObject(parent)
+    , _dataBufferManager(dataBufferManager)
+{}
+
+TrendDataAPI::~TrendDataAPI()
+{
+    qDebug() << "TrendDataAPI destroyed";
+    //TODO: unregister from all buffers
 }
 
-QObject *TrendDataAPI::qmlInstance(QQmlEngine *engine,
-                                   QJSEngine *scriptEngine) {
-  Q_UNUSED(scriptEngine)
-  Q_UNUSED(engine)
-
-  return TrendDataAPI::instance().data();
+TrendDataAPI *TrendDataAPI::instance(DataBufferManager *dataBufferManager, QObject *parent)
+{
+    if (!_instance) {
+        _instance.reset(new TrendDataAPI(dataBufferManager, parent));
+    }
+    return _instance.data();
 }
 
-QSharedPointer<TrendDataAPI> TrendDataAPI::instance() {
-  if (_instance.isNull()) {
-    _instance = QSharedPointer<TrendDataAPI>::create();
-  }
-  return _instance;
+QObject *TrendDataAPI::qmlInstance(QQmlEngine *engine, QJSEngine *scriptEngine)
+{
+    Q_UNUSED(engine);
+    Q_UNUSED(scriptEngine);
+
+    return TrendDataAPI::instance();
+}
+
+void TrendDataAPI::initialize()
+{
+    // Subscribe to all relevant buffers and get data from the buffers
+    _dataBufferManager->subscribeToAll(std::shared_ptr<I_Subscriber>(this), 50000);
 }
 
 QVariantList TrendDataAPI::raw() const { return _raw; }

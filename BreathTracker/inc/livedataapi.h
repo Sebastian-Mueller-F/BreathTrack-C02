@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QQmlEngine>
+#include <QScopedPointer>
 
 #include <FrontendTypes.h>
 #include <I_FrontendAPI.h>
@@ -12,69 +13,77 @@
 #include <smaaverager.h>
 
 // Singleton
-class LiveDataAPI : public QObject, public I_FrontendAPI {
-  Q_OBJECT
+class LiveDataAPI : public QObject, public I_FrontendAPIModule
+{
+    Q_OBJECT
+    Q_PROPERTY(int smaPeriod READ smaPeriod WRITE setSmaPeriod NOTIFY smaPeriodChanged FINAL)
+    Q_PROPERTY(int emaPeriod READ emaPeriod WRITE setEmaPeriod NOTIFY emaPeriodChanged FINAL)
+    Q_PROPERTY(int sensorValue READ sensorValue WRITE setSensorValue NOTIFY sensorValueChanged)
+    Q_PROPERTY(
+        int averagedValue READ averagedValue WRITE setAveragedValue NOTIFY averagedValueChanged)
+    Q_PROPERTY(FrontendTypes::AverageType averageType READ averageType WRITE setAverageType NOTIFY
+                   averageTypeChanged)
+
 public:
-  LiveDataAPI(QObject *parent = nullptr);
+    explicit LiveDataAPI(I_Sensor *sensorSimulator,
+                         I_Averager *smaAverager,
+                         I_Averager *emaAverager,
 
-  ~LiveDataAPI() override {
-    // Destructor
-  }
+                         QObject *parent = nullptr);
 
-  static QObject *qmlInstance(QQmlEngine *engine, QJSEngine *scriptEngine);
-  // TODO: Change to std::unique / std::shared ?
-  static LiveDataAPI *instance();
+    ~LiveDataAPI() override;
+
+    static LiveDataAPI *instance(I_Sensor *sensor = nullptr,
+                                 I_Averager *smaAverager = nullptr,
+                                 I_Averager *emaAverager = nullptr,
+                                 QObject *parent = nullptr);
+    static QObject *qmlInstance(QQmlEngine *engine, QJSEngine *scriptEngine);
+
+    void initialize();
+    bool validateDependencies();
+
+    int sensorValue() const;
+    void setSensorValue(int newSensorValue);
+    int averagedValue() const;
+    void setAveragedValue(int newAveragedValue);
+
+    FrontendTypes::AverageType averageType() const;
+    void setAverageType(const FrontendTypes::AverageType &newAverageType);
+
+    int smaPeriod() const;
+    Q_INVOKABLE void setSmaPeriod(int newSmaPeriod);
+    int emaPeriod() const;
+    Q_INVOKABLE void setEmaPeriod(int newEmaPeriod);
 
 private:
-  static LiveDataAPI *_instance;
+    static QScopedPointer<LiveDataAPI> _instance;
 
-  int _smaPeriod;
-  int _emaPeriod;
-  int _sensorValue;
-  int _averagedValue;
-  FrontendTypes::AverageType _averageType;
+    int _smaPeriod;
+    int _emaPeriod;
+    int _sensorValue;
+    int _averagedValue;
+    FrontendTypes::AverageType _averageType;
 
-  Q_PROPERTY(int smaPeriod READ smaPeriod WRITE setSmaPeriod NOTIFY
-                 smaPeriodChanged FINAL)
-  Q_PROPERTY(int emaPeriod READ emaPeriod WRITE setEmaPeriod NOTIFY
-                 emaPeriodChanged FINAL)
-  Q_PROPERTY(int sensorValue READ sensorValue WRITE setSensorValue NOTIFY
-                 sensorValueChanged)
-  Q_PROPERTY(int averagedValue READ averagedValue WRITE setAveragedValue NOTIFY
-                 averagedValueChanged)
-  Q_PROPERTY(FrontendTypes::AverageType averageType READ averageType WRITE
-                 setAverageType NOTIFY averageTypeChanged)
+    void getBackendData() override;
+    void handleFrontendRequest() override;
+    void saveSettings(QString key, QVariant val) override;
+    void loadSettings() override;
 
-  void getBackendData() override;
-  void handleFrontendRequest() override;
-  void saveSettings(QString key, QVariant val) override;
-  void loadSettings() override;
+    void updatePeriodInAveragers();
 
-  void updatePeriodInAveragers();
-
-public:
-  int sensorValue() const;
-  void setSensorValue(int newSensorValue);
-  int averagedValue() const;
-  void setAveragedValue(int newAveragedValue);
-
-  FrontendTypes::AverageType averageType() const;
-  void setAverageType(const FrontendTypes::AverageType &newAverageType);
-
-  int smaPeriod() const;
-  Q_INVOKABLE void setSmaPeriod(int newSmaPeriod);
-  int emaPeriod() const;
-  Q_INVOKABLE void setEmaPeriod(int newEmaPeriod);
+    I_Sensor *_sensor;
+    I_Averager *_smaAverager;
+    I_Averager *_emaAverager;
 
 signals:
 
-  void sensorValueChanged();
-  void averagedValueChanged();
+    void sensorValueChanged();
+    void averagedValueChanged();
 
-  void averageTypeChanged();
-  void averagingPeriodChanged();
-  void smaPeriodChanged();
-  void emaPeriodChanged();
+    void averageTypeChanged();
+    void averagingPeriodChanged();
+    void smaPeriodChanged();
+    void emaPeriodChanged();
 };
 
 #endif // LIVEDATAAPI_H

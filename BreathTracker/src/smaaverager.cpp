@@ -3,7 +3,7 @@
 #include <numeric> // for std::accumulate
 #include <stdexcept>
 
-QSharedPointer<SMAAverager> SMAAverager::_instance = nullptr;
+std::shared_ptr<SMAAverager> SMAAverager::_instance = nullptr;
 
 SMAAverager::SMAAverager(size_t period, QObject *parent)
     : I_Averager(parent), _period(period) {
@@ -11,21 +11,29 @@ SMAAverager::SMAAverager(size_t period, QObject *parent)
   _averageType = SensorDataType::SMA;
 }
 
-QSharedPointer<SMAAverager> SMAAverager::instance() {
-  if (_instance.isNull()) {
-    _instance = QSharedPointer<SMAAverager>::create(2);
-  }
-  return _instance;
+SMAAverager::~SMAAverager()
+{
+    qDebug() << "SMA Averager destroyed";
+}
+
+std::shared_ptr<SMAAverager> SMAAverager::instance()
+{
+    if (_instance == nullptr) {
+        _instance = std::shared_ptr<SMAAverager>(new SMAAverager(10));
+        qDebug() << "SMAAverager Singleton instance created.";
+    }
+    return _instance;
 }
 
 void SMAAverager::onNewData(const std::vector<double> &data,
                             SensorDataType type) {
-  _recentData = data;
+    qDebug() << "SMA On New Data";
+    _recentData = data;
 
-  double sma = calculate();
+    double sma = calculate();
 
-  emit averageUpdated(sma, this->_averageType);
-  // qDebug() << "Emitted averageUpdated signal with SMA:" << sma;
+    emit averageUpdated(sma, this->_averageType);
+    qDebug() << "Emitted averageUpdated signal with SMA:" << sma;
 }
 
 double SMAAverager::calculate() {

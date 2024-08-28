@@ -12,17 +12,16 @@
 // TODO 2. do we need to limit the number of values that are being taking into
 // account for the averager ?
 
-class SMAAverager : public I_Averager, public I_Subscriber {
-  Q_OBJECT
+class SMAAverager : public I_Averager, public I_Subscriber
+{
+    Q_OBJECT
 
 public:
   SMAAverager(size_t period, QObject *parent = nullptr);
 
-  ~SMAAverager() override {
-    // Destructor code, if any specific cleanup is needed
-  }
+  ~SMAAverager() override;
 
-  static QSharedPointer<SMAAverager> instance();
+  static std::shared_ptr<SMAAverager> instance();
 
   double calculate() override;
   size_t getPeriod() const override;
@@ -34,10 +33,10 @@ public:
   void onPeriodChanged() override;
 
 private:
-  static QSharedPointer<SMAAverager> _instance;
+    static std::shared_ptr<SMAAverager> _instance;
 
-  size_t _period;
-  std::vector<double> _recentData;
+    size_t _period;
+    std::vector<double> _recentData;
 };
 
 #endif // SMAAVERGER_H

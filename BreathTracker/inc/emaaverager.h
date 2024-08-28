@@ -14,12 +14,11 @@ class EMAAverager : public I_Averager, public I_Subscriber {
 public:
   EMAAverager(size_t period, QObject *parent = nullptr);
 
-  ~EMAAverager() override {
-    // Destructor code, if any specific cleanup is needed
-  }
+  ~EMAAverager() override;
+  ;
 
   // singleton
-  static QSharedPointer<EMAAverager> instance();
+  static std::shared_ptr<EMAAverager> instance();
 
   double calculate() override;
   size_t getPeriod() const override;
@@ -32,12 +31,12 @@ public:
 
 private:
   // singleton
-  static QSharedPointer<EMAAverager> _instance;
+    static std::shared_ptr<EMAAverager> _instance;
 
-  size_t _period;
-  double _previousEMA;
-  bool _isFirstCalculation;
-  double _alpha;
+    size_t _period;
+    double _previousEMA;
+    bool _isFirstCalculation;
+    double _alpha;
 };
 
 #endif // EMAAVERAGER_H

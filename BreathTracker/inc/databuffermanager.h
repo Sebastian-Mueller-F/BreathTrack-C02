@@ -8,50 +8,51 @@
 #include <emaaverager.h>
 #include <sensorsimulator.h>
 #include <smaaverager.h>
-#include <trenddataapi.h>
 #include <types.h>
 
-class DataBufferManager : public QObject {
-  Q_OBJECT
+class DataBufferManager : public QObject
+{
+    Q_OBJECT
 public:
-  DataBufferManager(QObject *parent = nullptr);
+    explicit DataBufferManager(std::shared_ptr<I_Sensor> sensor,
+                               std::shared_ptr<I_Averager> smaAverager,
+                               std::shared_ptr<I_Averager> emaAverager,
+                               QObject *parent = nullptr);
 
-  // TODO: Include Buffer Subscription Class
-  /* TODO: add data into buffers from..
-   *      .. sensor
-   *      .. sma
-   *      .. ema
-   */
+    static std::shared_ptr<DataBufferManager> instance(std::shared_ptr<I_Sensor> sensor,
+                                                       std::shared_ptr<I_Averager> smaAverager,
+                                                       std::shared_ptr<I_Averager> emaAverager);
 
-  /* TODO: add subscribers to each buffer ..
-   *      .. raw: Trend Calculator, FrontendAPI
-   *      .. sma: Trend Calculator, FrontendAPI
-   *      .. ema: Trend Calculator, FrontendAPI
-   */
+    CircularBuffer *getBuffer(SensorDataType type);
 
-  // Singleton
-  static std::shared_ptr<DataBufferManager> instance();
-
-  CircularBuffer *getBuffer(SensorDataType type);
+    void subscribe(std::shared_ptr<I_Subscriber> subscriber,
+                   SensorDataType type,
+                   int lookBackPeriodMS);
+    void subscribeToAll(std::shared_ptr<I_Subscriber> subscriber, int lookBackPeriodMS);
 
 private slots:
-  void onNewData(double newData, SensorDataType sensorDataType);
+    void onNewData(double newData, SensorDataType sensorDataType);
+
+signals:
+    void bufferInitialized(SensorDataType type, CircularBuffer *buffer);
 
 private:
-  std::map<SensorDataType, CircularBuffer *> _buffers;
-  void initializeBuffers();
+    void initializeBuffers();
+    void validateDependecies();
 
-  size_t _rawCapacity = 1000;     // Example: 10 minutes at 1-second intervals
-  size_t _averageCapacity = 1000; // Example: 5 minutes at 5-second intervals
+    static std::shared_ptr<DataBufferManager> _instance;
 
-  static std::shared_ptr<DataBufferManager> _instance;
+    std::shared_ptr<I_Sensor> _sensor;
+    std::shared_ptr<I_Averager> _smaAverager;
+    std::shared_ptr<I_Averager> _emaAverager;
 
-  std::shared_ptr<BufferSubscription> _rawTrendBufferSubscription;
-  std::shared_ptr<BufferSubscription> _smaTrendBufferSubscription;
-  std::shared_ptr<BufferSubscription> _emaTrendBufferSubscription;
+    size_t _rawCapacity = 1000;     // Example: 10 minutes at 1-second intervals
+    size_t _averageCapacity = 1000; // Example: 5 minutes at 5-second intervals
+    std::unordered_map<SensorDataType, CircularBuffer *> _buffers;
+    std::unordered_map<SensorDataType, std::shared_ptr<BufferSubscription>> _subscriptions;
 
-  // development functions
-  void printBufferValues();
+    // development functions
+    void printBufferValues();
 };
 
 #endif // DATABUFFERMANAGER_H

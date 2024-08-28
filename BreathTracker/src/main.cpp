@@ -1,91 +1,128 @@
 #include <QGuiApplication>
-#include <QQmlApplicationEngine>
-#include <sensorsimulator.h>
-
 #include <QLocale>
 #include <QMetaType>
+#include <QQmlApplicationEngine>
 #include <QQmlEngine>
 #include <QTranslator>
 #include <QVector>
 
 #include <I_Sensor.h>
-#include <I_Subscriber.h>
+#include <averagecalculator.h>
 #include <buffersubscription.h>
-#include <circularbuffer.h>
 #include <databuffermanager.h>
 #include <emaaverager.h>
+#include <frontendapi.h>
 #include <livedataapi.h>
 #include <sensorfactory.h>
+#include <sensorsimulator.h>
 #include <smaaverager.h>
 
-int main(int argc, char *argv[]) {
-  QGuiApplication app(argc, argv);
+struct PermanentBackendObjects
+{
+    PermanentBackendObjects(std::shared_ptr<BackendDependencies> backendDeps,
+                            std::shared_ptr<AverageCalculator> avgCalc)
+        : backendDependencies(backendDeps)
+        , avgCalc(avgCalc)
+    {}
 
-  QTranslator translator;
-  const QStringList uiLanguages = QLocale::system().uiLanguages();
-  for (const QString &locale : uiLanguages) {
-    const QString baseName = "BreathTracker_" + QLocale(locale).name();
-    if (translator.load(":/i18n/" + baseName)) {
-      app.installTranslator(&translator);
-      break;
+    std::shared_ptr<BackendDependencies> backendDependencies;
+    std::shared_ptr<AverageCalculator> avgCalc;
+};
+
+void initializeTranslator(QGuiApplication &app)
+{
+    QTranslator translator;
+    const QStringList uiLanguages = QLocale::system().uiLanguages();
+    for (const QString &locale : uiLanguages) {
+        const QString baseName = "BreathTracker_" + QLocale(locale).name();
+        if (translator.load(":/i18n/" + baseName)) {
+            app.installTranslator(&translator);
+            break;
+        }
     }
-  }
+}
 
-  // Initialize the sensor (using the simulator for now)
-  std::shared_ptr<I_Sensor> CO2sensor = SensorFactory::createSensor(
-      true); // Change to false when using the hardware sensor
-  if (CO2sensor == nullptr) {
-    qCritical() << "Failed to initialize CO2 sensor.";
-    return -1;
-  }
-  CO2sensor->startMeasurement();
+// initalize backend und return pointer to all backend objects that need to be kept alive
+std::unique_ptr<PermanentBackendObjects> initializeBackend()
+{
+    // Initialize the sensor (using the simulator for now)
+    std::shared_ptr<I_Sensor> sensor = SensorFactory::createSensor(
+        true); // Change to false when using the hardware sensor
+    if (sensor == nullptr) {
+        qCritical() << "Failed to initialize CO2 sensor.";
+        return nullptr;
+    }
+    sensor->startMeasurement();
 
-  QSharedPointer<I_Subscriber> sma = SMAAverager::instance();
-  QSharedPointer<I_Subscriber> ema = EMAAverager::instance();
+    // Initialize AverageCalculator
+    auto avgCalc = std::make_shared<AverageCalculator>(sensor, 60); // Buffer size 60
+    avgCalc->start();
 
-  // create buffer for averagers
-  CircularBuffer averagerBuffer(60); // TODO: variable instead of hardcoded 6
-  // add data from Sensor into averagerBuffer
-  bool receivingSensorDataSucess = QObject::connect(CO2sensor.get(),
-                                                    &I_Sensor::newCo2Value,
-                                                    [&](double newCo2Value) {
-                                                        averagerBuffer.writeNewItem(newCo2Value);
-                                                    });
-  if (!receivingSensorDataSucess) {
-      qCritical() << "Failed to connect signal to slot!";
-  }
+    //get address from SMA und EMA singletons which already were created within the AverageCaalculator object
+    auto sma = SMAAverager::instance();
+    auto ema = EMAAverager::instance();
 
-  BufferSubscription averagerBufferSubscription(averagerBuffer);
-  averagerBufferSubscription.registerSubscriber(
-      sma, 5000, SensorDataType::RAW); // 5 seconds
-  averagerBufferSubscription.registerSubscriber(
-      ema, 10000, SensorDataType::RAW); // 10 seconds
+    // Initialize DataBufferManager
+    auto trendDataBuffer = DataBufferManager::instance(sensor, sma, ema);
 
-  std::shared_ptr<DataBufferManager> dataBuffer = DataBufferManager::instance();
+    // Create and initialize BackendDependencies
+    auto backendDependenciesForFrontend = std::make_shared<BackendDependencies>();
+    backendDependenciesForFrontend->init(sensor, sma, ema, trendDataBuffer);
 
-  QQmlApplicationEngine engine;
+    // Return the permanent backend objects wrapped in a unique_ptr
+    return std::make_unique<PermanentBackendObjects>(backendDependenciesForFrontend, avgCalc);
+}
 
-  qmlRegisterType<FrontendTypes>("BreathTracker.FrontendTypes", 1, 0,
-                                 "FrontendTypes");
-  qmlRegisterSingletonType<LiveDataAPI>("BreathTracker.LiveData", 1, 0,
-                                        "BELiveData", LiveDataAPI::qmlInstance);
-  qmlRegisterSingletonType<TrendDataAPI>("BreathTracker.TrendData", 1, 0,
-                                         "BETrendData",
-                                         TrendDataAPI::qmlInstance);
-  LiveDataAPI::instance();
-  TrendDataAPI::instance();
+// Function to initialize QML engine
+void initializeQmlEngine(QQmlApplicationEngine &engine,
+                         QGuiApplication &app,
+                         FrontendApi &frontendApi)
+{
+    qmlRegisterType<FrontendTypes>("BreathTracker.FrontendTypes", 1, 0, "FrontendTypes");
+    qmlRegisterSingletonType<LiveDataAPI>("BreathTracker.LiveData",
+                                          1,
+                                          0,
+                                          "BELiveData",
+                                          LiveDataAPI::qmlInstance);
+    qmlRegisterSingletonType<TrendDataAPI>("BreathTracker.TrendData",
+                                           1,
+                                           0,
+                                           "BETrendData",
+                                           TrendDataAPI::qmlInstance);
 
-  const QUrl url(QStringLiteral("qrc:/BreathTracker/qml/main.qml"));
-  QObject::connect(
-      &engine, &QQmlApplicationEngine::objectCreated, &app,
-      [url](QObject *obj, const QUrl &objUrl) {
-        if (!obj && url == objUrl)
-          QCoreApplication::exit(-1);
-      },
-      Qt::QueuedConnection);
-  engine.load(url);
+    const QUrl url(QStringLiteral("qrc:/BreathTracker/qml/main.qml"));
+    QObject::connect(
+        &engine,
+        &QQmlApplicationEngine::objectCreated,
+        &app,
+        [url](QObject *obj, const QUrl &objUrl) {
+            if (!obj && url == objUrl)
+                QCoreApplication::exit(-1);
+        },
+        Qt::QueuedConnection);
+    engine.load(url);
+}
 
-  // Frontend API
+int main(int argc, char *argv[])
+{
+    QGuiApplication app(argc, argv);
 
-  return app.exec();
+    // Initialize translator
+    initializeTranslator(app);
+
+    // Initialize backend
+    auto permanentBackendObjects = initializeBackend();
+    if (!permanentBackendObjects) {
+        return -1; // Exit if backend initialization fails
+    }
+
+    // Initialize frontend API with backend dependencies
+    FrontendApi frontendApi(*permanentBackendObjects->backendDependencies);
+
+    // Initialize QML engine
+    QQmlApplicationEngine engine;
+    initializeQmlEngine(engine, app, frontendApi);
+
+    // Execute application
+    return app.exec();
 }

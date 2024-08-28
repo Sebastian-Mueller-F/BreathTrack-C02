@@ -59,8 +59,8 @@ source_group("Header Files// Data" FILES inc/databuffermanager.h)
 source_group("Source Files// Data" FILES src/databuffermanager.cpp)
 
 # Averagers
-source_group("Header Files// Averager" FILES inc/I_Averager.h inc/smaaverager.h inc/emaaverager.h)
-source_group("Source Files// Averager" FILES src/smaaverager.cpp src/emaaverager.cpp)
+source_group("Header Files// Averager" FILES inc/I_Averager.h inc/smaaverager.h inc/emaaverager.h inc/averagecalculator.h)
+source_group("Source Files// Averager" FILES src/smaaverager.cpp src/emaaverager.cpp src/averagecalculator.cpp)
 
 # Backend Frontend Interface
 source_group("Header Files// Backend Frontend Interface" FILES inc/I_FrontendAPI.h inc/livedataapi.h inc/trenddataapi.h)

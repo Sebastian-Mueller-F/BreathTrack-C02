@@ -16,17 +16,17 @@ public:
 
   ~BufferSubscription();
 
-  void registerSubscriber(QSharedPointer<I_Subscriber> subscriber,
+  void registerSubscriber(std::shared_ptr<I_Subscriber> subscriber,
                           int lookBackPeriodMS,
                           SensorDataType dataType = SensorDataType::RAW);
-  void unregisterSubscriber(QSharedPointer<I_Subscriber> subscriber);
+  void unregisterSubscriber(std::shared_ptr<I_Subscriber> subscriber);
 
-private slots:
+  private slots:
   void onDataAddedToBuffer(int dataIntervalsMS);
 
 private:
   CircularBuffer &_buffer;
-  QVector<QSharedPointer<I_Subscriber>> _subscribers;
+  QVector<std::shared_ptr<I_Subscriber>> _subscribers;
   QVector<int> _lookBackPeriods;
   QVector<SensorDataType> _sensorDataTypes;
 };

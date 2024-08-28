@@ -11,6 +11,7 @@ CircularBuffer::CircularBuffer(size_t capacity, int newDataIntervalMS,
 
 CircularBuffer::~CircularBuffer()
 {
+    qDebug() << "Circular Buffer destroyed at adress: " << this;
     /* Es sind keine zusätzlichen Aufräumaktionen erforderlich,
     // da alle verwendeten Ressourcen (std::vector, std::mutex)
      ihre Speicherverwaltung selbst handhaben. */
@@ -45,7 +46,7 @@ void CircularBuffer::writeNewItem(const double &newItem) {
 
     // Emit the dataAdded signal
     emit dataAdded(_newDataIntervalMS);
-    // qDebug() << "dataAdded signal emitted from buffer" << this;
+    qDebug() << "dataAdded signal emitted from buffer" << this;
 
   } catch (const std::runtime_error &e) {
     // Handle runtime errors, such as uninitialized buffer or zero capacity
