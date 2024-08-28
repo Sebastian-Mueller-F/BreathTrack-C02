@@ -16,6 +16,14 @@ FrontendApi::FrontendApi(const BackendDependencies &backendDependencies, QObject
 
     TrendDataAPI::instance(backendDependencies.dataBuffer.get(), this)->initialize();
 }
+
+FrontendApi::~FrontendApi()
+{
+    qDebug() << "Destroying FrontendApi";
+
+    // Should automatically deleted modules as this is the parent
+}
+
 LiveDataAPI *FrontendApi::liveDataAPI() const
 {
     return LiveDataAPI::instance();

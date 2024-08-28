@@ -14,12 +14,21 @@ SMAAverager::SMAAverager(size_t period, QObject *parent)
 SMAAverager::~SMAAverager()
 {
     qDebug() << "SMA Averager destroyed";
+
+    bool disconnected = disconnect(this, nullptr, nullptr, nullptr);
+    if (disconnected) {
+        qDebug() << "Successfully disconnected all signals for SMAAverager.";
+    } else {
+        qWarning() << "No signals to disconnect or disconnection failed!";
+    }
+
+    _instance.reset();
 }
 
-std::shared_ptr<SMAAverager> SMAAverager::instance()
+std::shared_ptr<SMAAverager> SMAAverager::instance(size_t period, QObject *parent)
 {
     if (_instance == nullptr) {
-        _instance = std::shared_ptr<SMAAverager>(new SMAAverager(10));
+        _instance = std::shared_ptr<SMAAverager>(new SMAAverager(period, parent));
         qDebug() << "SMAAverager Singleton instance created.";
     }
     return _instance;

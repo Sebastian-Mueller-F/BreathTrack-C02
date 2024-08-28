@@ -9,7 +9,7 @@ AverageCalculator::AverageCalculator(std::shared_ptr<I_Sensor> sensor,
                                      QObject *parent)
     : QObject(parent) // Make sure QObject is initialized properly
     , _sensor(sensor)
-    , _buffer(std::make_unique<CircularBuffer>(bufferSize))
+    , _buffer(std::make_unique<CircularBuffer>(bufferSize, 1000, this))
     , _subscription(new BufferSubscription(*_buffer))
 
 {
@@ -27,12 +27,21 @@ AverageCalculator::~AverageCalculator()
     } else {
         qWarning() << "Failed to disconnect sensor signal!";
     }
+
+    if (_subscription) {
+        _subscription->unregisterSubscriber(SMAAverager::instance());
+        _subscription->unregisterSubscriber(EMAAverager::instance());
+    }
+
+    if (_buffer) {
+        _buffer->clear();
+    }
 }
 
 void AverageCalculator::initializeAveragers()
 {
-    _smaAverager = SMAAverager::instance();
-    _emaAverager = EMAAverager::instance();
+    _smaAverager = SMAAverager::instance(10, this);
+    _emaAverager = EMAAverager::instance(10, this);
 
     qDebug() << "Initializing averagers:";
     qDebug() << "SMAAverager instance:" << _smaAverager.get();

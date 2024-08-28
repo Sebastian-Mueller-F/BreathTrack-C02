@@ -21,7 +21,7 @@ public:
 
   ~SMAAverager() override;
 
-  static std::shared_ptr<SMAAverager> instance();
+  static std::shared_ptr<SMAAverager> instance(size_t period = 10, QObject *parent = nullptr);
 
   double calculate() override;
   size_t getPeriod() const override;

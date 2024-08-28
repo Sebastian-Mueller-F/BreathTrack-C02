@@ -11,13 +11,13 @@ public:
   explicit SensorSimulator(double baseline = 55.0, double amplitude = 20.0,
                            int interval = 1000, QObject *parent = nullptr);
 
+  ~SensorSimulator() override; // Destruktor hinzugefügt
+
   static std::shared_ptr<SensorSimulator> instance();
 
   void startMeasurement() override;
   void stopMeasurement() override;
   SensorDataType sensorDataType() const override;
-
-  ~SensorSimulator() override; // Destruktor hinzugefügt
 
   private slots:
   void generateNewCo2Value();

@@ -40,19 +40,7 @@ import BreathTracker.FrontendTypes 1.0
             value: background.averagedData
         }
 
-        Connections {
-            target: BELiveData
-            onSensorValueChanged: {
-                // console.log("Sensor Value Updated: ", BELiveData.sensorValue)
-            }
-            onAveragedValueChanged: {
-                // console.log("Averaged Value Updated: ", BELiveData.averagedValue)
-            }
 
-            onAverageTypeChanged: {
-                // console.log("Average Type Updated: ", BELiveData.averageType)
-            }
-        }
     }
 
 

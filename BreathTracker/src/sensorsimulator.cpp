@@ -25,6 +25,24 @@ SensorSimulator::SensorSimulator(double baseline, double amplitude, int interval
             });
 }
 
+SensorSimulator::~SensorSimulator()
+{
+    if (_timer && _timer->isActive()) {
+        _timer->stop();
+        qDebug() << "SensorSim timer stopped in destructor.";
+    }
+
+    // Explicitly disconnect any connections
+    disconnect(_timer.data(), &QTimer::timeout, this, &SensorSimulator::generateNewCo2Value);
+    disconnect(this, &SensorSimulator::newCo2ValueGenerated, nullptr, nullptr);
+
+    // Log the destruction for debugging
+    qDebug() << "SensorSimulator destroyed.";
+
+    // Da QScopedPointer automatisch aufgeräumt wird, ist hier keine zusätzliche Implementierung nötig
+    // Falls zusätzliche dynamische Ressourcen hinzugefügt werden, sollten sie hier freigegeben werden
+}
+
 std::shared_ptr<SensorSimulator> SensorSimulator::instance()
 {
     if (!_instance) {
@@ -50,12 +68,6 @@ void SensorSimulator::stopMeasurement() {
 
 SensorDataType SensorSimulator::sensorDataType() const {
   return _sensorDataType;
-}
-
-SensorSimulator::~SensorSimulator()
-{
-    // Da QScopedPointer automatisch aufgeräumt wird, ist hier keine zusätzliche Implementierung nötig
-    // Falls zusätzliche dynamische Ressourcen hinzugefügt werden, sollten sie hier freigegeben werden
 }
 
 void SensorSimulator::generateNewCo2Value() {

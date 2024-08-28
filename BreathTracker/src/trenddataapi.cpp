@@ -10,7 +10,6 @@ TrendDataAPI::TrendDataAPI(DataBufferManager *dataBufferManager, QObject *parent
 TrendDataAPI::~TrendDataAPI()
 {
     qDebug() << "TrendDataAPI destroyed";
-    //TODO: unregister from all buffers
 }
 
 TrendDataAPI *TrendDataAPI::instance(DataBufferManager *dataBufferManager, QObject *parent)
@@ -32,6 +31,7 @@ QObject *TrendDataAPI::qmlInstance(QQmlEngine *engine, QJSEngine *scriptEngine)
 void TrendDataAPI::initialize()
 {
     // Subscribe to all relevant buffers and get data from the buffers
+
     _dataBufferManager->subscribeToAll(std::shared_ptr<I_Subscriber>(this), 50000);
 }
 

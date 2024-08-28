@@ -37,7 +37,9 @@ public:
   size_t getBufferSize();
   size_t getBufferCapacity();
 
-signals:
+  void clear();
+
+  signals:
 
   void dataAdded(int newDataIntervalMs);
 
